@@ -50,6 +50,8 @@
 
   # Enable the X11 windowing system.
   services = {
+    # needed for tailscale
+    resolved.enable = true;
     xserver = {
         enable = true;
         # Enable the XFCE Desktop Environment.
