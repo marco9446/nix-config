@@ -23,7 +23,7 @@
   networking = {
     networkmanager.enable = true;
     hostName = "acer-aspire"; # Define your hostname.
-    wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+    wireless.enable = false;  # Enables wireless support via wpa_supplicant.
   };
 
   # Set your time zone.
@@ -91,7 +91,7 @@
   nixpkgs.config.allowUnfree = true;
 
   programs = {
-    firefox.enable = true
+    firefox.enable = true;
   };
 
   # List packages installed in system profile.
