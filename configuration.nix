@@ -18,6 +18,8 @@
     enable = true;
     device = "/dev/sda";
     useOSProber = true;
+    # Limit the number of generations to keep
+    configurationLimit = 3;
   };
 
   networking = {
@@ -58,8 +60,10 @@
             variant = "";
         };
         displayManager.lightdm.enable = true;
-        displayManager.autoLogin.enable = false;
-        displayManager.autoLogin.user = "marco";
+    };
+    displayManager.autoLogin = {
+        enable = false;
+        user = "marco";
     };
     
     # Enable CUPS to print documents.
@@ -70,6 +74,11 @@
         alsa.enable = true;
         alsa.support32Bit = true;
         pulse.enable = true;
+    };
+
+    tailscale = {
+        enable = true;
+        useRoutingFeatures = "client";
     };
   };
   
@@ -107,6 +116,13 @@
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
+
+  # Perform garbage collection weekly to maintain low disk usage
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 1w";
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
