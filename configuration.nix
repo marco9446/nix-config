@@ -111,6 +111,7 @@
     wget
     git
     vscode
+    xfce.xfce4-docklike-plugin
   ];
 
   # Open ports in the firewall.
