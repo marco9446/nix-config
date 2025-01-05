@@ -82,10 +82,11 @@
         enable = true;
         useRoutingFeatures = "client";
     };
+    
+    pulseaudio.enable = false;
   };
   
   # Enable sound with pipewire.
-  hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
@@ -103,6 +104,7 @@
 
   programs = {
     firefox.enable = true;
+    xfconf.enable = true;
   };
 
   # List packages installed in system profile.
@@ -112,6 +114,7 @@
     git
     vscode
     xfce.xfce4-docklike-plugin
+    xfce.xfce4-systemload-plugin
   ];
 
   # Open ports in the firewall.

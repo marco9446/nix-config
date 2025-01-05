@@ -41,6 +41,8 @@
     lm_sensors # for `sensors` command
     pciutils # lspci
     usbutils # lsusb
+
+    yt-dlp
   ];
 
   # basic configuration of git, please change to your own

@@ -29,12 +29,17 @@
         # make home-manager as a module of nixos
         # so that home-manager configuration will be deployed automatically when executing `nixos-rebuild switch`
         home-manager.nixosModules.home-manager
-        {
+         ({ config, lib, ... }:{
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
 
-          home-manager.users.marco = import ./home.nix;
-        }
+          home-manager.users.marco  = {...}: {
+             imports = [
+              ./home.nix
+              ./homeManager/xfce.nix
+             ];
+          };
+        })
       ];
     };
   };
