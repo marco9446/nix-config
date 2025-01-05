@@ -17,15 +17,10 @@
       name = "Flat-Remix-Blue-Dark";
       package = pkgs.flat-remix-icon-theme;
     };
-    cursorTheme = {
-      name = "macOS-Monterey-White";
-      package = pkgs.apple-cursor;
-      size = 20;
-    };
     font = {
       name = "Noto Sans";
       package = pkgs.noto-fonts;
-      size = 11;
+      size = 6;
     };
   };
 
@@ -45,10 +40,10 @@
     xsettings = {
       "Net/ThemeName" = "Materia-dark-compact";
       "Net/IconThemeName" = "Flat-Remix-Blue-Dark";
-      "Gtk/CursorThemeName" = "macOS-Monterey-White";
+      "Gtk/CursorThemeName" = "elementary";
       "Gtk/CursorThemeSize" = 22;
-      "Gtk/FontName" = "Noto Sans Regular 11";
-      "Gtk/MonospaceFontName" = "NotoSansM Nerd Font 12";
+      "Gtk/FontName" = "Noto Sans Regular 10";
+      "Gtk/MonospaceFontName" = "NotoSansM Nerd Font 11";
     };
   
     xfce4-session = {
@@ -118,9 +113,11 @@
         "plugins/plugin-12" = "clock";
         "plugins/plugin-12/digital-layout" = 3; # time only
         "plugins/plugin-12/mode" = 2; # digital
+        "plugins/plugin-12/digital-time-font" = "Sans Bold 9";
+
+        # Separator
         "plugins/plugin-13" = "separator";
         "plugins/plugin-13/style" = 0; # transparent
-      
         # Show desktop
         "plugins/plugin-14" = "showdesktop";
        };

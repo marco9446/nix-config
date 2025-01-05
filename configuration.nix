@@ -113,6 +113,7 @@
     wget
     git
     vscode
+    gparted
   ];
 
   # Open ports in the firewall.
