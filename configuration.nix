@@ -94,15 +94,15 @@
     isNormalUser = true;
     description = "marco";
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [
-    #  thunderbird
-    ];
+    shell = pkgs.zsh;
+    packages = with pkgs; [];
   };
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
   programs = {
+    zsh.enable = true;
     firefox.enable = true;
     xfconf.enable = true;
   };
