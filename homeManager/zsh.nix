@@ -28,8 +28,9 @@
 
     initExtra = ''      
       autoload -U edit-command-line
-      bindkey '^[[A' history-search-backward 
-      bindkey '^[[B' history-search-forward 
+      # TODO find way to use just UP and DOWN arrorw instead of CTRL+UP/DOWN arrow
+      bindkey ';5A' history-search-backward 
+      bindkey ';5B' history-search-forward 
     '';
 
     plugins = [
