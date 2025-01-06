@@ -24,38 +24,11 @@
     yt-dlp
   ];
 
-  # basic configuration of git, please change to your own
-  programs.git = {
-    enable = true;
-    userName = "marco";
-    userEmail = "marco@test.com";
-  };
+ 
 
-  # starship - an customizable prompt for any shell
-  programs.starship = {
-    enable = true;
-    # custom settings
-    settings = {
-      add_newline = false;
-      aws.disabled = true;
-      gcloud.disabled = true;
-      sudo.disabled = false;
-      line_break.disabled = true;
-    };
-  };
 
-  programs.zsh = {
-    enable = true;
-    enableCompletion = true;
-    autosuggestion.enable = true;
-    syntaxHighlighting.enable = true;
 
-    shellAliases = {
-      ll = "ls -l";
-      update = "sudo nixos-rebuild switch";
-    };
-    history.size = 10000;
-  };
+
 
 
   # This value determines the home Manager release that your

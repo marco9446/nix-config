@@ -24,7 +24,7 @@
       # so you can directly use all dependencies in inputs in submodules
       specialArgs = { inherit inputs; };
       modules = [
-        ./configuration.nix
+        ./hosts/acer-aspire/configuration.nix
 
         # make home-manager as a module of nixos
         # so that home-manager configuration will be deployed automatically when executing `nixos-rebuild switch`
@@ -35,8 +35,11 @@
 
           home-manager.users.marco  = {...}: {
              imports = [
-              ./home.nix
+              ./homeManager/home.nix
+              ./homeManager/git.nix
+              ./homeManager/starship.nix
               ./homeManager/xfce.nix
+              ./homeManager/zsh.nix
              ];
           };
         })
