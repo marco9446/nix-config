@@ -2,9 +2,9 @@
 
 {
 
-  home.packages = with pkgs; [];
+  home.packages = with pkgs; [ ];
 
-   # basic configuration of git
+  # basic configuration of git
   programs.git = {
     enable = true;
     userName = "marco";

@@ -2,12 +2,14 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, inputs, ... }:
+{ pkgs, ... }:
 
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
+      # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ../../modules/common.nix
       ../../modules/nixVim.nix
     ];
 
@@ -26,7 +28,7 @@
   networking = {
     networkmanager.enable = true;
     hostName = "acer-aspire"; # Define your hostname.
-    wireless.enable = false;  # Enables wireless support via wpa_supplicant.
+    wireless.enable = false; # Enables wireless support via wpa_supplicant.
   };
 
   # Set your time zone.
@@ -36,15 +38,15 @@
   i18n = {
     defaultLocale = "en_US.UTF-8";
     extraLocaleSettings = {
-        LC_ADDRESS = "it_IT.UTF-8";
-        LC_IDENTIFICATION = "it_IT.UTF-8";
-        LC_MEASUREMENT = "it_IT.UTF-8";
-        LC_MONETARY = "it_IT.UTF-8";
-        LC_NAME = "it_IT.UTF-8";
-        LC_NUMERIC = "it_IT.UTF-8";
-        LC_PAPER = "it_IT.UTF-8";
-        LC_TELEPHONE = "it_IT.UTF-8";
-        LC_TIME = "it_IT.UTF-8";
+      LC_ADDRESS = "it_IT.UTF-8";
+      LC_IDENTIFICATION = "it_IT.UTF-8";
+      LC_MEASUREMENT = "it_IT.UTF-8";
+      LC_MONETARY = "it_IT.UTF-8";
+      LC_NAME = "it_IT.UTF-8";
+      LC_NUMERIC = "it_IT.UTF-8";
+      LC_PAPER = "it_IT.UTF-8";
+      LC_TELEPHONE = "it_IT.UTF-8";
+      LC_TIME = "it_IT.UTF-8";
     };
   };
 
@@ -54,40 +56,40 @@
     # needed for tailscale
     resolved.enable = true;
     xserver = {
-        enable = true;
-        # Enable the XFCE Desktop Environment.
-        desktopManager.xfce.enable = true;
-        # Configure keymap in X11
-        xkb = {
-            layout = "us";
-            variant = "";
-            options="caps:backspace";
-        };
-        displayManager.lightdm.enable = true;
+      enable = true;
+      # Enable the XFCE Desktop Environment.
+      desktopManager.xfce.enable = true;
+      # Configure keymap in X11
+      xkb = {
+        layout = "us";
+        variant = "";
+        options = "caps:backspace";
+      };
+      displayManager.lightdm.enable = true;
     };
     displayManager.autoLogin = {
-        enable = false;
-        user = "marco";
+      enable = false;
+      user = "marco";
     };
-    
+
     # Enable CUPS to print documents.
     printing.enable = true;
 
     pipewire = {
-        enable = true;
-        alsa.enable = true;
-        alsa.support32Bit = true;
-        pulse.enable = true;
+      enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      pulse.enable = true;
     };
 
     tailscale = {
-        enable = true;
-        useRoutingFeatures = "client";
+      enable = true;
+      useRoutingFeatures = "client";
     };
-    
+
     pulseaudio.enable = false;
   };
-  
+
   # Enable sound with pipewire.
   security.rtkit.enable = true;
 
@@ -97,7 +99,7 @@
     description = "marco";
     extraGroups = [ "networkmanager" "wheel" ];
     shell = pkgs.zsh;
-    packages = with pkgs; [];
+    packages = with pkgs; [ ];
   };
 
   # Allow unfree packages
@@ -111,9 +113,6 @@
 
   # List packages installed in system profile.
   environment.systemPackages = with pkgs; [
-    wget
-    git
-    gparted
   ];
 
   # Open ports in the firewall.

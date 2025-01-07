@@ -12,7 +12,7 @@
 
     # utils
     jq # A lightweight and flexible command-line JSON processor
-  
+
     # nix related
     nh
 

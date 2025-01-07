@@ -5,7 +5,7 @@
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-24.11";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
-     # home-manager, used for managing user configuration
+    # home-manager, used for managing user configuration
     home-manager = {
       url = "github:nix-community/home-manager";
       # The `follows` keyword in inputs is used for inheritance.
@@ -22,7 +22,7 @@
   };
 
   outputs = { self, nixpkgs, nixpkgs-stable, home-manager, nixvim, ... }@inputs: {
-    
+
     nixosConfigurations.acer-aspire = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       # Set all inputs parameters as special arguments for all submodules,
@@ -35,19 +35,19 @@
         # make home-manager as a module of nixos
         # so that home-manager configuration will be deployed automatically when executing `nixos-rebuild switch`
         home-manager.nixosModules.home-manager
-         ({ config, lib, ... }:{
+        ({ ... }: {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
 
-          home-manager.users.marco  = {...}: {
-             imports = [
+          home-manager.users.marco = { ... }: {
+            imports = [
               ./homeManager/home.nix
               ./homeManager/git.nix
               ./homeManager/starship.nix
               ./homeManager/xfce.nix
               ./homeManager/zsh.nix
               ./homeManager/vsCodium.nix
-             ];
+            ];
           };
         })
       ];

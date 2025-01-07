@@ -2,7 +2,7 @@
 
 {
 
-  home.packages = with pkgs; [];
+  home.packages = with pkgs; [ ];
 
   programs.fzf.enable = true;
 
@@ -24,8 +24,8 @@
     shellAliases = {
       ll = "ls -l";
       update = "sudo nixos-rebuild switch";
-      vim= "nvim";
-      code="codium";
+      vim = "nvim";
+      code = "codium";
     };
 
     initExtra = ''      
