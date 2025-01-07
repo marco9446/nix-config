@@ -23,5 +23,30 @@
                 when = "editorTextFocus && !editorReadonly";
             }
         ];
+        userSettings = {
+            "diffEditor.ignoreTrimWhitespace": false;
+            "editor.fontFamily": "'JetBrainsMono Nerd Font', 'JetBrains Mono', Consolas, 'Courier New', monospace";
+            "editor.fontLigatures": false;
+            "editor.fontSize": 12.5;
+            "editor.fontWeight": "400";
+            "editor.formatOnSave": true;
+            "editor.lineHeight": 1.5;
+            "editor.linkedEditing": true;
+            "editor.minimap.enabled": false;
+            "editor.mouseWheelZoom": true;
+            "editor.renderWhitespace": "trailing";
+            "editor.stickyScroll.enabled": true;
+            "editor.suggestSelection": "first";
+            "editor.tabSize": 2;
+            "errorLens.fontStyleItalic": true;
+            "git.confirmSync": false;
+            "markdown.extension.preview.autoShowPreviewToSide": true;
+            "markdown.extension.tableFormatter.normalizeIndentation": true;
+            "terminal.integrated.fontFamily": "'JetBrainsMono Nerd Font', 'JetBrains Mono', 'Fira Code' ,'Cascadia Code'";
+            "terminal.integrated.fontWeight": "normal";
+            "terminal.integrated.lineHeight": 1.1;
+            "extensions.ignoreRecommendations": true;
+            "workbench.iconTheme": "vscode-icons";
+        };
     };
 }
