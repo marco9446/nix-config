@@ -39,13 +39,14 @@
             "editor.suggestSelection" = "first";
             "editor.tabSize" = 2;
             "errorLens.fontStyleItalic" = true;
+            "extensions.ignoreRecommendations" = true;
             "git.confirmSync" = false;
+            "git.enableSmartCommit" = true;
             "markdown.extension.preview.autoShowPreviewToSide" = true;
             "markdown.extension.tableFormatter.normalizeIndentation" = true;
             "terminal.integrated.fontFamily" = "'JetBrainsMono Nerd Font', 'JetBrains Mono', 'Fira Code' ,'Cascadia Code'";
             "terminal.integrated.fontWeight" = "normal";
             "terminal.integrated.lineHeight" = 1.1;
-            "extensions.ignoreRecommendations" = true;
             "workbench.iconTheme" = "vscode-icons";
         };
     };
