@@ -10,10 +10,10 @@
     enable = true;
     package = pkgs.vscodium;
     extensions = with pkgs.vscode-extensions; [
-      yzhang.markdown-all-in-one
-      jnoortheen.nix-ide
       christian-kohler.path-intellisense
+      jnoortheen.nix-ide
       vscode-icons-team.vscode-icons
+      yzhang.markdown-all-in-one
     ];
 
     keybindings = [
@@ -49,13 +49,8 @@
       "git.enableSmartCommit" = true;
       "markdown.extension.preview.autoShowPreviewToSide" = true;
       "markdown.extension.tableFormatter.normalizeIndentation" = true;
-      "terminal.integrated.fontFamily" = "'JetBrainsMono Nerd Font', 'JetBrains Mono', 'Fira Code' ,'Cascadia Code'";
-      "terminal.integrated.fontWeight" = "normal";
-      "terminal.integrated.lineHeight" = 1.1;
-      "workbench.iconTheme" = "vscode-icons";
-
-      "nix.serverPath" = "nixd";
       "nix.enableLanguageServer" = true;
+      "nix.serverPath" = "nixd";
       "nix.serverSettings" = {
         "nixd" = {
           "formatting" = {
@@ -63,6 +58,10 @@
           };
         };
       };
+      "terminal.integrated.fontFamily" = "'JetBrainsMono Nerd Font', 'JetBrains Mono', 'Fira Code' ,'Cascadia Code'";
+      "terminal.integrated.fontWeight" = "normal";
+      "terminal.integrated.lineHeight" = 1.1;
+      "workbench.iconTheme" = "vscode-icons";
     };
   };
 }
