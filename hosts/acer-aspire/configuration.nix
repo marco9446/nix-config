@@ -99,7 +99,7 @@
     description = "marco";
     extraGroups = [ "networkmanager" "wheel" ];
     shell = pkgs.zsh;
-    packages = with pkgs; [ ];
+    # packages = with pkgs; [ ];
   };
 
   # Allow unfree packages
@@ -112,8 +112,8 @@
   };
 
   # List packages installed in system profile.
-  environment.systemPackages = with pkgs; [
-  ];
+  # environment.systemPackages = with pkgs; [
+  # ];
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

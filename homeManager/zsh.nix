@@ -1,9 +1,6 @@
 { pkgs, ... }:
 
 {
-
-  home.packages = with pkgs; [ ];
-
   programs.fzf.enable = true;
 
   programs.zsh = {
