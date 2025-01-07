@@ -25,6 +25,7 @@
       ll = "ls -l";
       update = "sudo nixos-rebuild switch";
       vim= "nvim";
+      code="codium";
     };
 
     initExtra = ''      

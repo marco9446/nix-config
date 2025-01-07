@@ -113,7 +113,6 @@
   environment.systemPackages = with pkgs; [
     wget
     git
-    vscode
     gparted
   ];
 

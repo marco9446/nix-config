@@ -46,6 +46,7 @@
               ./homeManager/starship.nix
               ./homeManager/xfce.nix
               ./homeManager/zsh.nix
+              ./homeManager/vsCodium.nix
              ];
           };
         })
