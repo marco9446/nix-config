@@ -14,9 +14,14 @@
       # to avoid problems caused by different versions of nixpkgs.
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nixvim = {
+      url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-stable, home-manager, ... }@inputs: {
+  outputs = { self, nixpkgs, nixpkgs-stable, home-manager, nixvim, ... }@inputs: {
     
     nixosConfigurations.acer-aspire = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
@@ -24,6 +29,7 @@
       # so you can directly use all dependencies in inputs in submodules
       specialArgs = { inherit inputs; };
       modules = [
+        nixvim.nixosModules.nixvim
         ./hosts/acer-aspire/configuration.nix
 
         # make home-manager as a module of nixos

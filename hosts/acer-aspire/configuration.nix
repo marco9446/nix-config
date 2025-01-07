@@ -8,6 +8,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ../../modules/nixVim.nix
     ];
 
   # Enable the Flakes feature and the accompanying new nix command-line tool
@@ -60,6 +61,7 @@
         xkb = {
             layout = "us";
             variant = "";
+            options="caps:backspace";
         };
         displayManager.lightdm.enable = true;
     };
@@ -109,7 +111,6 @@
 
   # List packages installed in system profile.
   environment.systemPackages = with pkgs; [
-    vim 
     wget
     git
     vscode

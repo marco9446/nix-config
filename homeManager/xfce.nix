@@ -5,6 +5,7 @@
   home.packages = with pkgs; [
     xfce.xfce4-docklike-plugin
     xfce.xfce4-systemload-plugin
+    nerd-fonts.jetbrains-mono
   ];
 
   gtk = {
@@ -135,10 +136,14 @@
     };
 
 
-    "xfce4-keyboard-shortcuts" = {
+    xfce4-keyboard-shortcuts = {
       # apps
       "commands/custom/override" = true; # allow custom commands
       "commands/custom/Super_L" = "xfce4-appfinder";
+    };
+
+    xfce4-terminal = {
+      "font-name" = "JetBrainsMono Nerd Font 11";
     };
 
   };
