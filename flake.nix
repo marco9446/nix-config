@@ -78,6 +78,7 @@
               ./homeManager/xfce.nix
               ./homeManager/zsh.nix
               ./homeManager/vsCodium.nix
+              ./homeManager/bambu-studio.nix
             ];
           };
         })
