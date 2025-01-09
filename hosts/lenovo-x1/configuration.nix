@@ -2,23 +2,30 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ inputs, pkgs, ... }:
 
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
+      # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ../../modules/common.nix
       ../../modules/nixVim.nix
     ];
 
-   # Enable the Flakes feature and the accompanying new nix command-line tool
+  # Enable the Flakes feature and the accompanying new nix command-line tool
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
 
   # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader = {
+    systemd-boot = {
+      enable = true;
+      configurationLimit = 3;
+      consoleMode = "1";
+    };
+    efi.canTouchEfiVariables = true;
+  };
 
   networking.hostName = "lenovo-x1"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -33,7 +40,7 @@
   # Set your time zone.
   time.timeZone = "Europe/Rome";
 
-    # Select internationalisation properties.
+  # Select internationalisation properties.
   i18n = {
     defaultLocale = "en_US.UTF-8";
     extraLocaleSettings = {
@@ -89,8 +96,8 @@
     pulseaudio.enable = false;
   };
 
-  
-  
+
+
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
@@ -102,23 +109,23 @@
     shell = pkgs.zsh;
   };
 
-   # Allow unfree packages
+  # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
   programs = {
     zsh.enable = true;
     firefox.enable = true;
     xfconf.enable = true;
-  }; 
+  };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #  wget
+    #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    #  wget
   ];
 
- # Perform garbage collection weekly to maintain low disk usage
+  # Perform garbage collection weekly to maintain low disk usage
   nix.gc = {
     automatic = true;
     dates = "weekly";

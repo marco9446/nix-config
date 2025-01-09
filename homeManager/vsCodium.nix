@@ -45,6 +45,7 @@
       "editor.tabSize" = 2;
       "errorLens.fontStyleItalic" = true;
       "extensions.ignoreRecommendations" = true;
+      "git.autofetch" = true;
       "git.confirmSync" = false;
       "git.enableSmartCommit" = true;
       "markdown.extension.preview.autoShowPreviewToSide" = true;
@@ -62,6 +63,7 @@
       "terminal.integrated.fontWeight" = "normal";
       "terminal.integrated.lineHeight" = 1.1;
       "workbench.iconTheme" = "vscode-icons";
+      "workbench.startupEditor" = "none";
     };
   };
 }

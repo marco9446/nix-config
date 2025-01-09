@@ -21,7 +21,7 @@
     font = {
       name = "Noto Sans";
       package = pkgs.noto-fonts;
-      size = 6;
+      size = 12;
     };
   };
 
@@ -39,7 +39,7 @@
 
   xfconf.settings = {
     xsettings = {
-      "Net/ThemeName" = "Materia-dark-compact";
+      "Net/ThemeName" = "Adwaita-dark";
       "Net/IconThemeName" = "Flat-Remix-Blue-Dark";
       "Gtk/CursorThemeName" = "elementary";
       "Gtk/CursorThemeSize" = 22;
@@ -51,7 +51,7 @@
 
     xfwm4 = {
       "general/button_layout" = "O|HMC"; # disable "shade"(S) button
-      "general/theme" = "Materia-dark-compact";
+      "general/theme" = "Default";
       "general/title_font" = "Noto Sans Bold 11";
       "general/mousewheel_rollup" = false;
       "general/move_opacity" = 80;
@@ -64,7 +64,7 @@
       "panels/dark-mode" = true;
       "panels" = [ 1 ];
       "panels/panel-1/icon-size" = 16;
-      "panels/panel-1/size" = 32;
+      "panels/panel-1/size" = 36;
       "panels/panel-1/length" = 100.0;
       "panels/panel-1/position" = "p=4;x=0;y=0";
       "panels/panel-1/enable-struts" = true;
@@ -120,6 +120,9 @@
       "plugins/plugin-13/style" = 0; # transparent
       # Show desktop
       "plugins/plugin-14" = "showdesktop";
+      # Separator
+      "plugins/plugin-15" = "separator";
+      "plugins/plugin-15/style" = 0; # transparent
     };
 
 
