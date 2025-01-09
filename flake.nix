@@ -52,5 +52,36 @@
         })
       ];
     };
+
+    nixosConfigurations.lenovo-x1 = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      # Set all inputs parameters as special arguments for all submodules,
+      # so you can directly use all dependencies in inputs in submodules
+      specialArgs = { inherit inputs; };
+      modules = [
+        nixvim.nixosModules.nixvim
+        ./hosts/lenovo-x1/configuration.nix
+
+        # make home-manager as a module of nixos
+        # so that home-manager configuration will be deployed automatically when executing `nixos-rebuild switch`
+        home-manager.nixosModules.home-manager
+        ({ ... }: {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+
+          home-manager.users.marco = { ... }: {
+            imports = [
+              ./homeManager/home.nix
+              ./homeManager/git.nix
+              ./homeManager/starship.nix
+              ./homeManager/xfce.nix
+              ./homeManager/zsh.nix
+              ./homeManager/vsCodium.nix
+            ];
+          };
+        })
+      ];
+    };
+
   };
 }
