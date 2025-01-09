@@ -42,12 +42,18 @@
       "Net/ThemeName" = "Adwaita-dark";
       "Net/IconThemeName" = "Flat-Remix-Blue-Dark";
       "Gtk/CursorThemeName" = "elementary";
-      "Gtk/CursorThemeSize" = 22;
+      "Gtk/CursorThemeSize" = 56;
       "Gtk/FontName" = "Noto Sans Regular 10";
       "Gtk/MonospaceFontName" = "NotoSansM Nerd Font 11";
+      "Gtk/WindowScalingFactor" = 2;
     };
 
     xfce4-session = { }; # xfce4-session
+
+    pointers = {
+      "SynPS2_Synaptics_TouchPad/Acceleration" = 7.5;
+      "SynPS2_Synaptics_TouchPad/ReverseScrolling" = true;
+    };
 
     xfwm4 = {
       "general/button_layout" = "O|HMC"; # disable "shade"(S) button

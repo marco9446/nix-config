@@ -4,6 +4,7 @@
   inputs = {
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-24.11";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
     # home-manager, used for managing user configuration
     home-manager = {
@@ -21,7 +22,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-stable, home-manager, nixvim, ... }@inputs: {
+  outputs = { self, nixpkgs, nixpkgs-stable, home-manager, nixvim, nixos-hardware, ... }@inputs: {
 
     nixosConfigurations.acer-aspire = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
@@ -59,7 +60,7 @@
       # so you can directly use all dependencies in inputs in submodules
       specialArgs = { inherit inputs; };
       modules = [
-        nixvim.nixosModules.nixvim
+        # nixos-hardware.nixosModules.lenovo-thinkpad-x1-extreme-gen3
         ./hosts/lenovo-x1/configuration.nix
 
         # make home-manager as a module of nixos

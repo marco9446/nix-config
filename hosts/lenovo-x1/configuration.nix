@@ -7,15 +7,17 @@
 {
   imports =
     [
+      inputs.nixos-hardware.nixosModules.common-cpu-intel
+      inputs.nixos-hardware.nixosModules.common-gpu-nvidia
+      inputs.nixos-hardware.nixosModules.common-pc-ssd
+      inputs.nixvim.nixosModules.nixvim
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ../../modules/common.nix
       ../../modules/nixVim.nix
+      ../../modules/user.nix
+      ./nvidia.nix
     ];
-
-  # Enable the Flakes feature and the accompanying new nix command-line tool
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
 
   # Bootloader.
   boot.loader = {
@@ -27,35 +29,21 @@
     efi.canTouchEfiVariables = true;
   };
 
-  networking.hostName = "lenovo-x1"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
   # Enable networking
-  networking.networkmanager.enable = true;
-
-  # Set your time zone.
-  time.timeZone = "Europe/Rome";
-
-  # Select internationalisation properties.
-  i18n = {
-    defaultLocale = "en_US.UTF-8";
-    extraLocaleSettings = {
-      LC_ADDRESS = "it_IT.UTF-8";
-      LC_IDENTIFICATION = "it_IT.UTF-8";
-      LC_MEASUREMENT = "it_IT.UTF-8";
-      LC_MONETARY = "it_IT.UTF-8";
-      LC_NAME = "it_IT.UTF-8";
-      LC_NUMERIC = "it_IT.UTF-8";
-      LC_PAPER = "it_IT.UTF-8";
-      LC_TELEPHONE = "it_IT.UTF-8";
-      LC_TIME = "it_IT.UTF-8";
-    };
+  networking = {
+    hostName = "lenovo-x1"; # Define your hostname.
+    networkmanager.enable = true;
   };
 
+  # Fixes an issue with incorrect battery reporting. See
+  # https://wiki.archlinux.org/index.php/Lenovo_ThinkPad_X1_Extreme_(Gen_2)#Invalid_Stats_Workaround
+  # boot.initrd.availableKernelModules = [ "battery" ];
+
+  # New ThinkPads have a different TrackPoint manufacturer/name.
+  hardware.trackpoint.device = "TPPS/2 Elan TrackPoint";
+
+  # Fix clickpad (clicking by depressing the touchpad).
+  boot.kernelParams = [ "psmouse.synaptics_intertouch=0" ];
 
   # Enable the X11 windowing system.
   services = {
@@ -72,6 +60,8 @@
         options = "caps:backspace";
       };
       displayManager.lightdm.enable = true;
+      monitorSection = "DisplaySize 344 215";
+      videoDrivers = [ "nvidia" ];
     };
     displayManager.autoLogin = {
       enable = false;
@@ -92,25 +82,12 @@
       enable = true;
       useRoutingFeatures = "client";
     };
-
+    throttled.enable = true;
     pulseaudio.enable = false;
   };
 
-
-
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.marco = {
-    isNormalUser = true;
-    description = "marco";
-    extraGroups = [ "networkmanager" "wheel" ];
-    shell = pkgs.zsh;
-  };
-
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
 
   programs = {
     zsh.enable = true;
@@ -125,11 +102,23 @@
     #  wget
   ];
 
-  # Perform garbage collection weekly to maintain low disk usage
-  nix.gc = {
-    automatic = true;
-    dates = "weekly";
-    options = "--delete-older-than 1w";
+  nixpkgs.config.nvidia.acceptLicense = true;
+  nixpkgs.overlays = [
+    (_self: super: {
+      bumblebee = super.bumblebee.override {
+        extraNvidiaDeviceOptions = ''
+          Option "AllowEmptyInitialConfiguration"
+        '';
+      };
+    })
+  ];
+
+  # Since the HDMI port is connected to the NVIDIA card.
+  hardware.bumblebee = {
+    enable = true;
+    connectDisplay = true;
+    pmMethod = "auto";
+    driver = "nvidia";
   };
 
   # Open ports in the firewall.

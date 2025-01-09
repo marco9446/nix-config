@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ pkgs, ... }:
+{ ... }:
 
 {
   imports =
@@ -11,10 +11,8 @@
       ./hardware-configuration.nix
       ../../modules/common.nix
       ../../modules/nixVim.nix
+      ../../modules/user.nix
     ];
-
-  # Enable the Flakes feature and the accompanying new nix command-line tool
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Bootloader.
   boot.loader.grub = {
@@ -30,26 +28,6 @@
     hostName = "acer-aspire"; # Define your hostname.
     wireless.enable = false; # Enables wireless support via wpa_supplicant.
   };
-
-  # Set your time zone.
-  time.timeZone = "Europe/Rome";
-
-  # Select internationalisation properties.
-  i18n = {
-    defaultLocale = "en_US.UTF-8";
-    extraLocaleSettings = {
-      LC_ADDRESS = "it_IT.UTF-8";
-      LC_IDENTIFICATION = "it_IT.UTF-8";
-      LC_MEASUREMENT = "it_IT.UTF-8";
-      LC_MONETARY = "it_IT.UTF-8";
-      LC_NAME = "it_IT.UTF-8";
-      LC_NUMERIC = "it_IT.UTF-8";
-      LC_PAPER = "it_IT.UTF-8";
-      LC_TELEPHONE = "it_IT.UTF-8";
-      LC_TIME = "it_IT.UTF-8";
-    };
-  };
-
 
   # Enable the X11 windowing system.
   services = {
@@ -93,17 +71,6 @@
   # Enable sound with pipewire.
   security.rtkit.enable = true;
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.marco = {
-    isNormalUser = true;
-    description = "marco";
-    extraGroups = [ "networkmanager" "wheel" ];
-    shell = pkgs.zsh;
-    # packages = with pkgs; [ ];
-  };
-
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
 
   programs = {
     zsh.enable = true;
@@ -121,12 +88,6 @@
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
-  # Perform garbage collection weekly to maintain low disk usage
-  nix.gc = {
-    automatic = true;
-    dates = "weekly";
-    options = "--delete-older-than 1w";
-  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
