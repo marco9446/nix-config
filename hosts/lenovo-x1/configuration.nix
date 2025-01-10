@@ -15,6 +15,7 @@
       ../../modules/nixVim.nix
       ../../modules/user.nix
       ./nvidia.nix
+      ../../modules/bluetooth.nix
     ];
 
   # Bootloader.
