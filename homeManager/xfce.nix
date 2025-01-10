@@ -63,7 +63,7 @@
       "panels/panel-1/position" = "p=4;x=0;y=0";
       "panels/panel-1/enable-struts" = true;
       "panels/panel-1/position-locked" = true;
-      "panels/panel-1/plugin-ids" = [ 1 2 3 4 5 6 7 8 9 10 11 12 13 ];
+      "panels/panel-1/plugin-ids" = [ 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15];
       # Application menu
       "plugins/plugin-1" = "applicationsmenu";
       "plugins/plugin-1/button-icon" = "start-here";
