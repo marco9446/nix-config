@@ -63,21 +63,25 @@
       "panels/panel-1/position" = "p=4;x=0;y=0";
       "panels/panel-1/enable-struts" = true;
       "panels/panel-1/position-locked" = true;
-      "panels/panel-1/plugin-ids" = [ 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15];
+      "panels/panel-1/plugin-ids" = [ 1 2 3 4 5 6 7 8 9 10 11 12 13 14];
+
       # Application menu
       "plugins/plugin-1" = "applicationsmenu";
       "plugins/plugin-1/button-icon" = "start-here";
       "plugins/plugin-1/button-title" = "Start";
       "plugins/plugin-1/show-button-title" = true;
       "plugins/plugin-1/show-menu-icons" = true;
+
       # Separator
       "plugins/plugin-2" = "separator";
-      "plugins/plugin-2/style" = 0; # transparent
+      "plugins/plugin-2/style" = 0;
+
       # Windows
       "plugins/plugin-3" = "docklike";
+
       # Separator
       "plugins/plugin-4" = "separator";
-      "plugins/plugin-4/style" = 0; # transparent
+      "plugins/plugin-4/style" = 0;
       "plugins/plugin-4/expand" = true;
 
       # systemload
@@ -93,16 +97,21 @@
 
       # Separator
       "plugins/plugin-7" = "separator";
-      "plugins/plugin-7/style" = 0; # transparent
+      "plugins/plugin-7/style" = 0;
+
       # Pulse audio
       "plugins/plugin-8" = "pulseaudio";
       "plugins/plugin-8/enable-keyboard-shortcuts" = true;
+
       # Sys tray
       "plugins/plugin-9" = "systray";
+
       # Power manager
       "plugins/plugin-10" = "power-manager-plugin";
+
       # Notification
       "plugins/plugin-11" = "notification-plugin";
+
       # Clock
       "plugins/plugin-12" = "clock";
       "plugins/plugin-12/digital-layout" = 3; # time only
@@ -111,12 +120,11 @@
 
       # Separator
       "plugins/plugin-13" = "separator";
-      "plugins/plugin-13/style" = 0; # transparent
+      "plugins/plugin-13/style" = 0;
+
       # Show desktop
       "plugins/plugin-14" = "showdesktop";
-      # Separator
-      "plugins/plugin-15" = "separator";
-      "plugins/plugin-15/style" = 0; # transparent
+
     };
 
 
