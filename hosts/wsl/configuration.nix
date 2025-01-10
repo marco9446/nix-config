@@ -11,12 +11,17 @@
   imports = [
     # include NixOS-WSL modules
     <nixos-wsl/modules>
+    ../../modules/common.nix
     ../../modules/nixVim.nix
+    ../../modules/user.nix
   ];
 
   wsl.enable = true;
-  wsl.defaultUser = "nixos";
+  wsl.defaultUser = "marco";
 
+  programs = {
+    zsh.enable = true;
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

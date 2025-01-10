@@ -78,9 +78,11 @@
     xfconf.enable = true;
   };
 
-  # List packages installed in system profile.
-  # environment.systemPackages = with pkgs; [
-  # ];
+  # List packages installed in system profile. To search, run:
+  # $ nix search wget
+  environment.systemPackages = with pkgs; [
+    gparted
+  ];
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

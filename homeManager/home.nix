@@ -20,8 +20,6 @@
     lm_sensors # for `sensors` command
     pciutils # lspci
     usbutils # lsusb
-
-    yt-dlp
   ];
 
   # This value determines the home Manager release that your

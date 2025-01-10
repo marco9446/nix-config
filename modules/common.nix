@@ -39,6 +39,5 @@
   environment.systemPackages = with pkgs; [
     wget
     git
-    gparted
   ];
 }
