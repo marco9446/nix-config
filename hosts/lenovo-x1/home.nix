@@ -16,5 +16,6 @@
 
   xfce_scaligFactor = 2;
   xfce_cursorSize = 56;
+  xfce_dpi = 110;
 
 }

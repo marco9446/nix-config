@@ -14,6 +14,10 @@
       default = 11;
       type = lib.types.int;
     };
+    xfce_dpi = lib.mkOption {
+      default = -1;
+      type = lib.types.int;
+    };
   };
 
   config = {
@@ -45,12 +49,13 @@
       xsettings = {
         "Gtk/CursorThemeName" = "elementary";
         "Gtk/CursorThemeSize" = config.xfce_cursorSize;
-        "Gtk/FontName" = "Noto Sans Regular ${toString config.xfce_fontSize}";
-        "Gtk/MonospaceFontName" = "JetBrainsMono Nerd Font ${toString config.xfce_fontSize}";
+        "Gtk/FontName" = "Noto Sans Regular ${toString (config.xfce_fontSize + 1)}";
+        "Gtk/MonospaceFontName" = "JetBrainsMono Nerd Font ${toString (config.xfce_fontSize + 1)}";
         "Gdk/WindowScalingFactor" = config.xfce_scaligFactor;
         "Gtk/WindowScalingFactor" = config.xfce_scaligFactor;
         "Net/IconThemeName" = "Flat-Remix-Blue-Dark";
         "Net/ThemeName" = "Adwaita-dark";
+        "Xft/DPI" = config.xfce_dpi;
       };
 
       xfce4-session = { }; # xfce4-session
