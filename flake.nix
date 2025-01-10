@@ -37,13 +37,7 @@
 
           home-manager.users.marco = { ... }: {
             imports = [
-              ./homeManager/home.nix
-              ./homeManager/git.nix
-              ./homeManager/starship.nix
-              ./homeManager/xfce.nix
-              ./homeManager/zsh.nix
-              ./homeManager/vsCodium.nix
-              ./homeManager/yt-dlp.nix
+              ./hosts/acer-aspire/home.nix
             ];
           };
         })
@@ -68,14 +62,7 @@
 
           home-manager.users.marco = { ... }: {
             imports = [
-              ./homeManager/home.nix
-              ./homeManager/git.nix
-              ./homeManager/starship.nix
-              ./homeManager/xfce.nix
-              ./homeManager/zsh.nix
-              ./homeManager/vsCodium.nix
-              ./homeManager/bambu-studio.nix
-              ./homeManager/yt-dlp.nix
+              ./hosts/lenovo-x1/home.nix
             ];
           };
         })
@@ -100,10 +87,7 @@
 
           home-manager.users.marco = { ... }: {
             imports = [
-              ./homeManager/home.nix
-              ./homeManager/git.nix
-              ./homeManager/starship.nix
-              ./homeManager/zsh.nix
+              ./hosts/wsl/home.nix
             ];
           };
         })
