@@ -113,14 +113,6 @@
     })
   ];
 
-  # Since the HDMI port is connected to the NVIDIA card.
-  hardware.bumblebee = {
-    enable = true;
-    connectDisplay = true;
-    pmMethod = "auto";
-    driver = "nvidia";
-  };
-
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
