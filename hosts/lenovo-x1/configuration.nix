@@ -7,8 +7,6 @@
 {
   imports =
     [
-      inputs.nixos-hardware.nixosModules.common-cpu-intel
-      inputs.nixos-hardware.nixosModules.common-gpu-nvidia
       inputs.nixos-hardware.nixosModules.common-pc-ssd
       inputs.nixvim.nixosModules.nixvim
       # Include the results of the hardware scan.
@@ -82,7 +80,7 @@
       enable = true;
       useRoutingFeatures = "client";
     };
-    throttled.enable = true; # TODO check if makes a difference
+    # throttled.enable = true; # TODO check if makes a difference
     pulseaudio.enable = false;
   };
 
