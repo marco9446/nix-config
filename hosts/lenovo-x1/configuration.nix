@@ -82,7 +82,7 @@
       enable = true;
       useRoutingFeatures = "client";
     };
-    throttled.enable = true;
+    throttled.enable = true; # TODO check if makes a difference
     pulseaudio.enable = false;
   };
 
@@ -100,17 +100,6 @@
   environment.systemPackages = with pkgs; [
     #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     #  wget
-  ];
-
-  nixpkgs.config.nvidia.acceptLicense = true;
-  nixpkgs.overlays = [
-    (_self: super: {
-      bumblebee = super.bumblebee.override {
-        extraNvidiaDeviceOptions = ''
-          Option "AllowEmptyInitialConfiguration"
-        '';
-      };
-    })
   ];
 
   # Open ports in the firewall.

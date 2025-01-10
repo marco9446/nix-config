@@ -6,6 +6,7 @@
     enable = true;
   };
 
+  nixpkgs.config.nvidia.acceptLicense = true;
 
   hardware.nvidia = {
 
