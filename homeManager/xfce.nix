@@ -27,13 +27,13 @@
 
   xfconf.settings = {
     xsettings = {
-      "Net/ThemeName" = "Adwaita-dark";
-      "Net/IconThemeName" = "Flat-Remix-Blue-Dark";
       "Gtk/CursorThemeName" = "elementary";
       "Gtk/CursorThemeSize" = 56;
       "Gtk/FontName" = "Noto Sans Regular 10";
       "Gtk/MonospaceFontName" = "NotoSansM Nerd Font 11";
       "Gtk/WindowScalingFactor" = 2;
+      "Net/IconThemeName" = "Flat-Remix-Blue-Dark";
+      "Net/ThemeName" = "Adwaita-dark";
     };
 
     xfce4-session = { }; # xfce4-session
@@ -45,25 +45,25 @@
 
     xfwm4 = {
       "general/button_layout" = "O|HMC"; # disable "shade"(S) button
-      "general/theme" = "Default";
-      "general/title_font" = "Noto Sans Bold 11";
       "general/mousewheel_rollup" = false;
       "general/move_opacity" = 80;
       "general/resize_opacity" = 80;
+      "general/theme" = "Default";
+      "general/title_font" = "Noto Sans Bold 11";
       "general/workspace_count" = 3;
       "general/workspace_names" = [ "1" "2" "3" ];
     };
 
     xfce4-panel = {
-      "panels/dark-mode" = true;
       "panels" = [ 1 ];
-      "panels/panel-1/icon-size" = 16;
-      "panels/panel-1/size" = 36;
-      "panels/panel-1/length" = 100.0;
-      "panels/panel-1/position" = "p=4;x=0;y=0";
+      "panels/dark-mode" = true;
       "panels/panel-1/enable-struts" = true;
-      "panels/panel-1/position-locked" = true;
+      "panels/panel-1/icon-size" = 16;
+      "panels/panel-1/length" = 100.0;
       "panels/panel-1/plugin-ids" = [ 1 2 3 4 5 6 7 8 9 10 11 12 13 14];
+      "panels/panel-1/position-locked" = true;
+      "panels/panel-1/position" = "p=4;x=0;y=0";
+      "panels/panel-1/size" = 36;
 
       # Application menu
       "plugins/plugin-1" = "applicationsmenu";
@@ -81,8 +81,8 @@
 
       # Separator
       "plugins/plugin-4" = "separator";
-      "plugins/plugin-4/style" = 0;
       "plugins/plugin-4/expand" = true;
+      "plugins/plugin-4/style" = 0;
 
       # systemload
       "plugins/plugin-5" = "systemload";
@@ -115,8 +115,8 @@
       # Clock
       "plugins/plugin-12" = "clock";
       "plugins/plugin-12/digital-layout" = 3; # time only
-      "plugins/plugin-12/mode" = 2; # digital
       "plugins/plugin-12/digital-time-font" = "Sans Bold 9";
+      "plugins/plugin-12/mode" = 2; # digital
 
       # Separator
       "plugins/plugin-13" = "separator";
@@ -129,14 +129,14 @@
 
 
     xfce4-desktop = {
+      "backdrop/single-workspace-mode" = false;
+      "backdrop/single-workspace-number" = 3;
       "desktop-icons/file-icons/show-filesystem" = true;
       "desktop-icons/file-icons/show-home" = false;
       "desktop-icons/file-icons/show-removable" = true;
       "desktop-icons/file-icons/show-trash" = true;
       "desktop-icons/icon-size" = 42;
       "desktop-menu/show" = false;
-      "backdrop/single-workspace-mode" = false;
-      "backdrop/single-workspace-number" = 3;
     };
 
 
