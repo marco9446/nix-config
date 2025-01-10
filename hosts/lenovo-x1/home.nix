@@ -1,4 +1,4 @@
-{ ... }: {
+{ pkgs, ... }: {
 
   imports = [
     ../../homeManager/common.nix
@@ -7,10 +7,14 @@
     ../../homeManager/xfce.nix
     ../../homeManager/zsh.nix
     ../../homeManager/vsCodium.nix
-    ../../homeManager/bambu-studio.nix
     ../../homeManager/yt-dlp.nix
   ];
 
+  home.packages = with pkgs; [
+    bambu-studio
+  ];
+
   xfce_scaligFactor = 2;
+  xfce_cursorSize = 56;
 
 }

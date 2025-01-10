@@ -6,6 +6,14 @@
       default = 1;
       type = lib.types.int;
     };
+    xfce_cursorSize = lib.mkOption {
+      default = 22;
+      type = lib.types.int;
+    };
+    xfce_fontSize = lib.mkOption {
+      default = 11;
+      type = lib.types.int;
+    };
   };
 
   config = {
@@ -29,16 +37,16 @@
       font = {
         name = "Noto Sans";
         package = pkgs.noto-fonts;
-        size = 12;
+        size = config.xfce_fontSize;
       };
     };
 
     xfconf.settings = {
       xsettings = {
         "Gtk/CursorThemeName" = "elementary";
-        "Gtk/CursorThemeSize" = 56;
-        "Gtk/FontName" = "Noto Sans Regular 10";
-        "Gtk/MonospaceFontName" = "NotoSansM Nerd Font 11";
+        "Gtk/CursorThemeSize" = config.xfce_cursorSize;
+        "Gtk/FontName" = "Noto Sans Regular ${toString config.xfce_fontSize}";
+        "Gtk/MonospaceFontName" = "JetBrainsMono Nerd Font ${toString config.xfce_fontSize}";
         "Gdk/WindowScalingFactor" = config.xfce_scaligFactor;
         "Gtk/WindowScalingFactor" = config.xfce_scaligFactor;
         "Net/IconThemeName" = "Flat-Remix-Blue-Dark";
@@ -58,7 +66,7 @@
         "general/move_opacity" = 80;
         "general/resize_opacity" = 80;
         "general/theme" = "Default";
-        "general/title_font" = "Noto Sans Bold 11";
+        "general/title_font" = "Noto Sans Bold ${toString config.xfce_fontSize}";
         "general/workspace_count" = 3;
         "general/workspace_names" = [ "1" "2" "3" ];
       };
@@ -124,7 +132,7 @@
         # Clock
         "plugins/plugin-12" = "clock";
         "plugins/plugin-12/digital-layout" = 3; # time only
-        "plugins/plugin-12/digital-time-font" = "Sans Bold 9";
+        "plugins/plugin-12/digital-time-font" = "Noto Sans Bold ${toString config.xfce_fontSize}";
         "plugins/plugin-12/mode" = 2; # digital
 
         # Separator
@@ -156,7 +164,7 @@
       };
 
       xfce4-terminal = {
-        "font-name" = "JetBrainsMono Nerd Font 11";
+        "font-name" = "JetBrainsMono Nerd Font ${toString config.xfce_fontSize}";
       };
 
     };
