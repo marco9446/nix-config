@@ -10,10 +10,10 @@
 
   gtk = {
     enable = true;
-    theme = {
-      name = "Materia-dark-compact";
-      package = pkgs.materia-theme;
-    };
+    # theme = {
+    #   name = "Materia-dark-compact";
+    #   package = pkgs.materia-theme;
+    # };
     iconTheme = {
       name = "Flat-Remix-Blue-Dark";
       package = pkgs.flat-remix-icon-theme;
@@ -24,18 +24,6 @@
       size = 12;
     };
   };
-
-
-  # FIXXME: as of 2023-07-28 I had some issues with xfconf not
-  # being able to set some options. While playing around and to my
-  # astonishment, I found out that some xfce modules require a
-  # leading slash for the options ("/saver/enabled" = true;) and
-  # other modules don't require those leading slashes
-  # ("general/workspace_count" = 4;). Therefore, I added "MUST
-  # NOT" and "MUST" comments when a certain configuration did seem
-  # to run through without causing this error message. This might
-  # be considered as a bug and may change in future, I don't know
-  # for now.
 
   xfconf.settings = {
     xsettings = {
