@@ -10,8 +10,6 @@
   };
 
   config = {
-
-
     home.packages = with pkgs; [
       nixd
       nixpkgs-fmt
@@ -44,6 +42,10 @@
           command = "editor.action.copyLinesUpAction";
           when = "editorTextFocus && !editorReadonly";
         }
+        {
+          key = "ctrl+s";
+          command = "saveAll";
+        }
       ];
       userSettings = {
         "diffEditor.ignoreTrimWhitespace" = false;
@@ -65,6 +67,7 @@
         "git.autofetch" = true;
         "git.confirmSync" = false;
         "git.enableSmartCommit" = true;
+        "git.postCommitCommand" = "push";
         "markdown.extension.preview.autoShowPreviewToSide" = true;
         "markdown.extension.tableFormatter.normalizeIndentation" = true;
         "nix.enableLanguageServer" = true;
@@ -74,6 +77,18 @@
             "formatting" = {
               "command" = [ "nixpkgs-fmt" ];
             };
+            # FIXME it doesn't work, probably the path is wrong
+            # "options" = {
+            # // By default, this entriy will be read from `import <nixpkgs> { }`.
+            # // You can write arbitary Nix expressions here, to produce valid "options" declaration result.
+            # // Tip: for flake-based configuration, utilize `builtins.getFlake`
+            # "nixos" = {
+            #   "expr" = "(builtins.getFlake \"/home/marco/nix-config/flake.nix\").nixosConfigurations.lenovo-x1.options";
+            # };
+            # "home-manager" = {
+            #   "expr" = "(builtins.getFlake \"/home/marco/nix-config/flake.nix\").homeConfigurations.marco.options";
+            # };
+            # };
           };
         };
         "terminal.integrated.fontFamily" = "'JetBrainsMono Nerd Font', 'JetBrains Mono', 'Fira Code' ,'Cascadia Code'";
