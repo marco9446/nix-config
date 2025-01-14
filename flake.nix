@@ -6,6 +6,8 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
+    nixos-cosmic.url = "github:lilyinstarlight/nixos-cosmic";
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -17,7 +19,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-stable, home-manager, nixvim, nixos-hardware, ... }@inputs: {
+  outputs = { self, nixpkgs, nixpkgs-stable, home-manager, nixvim, nixos-hardware, nixos-cosmic, ... }@inputs: {
 
     nixosConfigurations.acer-aspire = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
@@ -52,6 +54,13 @@
       modules = [
         # nixos-hardware.nixosModules.lenovo-thinkpad-x1-extreme-gen3
         ./hosts/lenovo-x1/configuration.nix
+        {
+          nix.settings = {
+            substituters = [ "https://cosmic.cachix.org/" ];
+            trusted-public-keys = [ "cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE=" ];
+          };
+        }
+        nixos-cosmic.nixosModules.default
 
         # make home-manager as a module of nixos
         # so that home-manager configuration will be deployed automatically when executing `nixos-rebuild switch`

@@ -16,6 +16,8 @@
       ../../modules/user.nix
       ./nvidia.nix
       ../../modules/bluetooth.nix
+      ../../modules/gnome.nix
+      ../../modules/cosmicDesktop.nix
     ];
 
   # Bootloader.
@@ -48,20 +50,20 @@
   services = {
     # needed for tailscale
     resolved.enable = true;
-    xserver = {
-      enable = true;
-      # Enable the XFCE Desktop Environment.
-      desktopManager.xfce.enable = true;
-      # Configure keymap in X11
-      xkb = {
-        layout = "us";
-        variant = "";
-        options = "caps:backspace";
-      };
-      displayManager.lightdm.enable = true;
-      monitorSection = "DisplaySize 344 215";
-      videoDrivers = [ "nvidia" ];
-    };
+    # xserver = {
+    #   enable = true;
+    #   # Enable the XFCE Desktop Environment.
+    #   desktopManager.xfce.enable = true;
+    #   # Configure keymap in X11
+    #   xkb = {
+    #     layout = "us";
+    #     variant = "";
+    #     options = "caps:backspace";
+    #   };
+    #   displayManager.lightdm.enable = true;
+    #   monitorSection = "DisplaySize 344 215";
+    #   videoDrivers = [ "nvidia" ];
+    # };
     displayManager.autoLogin = {
       enable = false;
       user = "marco";
@@ -91,7 +93,7 @@
   programs = {
     zsh.enable = true;
     firefox.enable = true;
-    xfconf.enable = true;
+    # xfconf.enable = true;
   };
 
   # List packages installed in system profile. To search, run:
