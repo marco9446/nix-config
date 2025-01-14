@@ -26,10 +26,12 @@
     };
 
     initExtra = ''      
-      autoload -U edit-command-line
+      autoload -Uz compinit && compinit
       # TODO find way to use just UP and DOWN arrorw instead of CTRL+UP/DOWN arrow
       bindkey ';5A' history-search-backward 
       bindkey ';5B' history-search-forward 
+
+      zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
     '';
 
     plugins = [
@@ -41,6 +43,16 @@
           repo = "zsh-nix-shell";
           rev = "v0.8.0";
           sha256 = "1lzrn0n4fxfcgg65v0qhnj7wnybybqzs4adz7xsrkgmcsr0ii8b7";
+        };
+      }
+      {
+        name = "fzf-tab";
+        file = "fzf-tab.plugin.zsh";
+        src = pkgs.fetchFromGitHub {
+          owner = "Aloxaf";
+          repo = "fzf-tab";
+          rev = "v1.1.2";
+          sha256 = "Qv8zAiMtrr67CbLRrFjGaPzFZcOiMVEFLg1Z+N6VMhg=";
         };
       }
     ];
