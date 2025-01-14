@@ -19,88 +19,93 @@
     };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-stable, home-manager, nixvim, nixos-hardware, nixos-cosmic, ... }@inputs: {
+  outputs = { nixpkgs, home-manager, nixvim, nixos-cosmic, ... }@inputs: {
 
-    nixosConfigurations.acer-aspire = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      # Set all inputs parameters as special arguments for all submodules,
-      # so you can directly use all dependencies in inputs in submodules
-      specialArgs = { inherit inputs; };
-      modules = [
-        nixvim.nixosModules.nixvim
-        ./hosts/acer-aspire/configuration.nix
 
-        # make home-manager as a module of nixos
-        # so that home-manager configuration will be deployed automatically when executing `nixos-rebuild switch`
-        home-manager.nixosModules.home-manager
-        ({ ... }: {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
+    nixosConfigurations = {
 
-          home-manager.users.marco = { ... }: {
-            imports = [
-              ./hosts/acer-aspire/home.nix
-            ];
-          };
-        })
-      ];
-    };
+      acer-aspire = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        # Set all inputs parameters as special arguments for all submodules,
+        # so you can directly use all dependencies in inputs in submodules
+        specialArgs = { inherit inputs; };
+        modules = [
+          nixvim.nixosModules.nixvim
+          ./hosts/acer-aspire/configuration.nix
 
-    nixosConfigurations.lenovo-x1 = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      # Set all inputs parameters as special arguments for all submodules,
-      # so you can directly use all dependencies in inputs in submodules
-      specialArgs = { inherit inputs; };
-      modules = [
-        # nixos-hardware.nixosModules.lenovo-thinkpad-x1-extreme-gen3
-        ./hosts/lenovo-x1/configuration.nix
-        {
-          nix.settings = {
-            substituters = [ "https://cosmic.cachix.org/" ];
-            trusted-public-keys = [ "cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE=" ];
-          };
-        }
-        nixos-cosmic.nixosModules.default
+          # make home-manager as a module of nixos
+          # so that home-manager configuration will be deployed automatically when executing `nixos-rebuild switch`
+          home-manager.nixosModules.home-manager
+          ({ ... }: {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
 
-        # make home-manager as a module of nixos
-        # so that home-manager configuration will be deployed automatically when executing `nixos-rebuild switch`
-        home-manager.nixosModules.home-manager
-        ({ ... }: {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
+            home-manager.users.marco = { ... }: {
+              imports = [
+                ./hosts/acer-aspire/home.nix
+              ];
+            };
+          })
+        ];
+      };
 
-          home-manager.users.marco = { ... }: {
-            imports = [
-              ./hosts/lenovo-x1/home.nix
-            ];
-          };
-        })
-      ];
-    };
+      lenovo-x1 = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        # Set all inputs parameters as special arguments for all submodules,
+        # so you can directly use all dependencies in inputs in submodules
+        specialArgs = { inherit inputs; };
+        modules = [
+          # nixos-hardware.nixosModules.lenovo-thinkpad-x1-extreme-gen3
+          ./hosts/lenovo-x1/configuration.nix
+          {
+            nix.settings = {
+              substituters = [ "https://cosmic.cachix.org/" ];
+              trusted-public-keys = [ "cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE=" ];
+            };
+          }
+          nixos-cosmic.nixosModules.default
 
-    nixosConfigurations.wsl = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      # Set all inputs parameters as special arguments for all submodules,
-      # so you can directly use all dependencies in inputs in submodules
-      specialArgs = { inherit inputs; };
-      modules = [
-        nixvim.nixosModules.nixvim
-        ./hosts/wsl/configuration.nix
+          # make home-manager as a module of nixos
+          # so that home-manager configuration will be deployed automatically when executing `nixos-rebuild switch`
+          home-manager.nixosModules.home-manager
+          ({ ... }: {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
 
-        # make home-manager as a module of nixos
-        # so that home-manager configuration will be deployed automatically when executing `nixos-rebuild switch`
-        home-manager.nixosModules.home-manager
-        ({ ... }: {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
+            home-manager.users.marco = { ... }: {
+              imports = [
+                ./hosts/lenovo-x1/home.nix
+              ];
+            };
+          })
+        ];
+      };
 
-          home-manager.users.marco = { ... }: {
-            imports = [
-              ./hosts/wsl/home.nix
-            ];
-          };
-        })
-      ];
+      wsl = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        # Set all inputs parameters as special arguments for all submodules,
+        # so you can directly use all dependencies in inputs in submodules
+        specialArgs = { inherit inputs; };
+        modules = [
+          nixvim.nixosModules.nixvim
+          ./hosts/wsl/configuration.nix
+
+          # make home-manager as a module of nixos
+          # so that home-manager configuration will be deployed automatically when executing `nixos-rebuild switch`
+          home-manager.nixosModules.home-manager
+          ({ ... }: {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+
+            home-manager.users.marco = { ... }: {
+              imports = [
+                ./hosts/wsl/home.nix
+              ];
+            };
+          })
+        ];
+      };
+
     };
   };
 }
