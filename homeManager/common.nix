@@ -20,6 +20,9 @@
     lm_sensors # for `sensors` command
     pciutils # lspci
     usbutils # lsusb
+
+    # fonts
+    nerd-fonts.jetbrains-mono
   ];
 
   # This value determines the home Manager release that your
