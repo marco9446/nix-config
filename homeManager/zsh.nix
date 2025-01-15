@@ -28,8 +28,8 @@
     initExtra = ''      
       autoload -Uz compinit && compinit
       # TODO find way to use just UP and DOWN arrorw instead of CTRL+UP/DOWN arrow
-      bindkey ';5A' history-search-backward 
-      bindkey ';5B' history-search-forward 
+      bindkey '^[[A' history-search-backward 
+      bindkey '^[[B' history-search-forward 
 
       zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
     '';

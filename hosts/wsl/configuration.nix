@@ -5,12 +5,11 @@
 # NixOS-WSL specific options are documented on the NixOS-WSL repository:
 # https://github.com/nix-community/NixOS-WSL
 
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, inputs,... }:
 
 {
   imports = [
-    # include NixOS-WSL modules
-    <nixos-wsl/modules>
+    inputs.nixvim.nixosModules.nixvim
     ../../modules/common.nix
     ../../modules/nixVim.nix
     ../../modules/user.nix
@@ -18,6 +17,11 @@
 
   wsl.enable = true;
   wsl.defaultUser = "marco";
+
+  networking = {
+    hostName = "wsl";
+    networkmanager.enable = true;
+  };
 
   programs = {
     zsh.enable = true;
