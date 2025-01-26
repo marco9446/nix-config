@@ -1,4 +1,4 @@
-{ config, lib, inputs, ... }: {
+{ config, lib, inputs, host, username, ... }: {
   imports = [
     inputs.home-manager.nixosModules.home-manager
   ];
@@ -16,8 +16,8 @@
     home-manager = {
       useGlobalPkgs = true;
       useUserPackages = true;
-      extraSpecialArgs = { inherit inputs; };
-      users.marco = import config.modules.homeManager.path;
+      extraSpecialArgs = { inherit inputs host username; };
+      users.${username} = import config.modules.homeManager.path;
     };
   };
 }

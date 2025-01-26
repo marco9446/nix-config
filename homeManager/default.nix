@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }: {
+{ lib, pkgs, username, ... }: {
 
   imports = [
     ./git.nix
@@ -19,8 +19,8 @@
   };
 
 
-  home.username = "marco";
-  home.homeDirectory = "/home/marco";
+  home.username = username;
+  home.homeDirectory = "/home/${username}";
 
   # Packages that should be installed to the user profile.
   home.packages = with pkgs; [

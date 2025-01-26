@@ -1,4 +1,4 @@
-{ lib, pkgs, inputs, ... }: {
+{ lib, pkgs, inputs, host, ... }: {
 
   imports = [
     ./gui
@@ -23,6 +23,12 @@
 
   # Enable the Flakes feature and the accompanying new nix command-line tool
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+  # Enable networking
+  networking = {
+    hostName = host;
+    networkmanager.enable = true;
+  };
 
   # Set your time zone.
   time.timeZone = "Europe/Rome";
@@ -49,6 +55,10 @@
     automatic = true;
     dates = "weekly";
     options = "--delete-older-than 1w";
+  };
+
+  programs = {
+    zsh.enable = true;
   };
 
   # List packages installed in system profile.

@@ -5,7 +5,7 @@
 # NixOS-WSL specific options are documented on the NixOS-WSL repository:
 # https://github.com/nix-community/NixOS-WSL
 
-{ inputs, ... }:
+{ inputs, username, ... }:
 
 {
   imports = [
@@ -25,16 +25,7 @@
   };
 
   wsl.enable = true;
-  wsl.defaultUser = "marco";
-
-  networking = {
-    hostName = "wsl";
-    networkmanager.enable = true;
-  };
-
-  programs = {
-    zsh.enable = true;
-  };
+  wsl.defaultUser = username;
 
   # It‘s perfectly fine and recommended to leave
   # this value at the release version of the first install of this system.

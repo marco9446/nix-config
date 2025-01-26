@@ -31,12 +31,6 @@
     efi.canTouchEfiVariables = true;
   };
 
-  # Enable networking
-  networking = {
-    hostName = "lenovo-x1"; # Define your hostname.
-    networkmanager.enable = true;
-  };
-
   # Fixes an issue with incorrect battery reporting. See
   # https://wiki.archlinux.org/index.php/Lenovo_ThinkPad_X1_Extreme_(Gen_2)#Invalid_Stats_Workaround
   # boot.initrd.availableKernelModules = [ "battery" ];
@@ -67,7 +61,6 @@
   # services.xserver.libinput.enable = true;
 
   programs = {
-    zsh.enable = true;
     firefox.enable = true;
   };
 

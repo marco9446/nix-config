@@ -24,13 +24,14 @@
     nixosConfigurations =
       let
         hostNames = [ "acer-aspire" "lenovo-x1" "wsl" ];
+        username = "marco";
       in
       builtins.listToAttrs (map
         (host: {
           name = host;
           value = nixpkgs.lib.nixosSystem {
             system = "x86_64-linux";
-            specialArgs = { inherit inputs; };
+            specialArgs = { inherit inputs host username; };
             modules = [ ./hosts/${host}/configuration.nix ];
           };
         })

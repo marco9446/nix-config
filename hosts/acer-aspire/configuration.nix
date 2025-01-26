@@ -25,12 +25,6 @@
     configurationLimit = 3;
   };
 
-  networking = {
-    networkmanager.enable = true;
-    hostName = "acer-aspire"; # Define your hostname.
-    wireless.enable = false; # Enables wireless support via wpa_supplicant.
-  };
-
   # Enable the X11 windowing system.
   services = {
     # Enable CUPS to print documents.
@@ -50,7 +44,6 @@
   security.rtkit.enable = true;
 
   programs = {
-    zsh.enable = true;
     firefox.enable = true;
   };
 
