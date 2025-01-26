@@ -2,25 +2,27 @@
 
 {
   options = {
-    xfce_scaligFactor = lib.mkOption {
-      default = 1;
-      type = lib.types.int;
-    };
-    xfce_cursorSize = lib.mkOption {
-      default = 22;
-      type = lib.types.int;
-    };
-    xfce_fontSize = lib.mkOption {
-      default = 11;
-      type = lib.types.int;
-    };
-    xfce_dpi = lib.mkOption {
-      default = -1;
-      type = lib.types.int;
+    homeModules.xfce = {
+      enable = lib.mkEnableOption "enable xfce";
+      scaligFactor = lib.mkOption {
+        default = 1;
+        type = lib.types.int;
+      };
+      cursorSize = lib.mkOption {
+        default = 22;
+        type = lib.types.int;
+      };
+      fontSize = lib.mkOption {
+        default = 11;
+        type = lib.types.int;
+      };
+      dpi = lib.mkOption {
+        default = -1;
+        type = lib.types.int;
+      };
     };
   };
-
-  config = {
+  config = lib.mkIf config.homeModules.xfce.enable {
 
     home.packages = with pkgs; [
       xfce.xfce4-docklike-plugin
@@ -49,13 +51,13 @@
       xsettings = {
         "Gtk/CursorThemeName" = "elementary";
         "Gtk/CursorThemeSize" = config.xfce_cursorSize;
-        "Gtk/FontName" = "Noto Sans Regular ${toString (config.xfce_fontSize + 1)}";
-        "Gtk/MonospaceFontName" = "JetBrainsMono Nerd Font ${toString (config.xfce_fontSize + 1)}";
+        "Gtk/FontName" = "Noto Sans Regular ${toString (config.homeModules.xfce.fontSize + 1)}";
+        "Gtk/MonospaceFontName" = "JetBrainsMono Nerd Font ${toString (config.homeModules.xfce.fontSize + 1)}";
         "Gdk/WindowScalingFactor" = config.xfce_scaligFactor;
         "Gtk/WindowScalingFactor" = config.xfce_scaligFactor;
         "Net/IconThemeName" = "Flat-Remix-Blue-Dark";
         "Net/ThemeName" = "Adwaita-dark";
-        "Xft/DPI" = config.xfce_dpi;
+        "Xft/DPI" = config.homeModules.xfce.dpi;
       };
 
       xfce4-session = { }; # xfce4-session
@@ -71,7 +73,7 @@
         "general/move_opacity" = 80;
         "general/resize_opacity" = 80;
         "general/theme" = "Default";
-        "general/title_font" = "Noto Sans Bold ${toString config.xfce_fontSize}";
+        "general/title_font" = "Noto Sans Bold ${toString config.homeModules.xfce.fontSize}";
         "general/workspace_count" = 3;
         "general/workspace_names" = [ "1" "2" "3" ];
       };
@@ -137,7 +139,7 @@
         # Clock
         "plugins/plugin-12" = "clock";
         "plugins/plugin-12/digital-layout" = 3; # time only
-        "plugins/plugin-12/digital-time-font" = "Noto Sans Bold ${toString config.xfce_fontSize}";
+        "plugins/plugin-12/digital-time-font" = "Noto Sans Bold ${toString config.homeModules.xfce.fontSize}";
         "plugins/plugin-12/mode" = 2; # digital
 
         # Separator
@@ -169,7 +171,7 @@
       };
 
       xfce4-terminal = {
-        "font-name" = "JetBrainsMono Nerd Font ${toString config.xfce_fontSize}";
+        "font-name" = "JetBrainsMono Nerd Font ${toString config.homeModules.xfce.fontSize}";
       };
 
     };

@@ -2,14 +2,16 @@
 
 
 {
+
   options = {
-    withWailand = lib.mkOption {
+    homeModules.vsCodium.enable = lib.mkEnableOption "enable vsCodium";
+    homeModules.vsCodium.withWailand = lib.mkOption {
       default = false;
       type = lib.types.bool;
     };
   };
+  config = lib.mkIf config.homeModules.vsCodium.enable {
 
-  config = {
     home.packages = with pkgs; [
       nixd
       nixpkgs-fmt
@@ -18,7 +20,7 @@
     programs.vscode = {
       enable = true;
       package =
-        if (config.withWailand) then
+        if (config.homeModules.vsCodium.withWailand) then
           pkgs.vscodium.override
             {
               commandLineArgs = "--enable-ozone --ozone-platform=wayland";
@@ -96,7 +98,7 @@
         "terminal.integrated.lineHeight" = 1.1;
         "workbench.iconTheme" = "vscode-icons";
         "workbench.startupEditor" = "none";
-        "window.zoomLevel" = 1;
+        "window.zoomLevel" = if (config.homeModules.vsCodium.withWailand) then 1 else 0;
       };
     };
   };

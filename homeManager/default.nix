@@ -1,6 +1,24 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }: {
 
-{
+  imports = [
+    ./git.nix
+    ./starship.nix
+    ./vsCodium.nix
+    ./xfce.nix
+    ./yt-dlp.nix
+    ./zsh.nix
+  ];
+
+  homeModules = {
+    git.enable = lib.mkDefault true;
+    starship.enable = lib.mkDefault true;
+    vsCodium.enable = lib.mkDefault false;
+    xfce.enable = lib.mkDefault false;
+    yt-dlp.enable = lib.mkDefault false;
+    zsh.enable = lib.mkDefault true;
+  };
+
+
   home.username = "marco";
   home.homeDirectory = "/home/marco";
 
