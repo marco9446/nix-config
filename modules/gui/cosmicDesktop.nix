@@ -1,4 +1,14 @@
-{ lib, config, ... }: {
+{ lib, config, inputs, ... }: {
+
+  imports = [
+    {
+      nix.settings = {
+        substituters = [ "https://cosmic.cachix.org/" ];
+        trusted-public-keys = [ "cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE=" ];
+      };
+    }
+    inputs.nixos-cosmic.nixosModules.default
+  ];
 
   options = {
     modules.cosmicDesktop.enable = lib.mkEnableOption "enable cosmic desktop";

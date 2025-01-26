@@ -6,12 +6,14 @@
     ./nixVim.nix
     ./user.nix
     ./tailscale.nix
+    ./homeManager.nix
   ];
 
   modules = {
     bluetooh.enable = lib.mkDefault true;
     nixVim.enable = lib.mkDefault true;
     tailscale.enable = lib.mkDefault true;
+    homeManager.enable = lib.mkDefault false;
   };
 
 

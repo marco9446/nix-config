@@ -12,6 +12,13 @@
     ../../modules
   ];
 
+  modules = {
+    homeManager = {
+      enable = true;
+      path = ./home.nix;
+    };
+  };
+
   wsl.enable = true;
   wsl.defaultUser = "marco";
 

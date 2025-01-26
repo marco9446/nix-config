@@ -10,6 +10,10 @@
   # local modules
   modules = {
     xfce.enable = true;
+    homeManager = {
+      enable = true;
+      path = ./home.nix;
+    };
   };
 
   # Bootloader.

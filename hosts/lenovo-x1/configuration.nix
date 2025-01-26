@@ -15,6 +15,10 @@
   modules = {
     nvidia.enable = true;
     cosmicDesktop.enable = true;
+    homeManager = {
+      enable = true;
+      path = ./home.nix;
+    };
   };
 
   # Bootloader.
