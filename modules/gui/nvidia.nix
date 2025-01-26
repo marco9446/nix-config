@@ -1,9 +1,9 @@
 { config, lib, ... }: {
 
   options = {
-    nvidiaModule.enable = lib.mkEnableOption "enable nvidia";
+    modules.nvidia.enable = lib.mkEnableOption "enable nvidia";
   };
-  config = lib.mkIf config.nixVimModule.enable {
+  config = lib.mkIf config.modules.nvidia.enable {
 
     # Enable OpenGL
     hardware.graphics = {

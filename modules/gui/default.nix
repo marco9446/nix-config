@@ -3,9 +3,12 @@
   imports = [
     ./cosmicDesktop.nix
     ./xfce.nix
+    ./nvidia.nix
   ];
 
-
-  cosmicDesktopModule.enable = lib.mkDefault false;
-  xfceModule.enable = lib.mkDefault false;
+  modules = {
+    nvidia.enable = lib.mkDefault false;
+    cosmicDesktop.enable = lib.mkDefault false;
+    xfce.enable = lib.mkDefault false;
+  };
 }

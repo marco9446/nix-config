@@ -1,8 +1,8 @@
 { lib, config, ... }: {
   options = {
-    xfceModule.enable = lib.mkEnableOption "enable xfce desktop";
+    modules.xfce.enable = lib.mkEnableOption "enable xfce desktop";
   };
-  config = lib.mkIf config.xfceModule.enable {
+  config = lib.mkIf config.modules.xfce.enable {
 
     services = {
 

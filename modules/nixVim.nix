@@ -5,9 +5,9 @@
     inputs.nixvim.nixosModules.nixvim
   ];
   options = {
-    nixVimModule.enable = lib.mkEnableOption "enable nixVim";
+    modules.nixVim.enable = lib.mkEnableOption "enable nixVim";
   };
-  config = lib.mkIf config.nixVimModule.enable {
+  config = lib.mkIf config.modules.nixVim.enable {
 
     programs.nixvim = {
       enable = true;
