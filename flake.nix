@@ -5,6 +5,7 @@
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-24.11";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+        nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
 
     nixos-cosmic.url = "github:lilyinstarlight/nixos-cosmic";
 
@@ -19,7 +20,7 @@
     };
   };
 
-  outputs = { nixpkgs, home-manager, nixvim, nixos-cosmic, ... }@inputs: {
+  outputs = { nixpkgs, home-manager, nixvim, nixos-cosmic, nixos-wsl, ... }@inputs: {
 
 
     nixosConfigurations = {
@@ -87,7 +88,11 @@
         # so you can directly use all dependencies in inputs in submodules
         specialArgs = { inherit inputs; };
         modules = [
-          nixvim.nixosModules.nixvim
+          nixos-wsl.nixosModules.default
+          {
+            system.stateVersion = "24.05";
+            wsl.enable = true;
+          }
           ./hosts/wsl/configuration.nix
 
           # make home-manager as a module of nixos
