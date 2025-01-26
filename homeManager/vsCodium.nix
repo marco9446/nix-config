@@ -96,6 +96,7 @@
         "terminal.integrated.lineHeight" = 1.1;
         "workbench.iconTheme" = "vscode-icons";
         "workbench.startupEditor" = "none";
+        "window.zoomLevel" = 1;
       };
     };
   };
