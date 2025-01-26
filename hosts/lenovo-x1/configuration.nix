@@ -3,23 +3,17 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { inputs, pkgs, ... }:
-
-
 {
   imports =
     [
       inputs.nixos-hardware.nixosModules.common-pc-ssd
-      inputs.nixvim.nixosModules.nixvim
-      # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ../../modules/common.nix
-      ../../modules/nixVim.nix
-      ../../modules/user.nix
-      ./nvidia.nix
-      ../../modules/bluetooth.nix
-      # ../../modules/xfce.nix
-      ../../modules/cosmicDesktop.nix
+      ../../modules
     ];
+
+  # module to enable
+  nvidiaModule.enable = true;
+  cosmicDesktopModule.enable = true;
 
   # Bootloader.
   boot.loader = {

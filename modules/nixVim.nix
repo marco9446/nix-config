@@ -1,16 +1,25 @@
-{ ... }:
+{ lib, config, inputs, ... }:
 
 {
-  programs.nixvim = {
-    enable = true;
+  imports = [
+    inputs.nixvim.nixosModules.nixvim
+  ];
+  options = {
+    nixVimModule.enable = lib.mkEnableOption "enable nixVim";
+  };
+  config = lib.mkIf config.nixVimModule.enable {
 
-    colorschemes.catppuccin.enable = true;
-    plugins.lualine.enable = true;
-    opts = {
-      number = true; # Show line numbers
-      relativenumber = true; # Show relative line numbers
+    programs.nixvim = {
+      enable = true;
 
-      shiftwidth = 2; # Tab width should be 2
+      colorschemes.catppuccin.enable = true;
+      plugins.lualine.enable = true;
+      opts = {
+        number = true; # Show line numbers
+        relativenumber = true; # Show relative line numbers
+
+        shiftwidth = 2; # Tab width should be 2
+      };
     };
   };
 }
