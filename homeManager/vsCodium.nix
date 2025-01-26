@@ -1,8 +1,6 @@
 { pkgs, config, lib, ... }:
 
-
 {
-
   options = {
     homeModules.vsCodium.enable = lib.mkEnableOption "enable vsCodium";
     homeModules.vsCodium.withWailand = lib.mkOption {
@@ -53,7 +51,7 @@
         "diffEditor.ignoreTrimWhitespace" = false;
         "editor.fontFamily" = "'JetBrainsMono Nerd Font', 'JetBrains Mono', Consolas, 'Courier New', monospace";
         "editor.fontLigatures" = false;
-        "editor.fontSize" = 12.5;
+        "editor.fontSize" = if (config.homeModules.vsCodium.withWailand) then 13.5 else 12.5;
         "editor.fontWeight" = "400";
         "editor.formatOnSave" = true;
         "editor.lineHeight" = 1.5;
@@ -98,7 +96,7 @@
         "terminal.integrated.lineHeight" = 1.1;
         "workbench.iconTheme" = "vscode-icons";
         "workbench.startupEditor" = "none";
-        "window.zoomLevel" = if (config.homeModules.vsCodium.withWailand) then 1 else 0;
+        "window.zoomLevel" = 0;
       };
     };
   };
