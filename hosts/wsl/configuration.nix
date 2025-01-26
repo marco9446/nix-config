@@ -5,10 +5,15 @@
 # NixOS-WSL specific options are documented on the NixOS-WSL repository:
 # https://github.com/nix-community/NixOS-WSL
 
-{ ... }:
+{ inputs, ... }:
 
 {
   imports = [
+    inputs.nixos-wsl.nixosModules.default
+    {
+      system.stateVersion = "24.05";
+      wsl.enable = true;
+    }
     ../../modules
   ];
 

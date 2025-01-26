@@ -20,48 +20,20 @@
     };
   };
 
-  outputs = { nixpkgs, home-manager, nixvim, nixos-cosmic, nixos-wsl, ... }@inputs: {
-
-
-    nixosConfigurations = {
-
-      acer-aspire = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        # Set all inputs parameters as special arguments for all submodules,
-        # so you can directly use all dependencies in inputs in submodules
-        specialArgs = { inherit inputs; };
-        modules = [
-          nixvim.nixosModules.nixvim
-          ./hosts/acer-aspire/configuration.nix
-        ];
-      };
-
-      lenovo-x1 = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        # Set all inputs parameters as special arguments for all submodules,
-        # so you can directly use all dependencies in inputs in submodules
-        specialArgs = { inherit inputs; };
-        modules = [
-          # nixos-hardware.nixosModules.lenovo-thinkpad-x1-extreme-gen3
-          ./hosts/lenovo-x1/configuration.nix
-        ];
-      };
-
-      wsl = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        # Set all inputs parameters as special arguments for all submodules,
-        # so you can directly use all dependencies in inputs in submodules
-        specialArgs = { inherit inputs; };
-        modules = [
-          nixos-wsl.nixosModules.default
-          {
-            system.stateVersion = "24.05";
-            wsl.enable = true;
-          }
-          ./hosts/wsl/configuration.nix
-        ];
-      };
-
-    };
+  outputs = { nixpkgs, ... }@inputs: {
+    nixosConfigurations =
+      let
+        hostNames = [ "acer-aspire" "lenovo-x1" "wsl" ];
+      in
+      builtins.listToAttrs (map
+        (host: {
+          name = host;
+          value = nixpkgs.lib.nixosSystem {
+            system = "x86_64-linux";
+            specialArgs = { inherit inputs; };
+            modules = [ ./hosts/${host}/configuration.nix ];
+          };
+        })
+        hostNames);
   };
 }
