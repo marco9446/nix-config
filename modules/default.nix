@@ -7,13 +7,17 @@
     ./user.nix
     ./tailscale.nix
     ./homeManager.nix
+    ./ssh.nix
+    ./docker.nix
   ];
 
   modules = {
-    bluetooh.enable = lib.mkDefault true;
+    bluetooth.enable = lib.mkDefault true;
     nixVim.enable = lib.mkDefault true;
     tailscale.enable = lib.mkDefault true;
     homeManager.enable = lib.mkDefault false;
+    ssh.enable = lib.mkDefault false;
+    docker.enable = lib.mkDefault false;
   };
 
 
