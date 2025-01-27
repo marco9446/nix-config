@@ -4,7 +4,7 @@
   imports =
     [
       ./hardware-configuration.nix
-      ../../modules
+      ../../modules/nixOS
     ];
 
   # local modules

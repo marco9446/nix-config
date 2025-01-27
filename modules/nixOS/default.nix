@@ -1,7 +1,9 @@
 { lib, pkgs, inputs, host, ... }: {
 
   imports = [
-    ./gui
+    ./cosmicDesktop.nix
+    ./xfce.nix
+    ./nvidia.nix
     ./bluetooth.nix
     ./nixVim.nix
     ./user.nix
@@ -12,6 +14,9 @@
   ];
 
   modules = {
+    nvidia.enable = lib.mkDefault false;
+    cosmicDesktop.enable = lib.mkDefault false;
+    xfce.enable = lib.mkDefault false;
     bluetooth.enable = lib.mkDefault true;
     nixVim.enable = lib.mkDefault true;
     tailscale.enable = lib.mkDefault false;

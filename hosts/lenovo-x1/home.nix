@@ -3,7 +3,7 @@
 {
 
   imports = [
-    ../../homeManager
+    ../../modules/homeManager
   ];
 
   homeModules = {

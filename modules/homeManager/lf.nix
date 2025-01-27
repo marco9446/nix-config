@@ -6,8 +6,8 @@
   };
   config = lib.mkIf config.homeModules.lf.enable {
   
-    xdg.configFile."lf/icons".source = ../assets/lf_icons;
-    xdg.configFile."lf/colors".source = ../assets/lf_colors;
+    xdg.configFile."lf/icons".source = ../../assets/lf_icons;
+    xdg.configFile."lf/colors".source = ../../assets/lf_colors;
     
     # Documentation: https://github.com/gokcehan/lf/blob/master/doc.md
     programs.lf = {

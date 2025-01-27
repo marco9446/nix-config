@@ -8,7 +8,7 @@
     [
       inputs.nixos-hardware.nixosModules.common-pc-ssd
       ./hardware-configuration.nix
-      ../../modules
+      ../../modules/nixOS
     ];
 
   # local modules
