@@ -8,6 +8,7 @@
     ./yt-dlp.nix
     ./zsh.nix
     ./lf.nix
+    ./eza.nix
   ];
 
   homeModules = {
@@ -18,6 +19,7 @@
     yt-dlp.enable = lib.mkDefault false;
     zsh.enable = lib.mkDefault true;
     lf.enable = lib.mkDefault true;
+    eza.enable = lib.mkDefault true;
   };
 
 
