@@ -27,6 +27,9 @@
   wsl.enable = true;
   wsl.defaultUser = username;
 
+    # Disable systemd-resolved to avoid conflict with WSL's resolv.conf management
+  services.resolved.enable = false;
+
   # It‘s perfectly fine and recommended to leave
   # this value at the release version of the first install of this system.
   system.stateVersion = "24.05"; # Did you read the comment?

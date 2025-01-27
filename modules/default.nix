@@ -14,7 +14,7 @@
   modules = {
     bluetooth.enable = lib.mkDefault true;
     nixVim.enable = lib.mkDefault true;
-    tailscale.enable = lib.mkDefault true;
+    tailscale.enable = lib.mkDefault false;
     homeManager.enable = lib.mkDefault false;
     ssh.enable = lib.mkDefault false;
     docker.enable = lib.mkDefault false;
