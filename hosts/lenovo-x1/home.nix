@@ -1,4 +1,6 @@
-{ pkgs, ... }: {
+{ pkgs-stable, ... }:
+
+{
 
   imports = [
     ../../homeManager
@@ -10,8 +12,8 @@
     yt-dlp.enable = true;
   };
 
-  home.packages = with pkgs; [
-    bambu-studio
+  home.packages = [
+    pkgs-stable.bambu-studio
   ];
 
 

@@ -20,7 +20,7 @@
     };
   };
 
-  outputs = { nixpkgs, ... }@inputs: {
+  outputs = { nixpkgs, nixpkgs-stable, ... }@inputs: {
     nixosConfigurations =
       let
         hostNames = [ "acer-aspire" "lenovo-x1" "wsl" ];
@@ -29,9 +29,14 @@
       builtins.listToAttrs (map
         (host: {
           name = host;
-          value = nixpkgs.lib.nixosSystem {
+          value = nixpkgs.lib.nixosSystem rec {
             system = "x86_64-linux";
-            specialArgs = { inherit inputs host username; };
+            specialArgs = {
+              inherit inputs host username; pkgs-stable = import nixpkgs-stable {
+              inherit system;
+              config.allowUnfree = true;
+            };
+            };
             modules = [ ./hosts/${host}/configuration.nix ];
           };
         })
