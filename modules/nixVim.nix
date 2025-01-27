@@ -23,6 +23,16 @@
         neo-tree.enable = true;
         web-devicons.enable = true;
       };
+      keymaps = [
+        {
+          key = ";";
+          action = ":";
+        }
+        {
+          key = "<C-b>";
+          action = ":Neotree toggle<CR>";
+        }
+      ];
       opts = {
         number = true; # Show line numbers
         relativenumber = false;
