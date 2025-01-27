@@ -15,12 +15,13 @@
       viAlias = true;
       vimAlias = true;
 
-      colorschemes.vscode.enable= true;
-      plugins={
+      colorschemes.vscode.enable = true;
+      plugins = {
         lualine.enable = true;
         nvim-autopairs.enable = true;
         comment.enable = true;
-        treesitter.enable = true;
+        neo-tree.enable = true;
+        web-devicons.enable = true;
       };
       opts = {
         number = true; # Show line numbers
