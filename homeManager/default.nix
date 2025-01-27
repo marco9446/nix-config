@@ -7,6 +7,7 @@
     ./xfce.nix
     ./yt-dlp.nix
     ./zsh.nix
+    ./lf.nix
   ];
 
   homeModules = {
@@ -16,11 +17,17 @@
     xfce.enable = lib.mkDefault false;
     yt-dlp.enable = lib.mkDefault false;
     zsh.enable = lib.mkDefault true;
+    lf.enable = lib.mkDefault true;
   };
 
 
   home.username = username;
   home.homeDirectory = "/home/${username}";
+
+  home.sessionVariables = {
+    EDITOR = "nvim";
+    VISUAL = "nvim";
+  };
 
   # Packages that should be installed to the user profile.
   home.packages = with pkgs; [

@@ -26,18 +26,17 @@
       shellAliases = {
         ll = "ls -l";
         update = "sudo nixos-rebuild switch";
-        vim = "nvim";
         code = "codium";
       };
 
       initExtra = ''      
-      autoload -Uz compinit && compinit
-      # TODO find way to use just UP and DOWN arrorw instead of CTRL+UP/DOWN arrow
-      bindkey '^[[A' history-search-backward 
-      bindkey '^[[B' history-search-forward 
+        autoload -Uz compinit && compinit
+        # TODO find way to use just UP and DOWN arrorw instead of CTRL+UP/DOWN arrow
+        bindkey '^[[A' history-search-backward 
+        bindkey '^[[B' history-search-forward 
 
-      zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
-    '';
+        zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+      '';
 
       plugins = [
         {
