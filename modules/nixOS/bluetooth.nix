@@ -8,7 +8,6 @@
     modules.bluetooth.enable = lib.mkEnableOption "enable bluetooth module";
   };
 
-
   config = lib.mkIf config.modules.bluetooth.enable {
     # Blueman is the GUI app to manage bluetooth, make sure is not already installe in the desktop manager to avoid duplicates
     services.blueman.enable = config.modules.bluetooth.withBlueman;

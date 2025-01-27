@@ -23,6 +23,7 @@
     homeManager.enable = lib.mkDefault false;
     ssh.enable = lib.mkDefault false;
     docker.enable = lib.mkDefault false;
+    user.enable = lib.mkDefault true;
   };
 
 

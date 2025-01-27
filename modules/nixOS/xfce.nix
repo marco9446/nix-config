@@ -5,7 +5,6 @@
   config = lib.mkIf config.modules.xfce.enable {
 
     services = {
-
       xserver = {
         enable = true;
         # Enable the XFCE Desktop Environment.
@@ -19,7 +18,6 @@
         displayManager.lightdm.enable = true;
         monitorSection = "DisplaySize 344 215";
       };
-
     };
 
     programs = {

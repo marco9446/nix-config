@@ -8,7 +8,7 @@
     # basic configuration of eza
     programs.eza = {
       enable = true;
-      enableZshIntegration= true;
+      enableZshIntegration = true;
       git = true;
       icons = "auto";
       extraOptions = [ "--group-directories-first" ];
