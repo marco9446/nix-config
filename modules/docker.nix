@@ -1,4 +1,4 @@
-{...}:{
+{lib, config, ...}:{
 
   options = {
     modules.docker.enable = lib.mkEnableOption "enable docker module";
@@ -19,8 +19,8 @@
         flags = [
           "--all"
           "--force"
-        ]
-      }
+        ];
+      };
     };
   };
 }
