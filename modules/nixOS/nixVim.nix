@@ -15,7 +15,7 @@
       viAlias = true;
       vimAlias = true;
 
-      colorschemes.vscode.enable = true;
+      colorschemes.monokai-pro.enable = true;
       plugins = {
         lualine.enable = true;
         nvim-autopairs.enable = true;
