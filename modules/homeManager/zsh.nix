@@ -38,6 +38,10 @@
       initExtra = ''      
         autoload -Uz compinit && compinit
 
+        autoload -z edit-command-line
+        zle -N edit-command-line
+        bindkey "^E" edit-command-line
+
         zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
         zstyle ':completion:*' menu no
         zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
