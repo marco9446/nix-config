@@ -19,6 +19,9 @@ The theme should be `Monokay pro`
 
 ### Windows terminal
 
+Add `"tabColor": "#D17E55"` in the NixOs profile<br>
+Add `"tabColor": "#4176a2"` in the PowerShell profile
+
 ```json
 {
   "name": "Monokai Pro",
