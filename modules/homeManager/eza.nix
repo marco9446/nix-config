@@ -9,7 +9,7 @@
     programs.eza = {
       enable = true;
       enableZshIntegration= true;
-      git = true;
+      git = false;
       icons = "auto";
       extraOptions = [ "--group-directories-first" ];
     };
