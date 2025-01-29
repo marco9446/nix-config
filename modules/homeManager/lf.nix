@@ -27,7 +27,7 @@
         gh = "cd ~";
         c = "mkdir";
         "<enter>" = "open";
-        i = ''''$${pkgs.bat}/bin/bat --paging=always --theme="Sublime Snazzy" "$f"'';
+        i = ''''$${pkgs.bat}/bin/bat --paging=always --theme="Monokai Extended" "$f"'';
       };
 
       settings = {
