@@ -9,6 +9,7 @@
 
   # local modules
   modules = {
+    tailscale.enable = true;
     xfce.enable = true;
     homeManager = {
       enable = true;
