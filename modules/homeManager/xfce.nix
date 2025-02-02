@@ -43,18 +43,18 @@
       font = {
         name = "Noto Sans";
         package = pkgs.noto-fonts;
-        size = config.xfce_fontSize;
+        size = config.homeModules.xfce.fontSize;
       };
     };
 
     xfconf.settings = {
       xsettings = {
         "Gtk/CursorThemeName" = "elementary";
-        "Gtk/CursorThemeSize" = config.xfce_cursorSize;
+        "Gtk/CursorThemeSize" = config.homeModules.xfce.cursorSize;
         "Gtk/FontName" = "Noto Sans Regular ${toString (config.homeModules.xfce.fontSize + 1)}";
         "Gtk/MonospaceFontName" = "JetBrainsMono Nerd Font ${toString (config.homeModules.xfce.fontSize + 1)}";
-        "Gdk/WindowScalingFactor" = config.xfce_scaligFactor;
-        "Gtk/WindowScalingFactor" = config.xfce_scaligFactor;
+        "Gdk/WindowScalingFactor" = config.homeModules.xfce.scaligFactor;
+        "Gtk/WindowScalingFactor" = config.homeModules.xfce.scaligFactor;
         "Net/IconThemeName" = "Flat-Remix-Blue-Dark";
         "Net/ThemeName" = "Adwaita-dark";
         "Xft/DPI" = config.homeModules.xfce.dpi;

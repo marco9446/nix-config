@@ -4,11 +4,12 @@
   imports =
     [
       ./hardware-configuration.nix
-      ../../modules
+      ../../modules/nixOS
     ];
 
   # local modules
   modules = {
+    tailscale.enable = true;
     xfce.enable = true;
     homeManager = {
       enable = true;

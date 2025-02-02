@@ -97,6 +97,7 @@
         "workbench.iconTheme" = "vscode-icons";
         "workbench.startupEditor" = "none";
         "window.zoomLevel" = 0;
+        "vsicons.dontShowNewVersionMessage" = true;
       };
     };
   };

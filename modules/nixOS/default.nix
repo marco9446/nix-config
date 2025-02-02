@@ -1,19 +1,29 @@
 { lib, pkgs, inputs, host, ... }: {
 
   imports = [
-    ./gui
+    ./cosmicDesktop.nix
+    ./xfce.nix
+    ./nvidia.nix
     ./bluetooth.nix
     ./nixVim.nix
     ./user.nix
     ./tailscale.nix
     ./homeManager.nix
+    ./ssh.nix
+    ./docker.nix
   ];
 
   modules = {
-    bluetooh.enable = lib.mkDefault true;
+    nvidia.enable = lib.mkDefault false;
+    cosmicDesktop.enable = lib.mkDefault false;
+    xfce.enable = lib.mkDefault false;
+    bluetooth.enable = lib.mkDefault true;
     nixVim.enable = lib.mkDefault true;
-    tailscale.enable = lib.mkDefault true;
+    tailscale.enable = lib.mkDefault false;
     homeManager.enable = lib.mkDefault false;
+    ssh.enable = lib.mkDefault false;
+    docker.enable = lib.mkDefault false;
+    user.enable = lib.mkDefault true;
   };
 
 

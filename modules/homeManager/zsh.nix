@@ -21,23 +21,33 @@
         size = 100000;
         ignoreAllDups = true;
         expireDuplicatesFirst = true;
+        share = true;
+      };
+      historySubstringSearch = {
+        enable = true;
+        searchDownKey = "$terminfo[kcud1]";
+        searchUpKey = "$terminfo[kcuu1]";
       };
 
       shellAliases = {
         ll = "ls -l";
         update = "sudo nixos-rebuild switch";
-        vim = "nvim";
         code = "codium";
       };
 
       initExtra = ''      
-      autoload -Uz compinit && compinit
-      # TODO find way to use just UP and DOWN arrorw instead of CTRL+UP/DOWN arrow
-      bindkey '^[[A' history-search-backward 
-      bindkey '^[[B' history-search-forward 
+        autoload -Uz compinit && compinit
 
-      zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
-    '';
+        autoload -z edit-command-line
+        zle -N edit-command-line
+        bindkey "^E" edit-command-line
+
+        zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+        zstyle ':completion:*' menu no
+        zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
+        zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
+
+      '';
 
       plugins = [
         {
