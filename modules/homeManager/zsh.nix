@@ -30,7 +30,7 @@
       };
 
       shellAliases = {
-        ll = "ls -l";
+        ll = "ls -alhF";
         update = "sudo nixos-rebuild switch";
         code = "codium";
       };
