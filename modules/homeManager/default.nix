@@ -9,6 +9,7 @@
     ./zsh.nix
     ./eza.nix
     ./yazi.nix
+    ./zoxide.nix
   ];
 
   homeModules = {
@@ -20,6 +21,7 @@
     zsh.enable = lib.mkDefault true;
     eza.enable = lib.mkDefault true;
     yazi.enable = lib.mkDefault true;
+    zoxide.enable = lib.mkDefault true;
   };
 
 
