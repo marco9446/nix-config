@@ -7,8 +7,8 @@
     ./xfce.nix
     ./yt-dlp.nix
     ./zsh.nix
-    ./lf.nix
     ./eza.nix
+    ./yazi.nix
   ];
 
   homeModules = {
@@ -18,8 +18,8 @@
     xfce.enable = lib.mkDefault false;
     yt-dlp.enable = lib.mkDefault false;
     zsh.enable = lib.mkDefault true;
-    lf.enable = lib.mkDefault true;
     eza.enable = lib.mkDefault true;
+    yazi.enable = lib.mkDefault true;
   };
 
 
