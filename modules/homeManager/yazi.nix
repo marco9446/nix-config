@@ -1,11 +1,13 @@
-{pkgs, lib, config, ...}: let
-	yazi-plugins = pkgs.fetchFromGitHub {
-		owner = "yazi-rs";
-		repo = "plugins";
-		rev = "main";
-		hash = "sha256-1FZ8wcf2VVp6ZWY27vm1dUU1KAL32WwoYbNA/8RUAog=";
-	};
-in {
+{ pkgs, lib, config, ... }:
+let
+  yazi-plugins = pkgs.fetchFromGitHub {
+    owner = "yazi-rs";
+    repo = "plugins";
+    rev = "main";
+    hash = "sha256-enIt79UvQnKJalBtzSEdUkjNHjNJuKUWC4L6QFb3Ou4=";
+  };
+in
+{
 
   options = {
     homeModules.yazi.enable = lib.mkEnableOption "enable yazi";
@@ -21,7 +23,7 @@ in {
         manager = {
           show_hidden = true;
           sort_dir_first = true;
-          ratio = [1 4 3];
+          ratio = [ 1 4 3 ];
           show_symlink = true;
           linemode = "size";
         };

@@ -75,5 +75,6 @@
   environment.systemPackages = with pkgs; [
     wget
     git
+    htop
   ];
 }
