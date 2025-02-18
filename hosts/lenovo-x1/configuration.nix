@@ -66,7 +66,7 @@
   };
 
   environment.sessionVariables = {
-    XCURSOR_SIZE = "22";
+    XCURSOR_SIZE = "20";
   };
 
   # List packages installed in system profile.
