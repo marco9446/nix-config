@@ -10,6 +10,7 @@
     ./eza.nix
     ./yazi.nix
     ./zoxide.nix
+    ./gtk.nix
   ];
 
   homeModules = {
@@ -22,6 +23,7 @@
     eza.enable = lib.mkDefault true;
     yazi.enable = lib.mkDefault true;
     zoxide.enable = lib.mkDefault true;
+    gtk.enable = lib.mkDefault false;
   };
 
 

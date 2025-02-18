@@ -4,7 +4,7 @@
   options = {
     homeModules.xfce = {
       enable = lib.mkEnableOption "enable xfce";
-      scaligFactor = lib.mkOption {
+      scalingFactor = lib.mkOption {
         default = 1;
         type = lib.types.int;
       };
@@ -53,8 +53,8 @@
         "Gtk/CursorThemeSize" = config.homeModules.xfce.cursorSize;
         "Gtk/FontName" = "Noto Sans Regular ${toString (config.homeModules.xfce.fontSize + 1)}";
         "Gtk/MonospaceFontName" = "JetBrainsMono Nerd Font ${toString (config.homeModules.xfce.fontSize + 1)}";
-        "Gdk/WindowScalingFactor" = config.homeModules.xfce.scaligFactor;
-        "Gtk/WindowScalingFactor" = config.homeModules.xfce.scaligFactor;
+        "Gdk/WindowScalingFactor" = config.homeModules.xfce.scalingFactor;
+        "Gtk/WindowScalingFactor" = config.homeModules.xfce.scalingFactor;
         "Net/IconThemeName" = "Flat-Remix-Blue-Dark";
         "Net/ThemeName" = "Adwaita-dark";
         "Xft/DPI" = config.homeModules.xfce.dpi;
