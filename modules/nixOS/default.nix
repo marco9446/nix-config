@@ -77,5 +77,6 @@
     wget
     git
     htop
+    lhsw
   ];
 }
