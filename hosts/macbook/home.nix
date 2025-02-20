@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs-stable, ... }:
 
 {
 
@@ -20,7 +20,7 @@
   };
 
   home.packages = [
-    pkgs.bambu-studio
+    pkgs-stable.bambu-studio
   ];
 
 }
