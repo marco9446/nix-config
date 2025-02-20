@@ -2,21 +2,21 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, inputs, ... }:
+{ pkgs, inputs, ... }:
 
 {
   imports =
     [
-        inputs.nixos-hardware.nixosModules.common-pc-ssd
-        ./hardware-configuration.nix
-        ../../modules/nixOS
+      inputs.nixos-hardware.nixosModules.common-pc-ssd
+      ./hardware-configuration.nix
+      ../../modules/nixOS
     ];
 
   # local modules
   modules = {
     nvidia.enable = true;
-    cosmicDesktop.enable = false;
-    xfce.enable = true; 
+    cosmicDesktop.enable = true;
+    xfce.enable = false;
     homeManager = {
       enable = true;
       path = ./home.nix;
@@ -63,7 +63,7 @@
     gparted
   ];
 
-   # Open ports in the firewall.
+  # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.

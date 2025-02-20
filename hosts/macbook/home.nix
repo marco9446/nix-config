@@ -15,7 +15,7 @@
     git.enable = true;
     starship.enable = true;
     xfce = {
-      enable = true;
+      enable = false;
       scalingFactor = 2;
       cursorSize = 42;
       dpi = 95;
