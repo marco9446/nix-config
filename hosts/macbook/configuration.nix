@@ -45,6 +45,8 @@
       pulse.enable = true;
     };
 
+    fwupd.enable = true;
+
     # throttled.enable = true; # TODO check if makes a difference
     pulseaudio.enable = false;
   };
@@ -55,7 +57,7 @@
   };
 
   environment.sessionVariables = {
-    XCURSOR_SIZE = "20";
+    XCURSOR_SIZE = "22";
   };
 
   # List packages installed in system profile.
