@@ -11,6 +11,7 @@
     ./homeManager.nix
     ./ssh.nix
     ./docker.nix
+    ./nh.nix
   ];
 
   modules = {
@@ -24,6 +25,7 @@
     ssh.enable = lib.mkDefault false;
     docker.enable = lib.mkDefault false;
     user.enable = lib.mkDefault true;
+    nh.enable = lib.mkDefault true;
   };
 
 

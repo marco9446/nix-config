@@ -44,9 +44,6 @@
     # utils
     jq # A lightweight and flexible command-line JSON processor
 
-    # nix related
-    nh
-
     # system tools
     lm_sensors # for `sensors` command
     pciutils # lspci

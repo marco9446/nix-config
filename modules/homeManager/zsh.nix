@@ -31,7 +31,7 @@
 
       shellAliases = {
         ll = "ls -alhF";
-        update = "sudo nixos-rebuild switch";
+        update = "nh os switch";
         code = "codium";
         h = "${pkgs.htop}/bin/htop";
       };
