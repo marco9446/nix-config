@@ -1,4 +1,4 @@
-{ pkgs-stable, ... }:
+{ pkgs, ... }:
 
 {
 
@@ -8,11 +8,14 @@
 
   homeModules = {
     vsCodium.enable = true;
-    vsCodium.withWailand = true;
+    vsCodium.withWailand = false;
     yt-dlp.enable = true;
     gtk.enable = true;
+    eza.enable = true;
+    git.enable = true;
+    starship.enable = true;
     xfce = {
-      enable = false;
+      enable = true;
       scalingFactor = 2;
       cursorSize = 42;
       dpi = 95;
@@ -20,7 +23,7 @@
   };
 
   home.packages = [
-    pkgs-stable.bambu-studio
+    pkgs.bambu-studio
   ];
 
 }

@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   imports =
@@ -15,8 +15,8 @@
   # local modules
   modules = {
     nvidia.enable = true;
-    cosmicDesktop.enable = true;
-    xfce.enable = false; 
+    cosmicDesktop.enable = false;
+    xfce.enable = true; 
     homeManager = {
       enable = true;
       path = ./home.nix;
