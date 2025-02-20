@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, nixOsConfig, ... }:
 
 {
 
@@ -8,11 +8,11 @@
 
   homeModules = {
     vsCodium.enable = true;
-    vsCodium.withWailand = true;
+    vsCodium.withWailand = !nixOsConfig.modules.xfce.enable;
     yt-dlp.enable = true;
     gtk.enable = true;
     xfce = {
-      enable = false;
+      enable = nixOsConfig.modules.xfce.enable;
       scalingFactor = 2;
       cursorSize = 42;
       dpi = 95;

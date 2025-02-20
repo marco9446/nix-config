@@ -16,7 +16,10 @@
     home-manager = {
       useGlobalPkgs = true;
       useUserPackages = true;
-      extraSpecialArgs = { inherit inputs host username pkgs-stable; };
+      extraSpecialArgs = {
+        inherit inputs host username pkgs-stable;
+        nixOsConfig = config;
+      };
       users.${username} = import config.modules.homeManager.path;
     };
   };

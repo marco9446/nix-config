@@ -1,4 +1,4 @@
-{ lib, pkgs, inputs, host, ... }: {
+{ lib, pkgs, inputs, host, config, ... }: {
 
   imports = [
     ./cosmicDesktop.nix
@@ -65,7 +65,7 @@
 
   # Perform garbage collection weekly to maintain low disk usage
   nix.gc = {
-    automatic = true;
+    automatic = lib.mkIf config.programs.nh.enable == false;
     dates = "weekly";
     options = "--delete-older-than 1w";
   };

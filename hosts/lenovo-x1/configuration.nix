@@ -12,10 +12,10 @@
     ];
 
   # local modules
-  modules = {
+  modules = rec {
     nvidia.enable = true;
     cosmicDesktop.enable = true;
-    xfce.enable = false; 
+    xfce.enable = !cosmicDesktop.enable;
     homeManager = {
       enable = true;
       path = ./home.nix;

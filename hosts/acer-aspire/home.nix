@@ -1,4 +1,4 @@
-{ ... }: {
+{ nixOsConfig, ... }: {
 
 
   imports = [
@@ -7,9 +7,11 @@
 
   homeModules = {
     vsCodium.enable = true;
-    vsCodium.withWailand = false;
-    xfce.enable = true;
+    vsCodium.withWailand = !nixOsConfig.modules.xfce.enable;
     yt-dlp.enable = true;
+    xfce = {
+      enable = nixOsConfig.modules.xfce.enable;
+    };
   };
 }
 

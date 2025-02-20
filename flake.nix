@@ -23,7 +23,7 @@
   outputs = { nixpkgs, nixpkgs-stable, ... }@inputs: {
     nixosConfigurations =
       let
-        hostNames = [ "acer-aspire" "lenovo-x1" "wsl"  "macbook"];
+        hostNames = [ "acer-aspire" "lenovo-x1" "wsl" "macbook" ];
         username = "marco";
       in
       builtins.listToAttrs (map
@@ -32,10 +32,11 @@
           value = nixpkgs.lib.nixosSystem rec {
             system = "x86_64-linux";
             specialArgs = {
-              inherit inputs host username; pkgs-stable = import nixpkgs-stable {
-              inherit system;
-              config.allowUnfree = true;
-            };
+              inherit inputs host username;
+              pkgs-stable = import nixpkgs-stable {
+                inherit system;
+                config.allowUnfree = true;
+              };
             };
             modules = [ ./hosts/${host}/configuration.nix ];
           };
