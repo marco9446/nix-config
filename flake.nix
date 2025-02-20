@@ -23,7 +23,7 @@
   outputs = { nixpkgs, nixpkgs-stable, ... }@inputs: {
     nixosConfigurations =
       let
-        hostNames = [ "acer-aspire" "lenovo-x1" "wsl" ];
+        hostNames = [ "acer-aspire" "lenovo-x1" "wsl"  "macbook"];
         username = "marco";
       in
       builtins.listToAttrs (map
