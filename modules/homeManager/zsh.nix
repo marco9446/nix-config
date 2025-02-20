@@ -34,6 +34,7 @@
         update = "nh os switch";
         code = "codium";
         h = "${pkgs.htop}/bin/htop";
+        disk = "df | grep  '/$' | awk '{print $1}' | xargs df -H";
       };
 
       initExtra = ''      
