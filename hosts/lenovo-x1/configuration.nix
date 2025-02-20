@@ -46,14 +46,14 @@
   services = {
     # Enable CUPS to print documents.
     printing.enable = true;
-
+    power-profiles-daemon.enable = true;
     pipewire = {
       enable = true;
       alsa.enable = true;
       alsa.support32Bit = true;
       pulse.enable = true;
     };
-
+    fwupd.enable = true;
     # throttled.enable = true; # TODO check if makes a difference
     pulseaudio.enable = false;
   };
