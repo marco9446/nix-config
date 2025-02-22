@@ -11,6 +11,7 @@
   modules = {
     customConfig = {
       desktop = "xfce";
+      xcursorSize = "22";
     };
     tailscale.enable = true;
     homeManager = {

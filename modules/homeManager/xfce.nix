@@ -1,4 +1,4 @@
-{ pkgs, lib, config, ... }:
+{ pkgs, lib, config, nixOsConfig, ... }:
 
 {
   options = {
@@ -9,7 +9,7 @@
         type = lib.types.int;
       };
       cursorSize = lib.mkOption {
-        default = 22;
+        default = lib.strings.toInt nixOsConfig.modules.customConfig.xcursorSize;
         type = lib.types.int;
       };
       fontSize = lib.mkOption {

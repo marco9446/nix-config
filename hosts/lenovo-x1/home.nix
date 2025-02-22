@@ -12,7 +12,6 @@
     gtk.enable = true;
     xfce = {
       scalingFactor = 2;
-      cursorSize = 42;
       dpi = 95;
     };
   };

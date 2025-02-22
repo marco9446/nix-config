@@ -12,11 +12,11 @@
       ../../modules/nixOS
     ];
 
-  # local modules
+  # local modules 
   modules = {
-    customConfig = {
+    customConfig = rec{
       desktop = "cosmic";
-      xcursorSize = "22";
+      xcursorSize = if (desktop == "xfce") then "42" else "22";
     };
     nvidia.enable = true;
     homeManager = {

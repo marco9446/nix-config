@@ -16,7 +16,6 @@
     xfce = {
       enable = nixOsConfig.modules.xfce.enable;
       scalingFactor = 2;
-      cursorSize = 42;
       dpi = 95;
     };
   };

@@ -1,4 +1,4 @@
-{ lib, config, pkgs, ... }: {
+{ lib, config, pkgs, nixOsConfig, ... }: {
 
   options = {
     homeModules.gtk.enable = lib.mkEnableOption "enable gtk";
@@ -6,7 +6,7 @@
   config = lib.mkIf config.homeModules.gtk.enable {
     gtk = {
       enable = true;
-      cursorTheme.size = config.homeModules.xfce.cursorSize;
+      cursorTheme.size = lib.strings.toInt nixOsConfig.modules.customConfig.xcursorSize;
       cursorTheme.name = "elementary";
       iconTheme = {
         name = "Flat-Remix-Blue-Dark";
