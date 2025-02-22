@@ -35,6 +35,7 @@
         code = "codium";
         h = "${pkgs.htop}/bin/htop";
         disk = "df | grep  '/$' | awk '{print $1}' | xargs df -H";
+        lb = "lsblk -o +LABEL,UUID";
       };
 
       initExtra = ''      
