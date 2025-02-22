@@ -15,6 +15,7 @@
   modules = {
     customConfig = {
       desktop = "cosmic";
+      xcursorSize = "42";
     };
     nvidia.enable = true;
     homeManager = {

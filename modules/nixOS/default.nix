@@ -15,9 +15,15 @@
   ];
 
   options = {
-    modules.customConfig.desktop = lib.mkOption {
-      description = "The desktop environment you intend to use";
-      type = lib.types.enum [ "none" "xfce" "cosmic" ];
+    modules.customConfig = {
+      desktop = lib.mkOption {
+        description = "The desktop environment you intend to use";
+        type = lib.types.enum [ "none" "xfce" "cosmic" ];
+      };
+      xcursorSize = lib.mkOption {
+        type = lib.types.str;
+        default = "20";
+      };
     };
   };
 
@@ -37,7 +43,7 @@
     };
 
     environment.sessionVariables = {
-      XCURSOR_SIZE = if (config.modules.cosmicDesktop.enable) then "20" else "42";
+      XCURSOR_SIZE = config.modules.customConfig.xcursorSize;
     };
 
     # Allow unfree packages

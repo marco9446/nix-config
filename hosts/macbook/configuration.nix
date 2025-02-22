@@ -16,6 +16,7 @@
   modules = {
     customConfig = {
       desktop = "cosmic";
+      xcursorSize = "22";
     };
     nvidia.enable = true;
     homeManager = {
@@ -50,6 +51,15 @@
 
     # throttled.enable = true; # TODO check if makes a difference
     pulseaudio.enable = false;
+  };
+
+  # set initial backlight to 50%
+  systemd.services.set-backlight = {
+    description = "Set backlight to desired brightness";
+    wantedBy = [ "multi-user.target" ]; # Ensure it runs after the system is ready
+
+    script = "echo 515 | tee /sys/class/backlight/gmux_backlight/brightness";
+    serviceConfig.User = "root"; # Ensure the command runs as root
   };
 
 
