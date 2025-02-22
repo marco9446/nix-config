@@ -14,7 +14,7 @@
   # local modules
   modules = {
     customConfig = {
-      desktop = "xfce";
+      desktop = "cosmic";
     };
     nvidia.enable = true;
     homeManager = {

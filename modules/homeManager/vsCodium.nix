@@ -1,10 +1,10 @@
-{ pkgs, config, lib, ... }:
+{ pkgs, config, lib, nixOsConfig, ... }:
 
 {
   options = {
     homeModules.vsCodium.enable = lib.mkEnableOption "enable vsCodium";
     homeModules.vsCodium.withWailand = lib.mkOption {
-      default = false;
+      default = !nixOsConfig.modules.xfce.enable;
       type = lib.types.bool;
     };
   };

@@ -16,7 +16,7 @@
 
   options = {
     modules.customConfig.desktop = lib.mkOption {
-      default = "xfce";
+      description = "The desktop environment you intend to use";
       type = lib.types.enum [ "none" "xfce" "cosmic" ];
     };
   };

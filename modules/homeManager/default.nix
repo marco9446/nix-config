@@ -1,4 +1,4 @@
-{ lib, pkgs, username, ... }: {
+{ lib, pkgs, username, nixOsConfig, ... }: {
 
   imports = [
     ./git.nix
@@ -17,13 +17,13 @@
     git.enable = lib.mkDefault true;
     starship.enable = lib.mkDefault true;
     vsCodium.enable = lib.mkDefault false;
-    xfce.enable = lib.mkDefault false;
+    xfce.enable = lib.mkDefault nixOsConfig.modules.xfce.enable;
     yt-dlp.enable = lib.mkDefault false;
     zsh.enable = lib.mkDefault true;
     eza.enable = lib.mkDefault true;
     yazi.enable = lib.mkDefault true;
     zoxide.enable = lib.mkDefault true;
-    gtk.enable = lib.mkDefault false;
+    gtk.enable = lib.mkDefault true;
   };
 
 

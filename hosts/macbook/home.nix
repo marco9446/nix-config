@@ -8,7 +8,6 @@
 
   homeModules = {
     vsCodium.enable = true;
-    vsCodium.withWailand = !nixOsConfig.modules.xfce.enable;
     yt-dlp.enable = true;
     gtk.enable = true;
     eza.enable = true;
