@@ -18,6 +18,9 @@
   ];
 
   modules = {
+    customConfig = {
+      desktop = "none";
+    };
     homeManager = {
       enable = true;
       path = ./home.nix;
@@ -27,7 +30,7 @@
   wsl.enable = true;
   wsl.defaultUser = username;
 
-    # Disable systemd-resolved to avoid conflict with WSL's resolv.conf management
+  # Disable systemd-resolved to avoid conflict with WSL's resolv.conf management
   services.resolved.enable = false;
 
   # It‘s perfectly fine and recommended to leave

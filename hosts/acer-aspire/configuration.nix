@@ -8,10 +8,11 @@
     ];
 
   # local modules
-  modules = rec{
+  modules = {
+    customConfig = {
+      desktop = "xfce";
+    };
     tailscale.enable = true;
-    cosmicDesktop.enable = false;
-    xfce.enable = !cosmicDesktop.enable;
     homeManager = {
       enable = true;
       path = ./home.nix;

@@ -13,10 +13,11 @@
     ];
 
   # local modules
-  modules = rec {
+  modules = {
+    customConfig = {
+      desktop = "cosmic";
+    };
     nvidia.enable = true;
-    cosmicDesktop.enable = true;
-    xfce.enable = !cosmicDesktop.enable;
     homeManager = {
       enable = true;
       path = ./home.nix;
@@ -54,10 +55,6 @@
 
   programs = {
     firefox.enable = true;
-  };
-
-  environment.sessionVariables = {
-    XCURSOR_SIZE = "22";
   };
 
   # List packages installed in system profile.

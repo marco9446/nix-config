@@ -30,23 +30,6 @@
       nerd-fonts.jetbrains-mono
     ];
 
-    gtk = {
-      enable = true;
-      # theme = {
-      #   name = "Materia-dark-compact";
-      #   package = pkgs.materia-theme;
-      # };
-      iconTheme = {
-        name = "Flat-Remix-Blue-Dark";
-        package = pkgs.flat-remix-icon-theme;
-      };
-      font = {
-        name = "Noto Sans";
-        package = pkgs.noto-fonts;
-        size = config.homeModules.xfce.fontSize;
-      };
-    };
-
     xfconf.settings = {
       xsettings = {
         "Gtk/CursorThemeName" = "elementary";
@@ -76,6 +59,7 @@
         "general/title_font" = "Noto Sans Bold ${toString config.homeModules.xfce.fontSize}";
         "general/workspace_count" = 3;
         "general/workspace_names" = [ "1" "2" "3" ];
+        "general/raise_with_any_button" = false;
       };
 
       xfce4-panel = {

@@ -14,71 +14,83 @@
     ./nh.nix
   ];
 
-  modules = {
-    nvidia.enable = lib.mkDefault false;
-    cosmicDesktop.enable = lib.mkDefault false;
-    xfce.enable = lib.mkDefault false;
-    bluetooth.enable = lib.mkDefault true;
-    nixVim.enable = lib.mkDefault true;
-    tailscale.enable = lib.mkDefault false;
-    homeManager.enable = lib.mkDefault false;
-    ssh.enable = lib.mkDefault false;
-    docker.enable = lib.mkDefault false;
-    user.enable = lib.mkDefault true;
-    nh.enable = lib.mkDefault true;
-  };
-
-
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
-  nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
-
-  # Enable the Flakes feature and the accompanying new nix command-line tool
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  nix.settings.warn-dirty = false;
-
-  # Enable networking
-  networking = {
-    hostName = host;
-    networkmanager.enable = true;
-  };
-
-  # Set your time zone.
-  time.timeZone = "Europe/Rome";
-
-  # Select internationalisation properties.
-  i18n = {
-    defaultLocale = "en_US.UTF-8";
-    extraLocaleSettings = {
-      LC_ADDRESS = "it_IT.UTF-8";
-      LC_IDENTIFICATION = "it_IT.UTF-8";
-      LC_MEASUREMENT = "it_IT.UTF-8";
-      LC_MONETARY = "it_IT.UTF-8";
-      LC_NAME = "it_IT.UTF-8";
-      LC_NUMERIC = "it_IT.UTF-8";
-      LC_PAPER = "it_IT.UTF-8";
-      LC_TELEPHONE = "it_IT.UTF-8";
-      LC_TIME = "it_IT.UTF-8";
+  options = {
+    modules.customConfig.desktop = lib.mkOption {
+      default = "xfce";
+      type = lib.types.enum [ "none" "xfce" "cosmic" ];
     };
   };
 
+  config = {
+    modules = {
+      nvidia.enable = lib.mkDefault false;
+      cosmicDesktop.enable = config.modules.customConfig.desktop == "cosmic";
+      xfce.enable = config.modules.customConfig.desktop == "xfce";
+      bluetooth.enable = lib.mkDefault true;
+      nixVim.enable = lib.mkDefault true;
+      tailscale.enable = lib.mkDefault false;
+      homeManager.enable = lib.mkDefault false;
+      ssh.enable = lib.mkDefault false;
+      docker.enable = lib.mkDefault false;
+      user.enable = lib.mkDefault true;
+      nh.enable = lib.mkDefault true;
+    };
 
-  # Perform garbage collection weekly to maintain low disk usage
-  nix.gc = {
-    automatic = lib.mkIf config.programs.nh.enable == false;
-    dates = "weekly";
-    options = "--delete-older-than 1w";
+    environment.sessionVariables = {
+      XCURSOR_SIZE = if (config.modules.cosmicDesktop.enable) then "20" else "42";
+    };
+
+    # Allow unfree packages
+    nixpkgs.config.allowUnfree = true;
+    nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
+
+    # Enable the Flakes feature and the accompanying new nix command-line tool
+    nix.settings.experimental-features = [ "nix-command" "flakes" ];
+    nix.settings.warn-dirty = false;
+
+    # Enable networking
+    networking = {
+      hostName = host;
+      networkmanager.enable = true;
+    };
+
+    # Set your time zone.
+    time.timeZone = "Europe/Rome";
+
+    # Select internationalisation properties.
+    i18n = {
+      defaultLocale = "en_US.UTF-8";
+      extraLocaleSettings = {
+        LC_ADDRESS = "it_IT.UTF-8";
+        LC_IDENTIFICATION = "it_IT.UTF-8";
+        LC_MEASUREMENT = "it_IT.UTF-8";
+        LC_MONETARY = "it_IT.UTF-8";
+        LC_NAME = "it_IT.UTF-8";
+        LC_NUMERIC = "it_IT.UTF-8";
+        LC_PAPER = "it_IT.UTF-8";
+        LC_TELEPHONE = "it_IT.UTF-8";
+        LC_TIME = "it_IT.UTF-8";
+      };
+    };
+
+
+    # Perform garbage collection weekly to maintain low disk usage
+    nix.gc = {
+      automatic = lib.mkIf config.programs.nh.enable == false;
+      dates = "weekly";
+      options = "--delete-older-than 1w";
+    };
+
+    programs = {
+      zsh.enable = true;
+    };
+
+    # List packages installed in system profile.
+    environment.systemPackages = with pkgs; [
+      wget
+      git
+      htop
+      lshw
+    ];
   };
-
-  programs = {
-    zsh.enable = true;
-  };
-
-  # List packages installed in system profile.
-  environment.systemPackages = with pkgs; [
-    wget
-    git
-    htop
-    lshw
-  ];
 }
