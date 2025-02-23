@@ -14,8 +14,11 @@
   # local modules
   modules = {
     customConfig = rec {
-      desktop = "cosmic";
-      xcursorSize = if (desktop == "xfce") then "42" else "20";
+      desktop = "gnome";
+      xcursorSize =
+        if (desktop == "xfce") then "42"
+        else if (desktop == "gnome") then "28"
+        else "20";
     };
     nvidia.enable = true;
     homeManager = {

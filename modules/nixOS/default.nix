@@ -12,13 +12,14 @@
     ./ssh.nix
     ./docker.nix
     ./nh.nix
+    ./gnome.nix
   ];
 
   options = {
     modules.customConfig = {
       desktop = lib.mkOption {
         description = "The desktop environment you intend to use";
-        type = lib.types.enum [ "none" "xfce" "cosmic" ];
+        type = lib.types.enum [ "none" "xfce" "cosmic" "gnome" ];
       };
       xcursorSize = lib.mkOption {
         type = lib.types.str;
@@ -32,6 +33,7 @@
       nvidia.enable = lib.mkDefault false;
       cosmicDesktop.enable = config.modules.customConfig.desktop == "cosmic";
       xfce.enable = config.modules.customConfig.desktop == "xfce";
+      gnome.enable = config.modules.customConfig.desktop == "gnome";
       bluetooth.enable = lib.mkDefault true;
       nixVim.enable = lib.mkDefault true;
       tailscale.enable = lib.mkDefault false;
