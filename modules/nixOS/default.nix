@@ -99,6 +99,7 @@
       git
       htop
       lshw
+      vlc
     ];
   };
 }

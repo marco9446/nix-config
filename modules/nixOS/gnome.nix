@@ -10,13 +10,12 @@
     services.xserver.displayManager.gdm.enable = true;
     services.xserver.desktopManager.gnome.enable = true;
 
-
-
     environment.systemPackages = with pkgs; [
       gnome-tweaks
       gnomeExtensions.blur-my-shell
       gnomeExtensions.pop-shell
       gnomeExtensions.arcmenu
+      gnomeExtensions.app-icons-taskbar
     ];
 
     programs.dconf = {
@@ -32,6 +31,7 @@
                 pkgs.gnomeExtensions.blur-my-shell.extensionUuid
                 pkgs.gnomeExtensions.pop-shell.extensionUuid
                 pkgs.gnomeExtensions.arcmenu.extensionUuid
+                pkgs.gnomeExtensions.app-icons-taskbar.extensionUuid
                 "system-monitor@gnome-shell-extensions.gcampax.github.com"
               ];
             };
@@ -46,9 +46,20 @@
 
             "org/gnome/desktop/interface" = {
               clock-show-weekday = true;
+              show-battery-percentage = true;
+              cursor-size = config.modules.customConfig.xcursorSize;
             };
+
             "org/gnome/desktop/input-sources" = {
               xkb-options = [ "terminate:ctrl_alt_bksp" "lv3:ralt_switch" "caps:backspace" ];
+            };
+
+            "org/gnome/desktop/session" = {
+              idle-delay = lib.gvariant.mkUint32 600;
+            };
+
+            "org/gnome/settings-daemon/plugins/power" = {
+              sleep-inactive-ac-timeout = lib.gvariant.mkInt32 300;
             };
 
           };

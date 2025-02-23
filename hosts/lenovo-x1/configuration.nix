@@ -17,7 +17,7 @@
       desktop = "gnome";
       xcursorSize =
         if (desktop == "xfce") then "42"
-        else if (desktop == "gnome") then "28"
+        else if (desktop == "gnome") then "24"
         else "20";
     };
     nvidia.enable = true;
