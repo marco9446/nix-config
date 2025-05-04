@@ -38,7 +38,7 @@
         lb = "lsblk -o +LABEL,UUID";
       };
 
-      initExtra = ''      
+      initContent = ''      
         autoload -Uz compinit && compinit
 
         autoload -z edit-command-line

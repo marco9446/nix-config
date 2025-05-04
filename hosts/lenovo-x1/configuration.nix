@@ -14,7 +14,7 @@
   # local modules
   modules = {
     customConfig = rec {
-      desktop = "gnome";
+      desktop = "cosmic";
       xcursorSize =
         if (desktop == "xfce") then "42"
         else if (desktop == "gnome") then "24"
