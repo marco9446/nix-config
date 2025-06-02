@@ -100,6 +100,7 @@
       htop
       lshw
       vlc
+      sslscan
     ];
   };
 }
