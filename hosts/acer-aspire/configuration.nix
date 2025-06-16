@@ -14,6 +14,7 @@
       xcursorSize = "22";
     };
     tailscale.enable = true;
+    ssh.enable = true;
     homeManager = {
       enable = true;
       path = ./home.nix;
