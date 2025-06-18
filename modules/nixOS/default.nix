@@ -7,6 +7,7 @@
     ./bluetooth.nix
     ./nixVim.nix
     ./user.nix
+    ./user-family.nix
     ./tailscale.nix
     ./homeManager.nix
     ./ssh.nix

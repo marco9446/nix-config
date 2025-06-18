@@ -14,8 +14,8 @@
       enable = true;
       openFirewall = true;
       settings = {
-        passwordAuthentication = config.modules.ssh.withPassword; # set to false when you have ssh keys configured
-        permitRootLogin = "no";
+        PasswordAuthentication = config.modules.ssh.withPassword; # set to false when you have ssh keys configured
+        PermitRootLogin = "prohibit-password";
         UseDns = true;
       };
     };
