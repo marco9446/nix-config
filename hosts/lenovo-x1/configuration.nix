@@ -31,8 +31,15 @@
   boot.loader = {
     systemd-boot = {
       enable = true;
-      configurationLimit = 3;
+      configurationLimit = 2;
       consoleMode = "1";
+      extraInstallCommands = ''
+        {
+          echo "default auto-windows"
+          echo "beep true"
+          echo "timeout 3"
+        } >> /boot/loader/loader.conf
+      '';
     };
     efi.canTouchEfiVariables = true;
   };
