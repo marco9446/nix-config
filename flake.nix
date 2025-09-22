@@ -7,7 +7,7 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
 
-    nixos-cosmic.url = "github:lilyinstarlight/nixos-cosmic";
+    # nixos-cosmic.url = "github:lilyinstarlight/nixos-cosmic";
 
     home-manager = {
       url = "github:nix-community/home-manager";
