@@ -82,11 +82,6 @@
     gparted
     gvfs
     xfce.thunar
-    # gvfs-smb # for Samba/CIFS (Windows shares, most NAS)
-    # gvfs-nfs # for NFS shares
-    # gvfs-gphoto2
-    # gvfs-afc
-    # gvfs-mtp
   ];
 
   # Open ports in the firewall.
