@@ -17,8 +17,6 @@
   };
 
   home.packages = [
-    pkgs.bambu-studio
-    pkgs.arduino-ide
     pkgs.python313
   ];
 

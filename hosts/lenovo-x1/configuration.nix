@@ -68,6 +68,7 @@
     fwupd.enable = true;
     # throttled.enable = true; # TODO check if makes a difference
     pulseaudio.enable = false;
+    flatpak.enable = true;
   };
 
   # Enable touchpad support (enabled default in most desktopManager).

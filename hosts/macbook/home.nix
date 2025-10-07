@@ -21,7 +21,6 @@
   };
 
   home.packages = [
-    pkgs.bambu-studio
   ];
 
 }
