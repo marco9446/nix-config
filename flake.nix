@@ -2,12 +2,9 @@
   description = "My nixOs configuration";
 
   inputs = {
-    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-24.11";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
-
-    # nixos-cosmic.url = "github:lilyinstarlight/nixos-cosmic";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -19,28 +16,58 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
+  outputs = inputs@{ nixpkgs, ... }:
+    let
+      systems = [ "x86_64-linux" ];
+      forAllSystems = nixpkgs.lib.genAttrs systems;
+      hostNames = [ "acer-aspire" "lenovo-x1" "wsl" "macbook" ];
+      username = "marco";
+      pkgsFor = system: import nixpkgs { inherit system; };
+    in
+    {
+      # use it with nix fmt
+      formatter = forAllSystems (system:
+        let pkgs = pkgsFor system;
+        in pkgs.writeShellScriptBin "format-nix" ''
+          find . -name '*.nix' -print0 | xargs -0 ${pkgs.nixpkgs-fmt}/bin/nixpkgs-fmt
+        '');
+      # use it with nix develop
+      devShells = forAllSystems (system:
+        let pkgs = pkgsFor system;
+        in {
+          default = pkgs.mkShell {
+            packages = with pkgs; [ git nixpkgs-fmt nil ];
+          };
+        });
+      # use it with nix flake check
+      checks = forAllSystems (system:
+        let pkgs = pkgsFor system;
+        in {
+          # Formats all *.nix files; fails if any need changes.
+          formatting = pkgs.stdenv.mkDerivation {
+            name = "fmt-check";
+            src = ./.;
+            nativeBuildInputs = [ pkgs.nixpkgs-fmt ];
+            phases = [ "buildPhase" ];
+            buildPhase = ''
+              # List all nix files and check formatting
+              find "$src" -name '*.nix' -print0 | xargs -0 nixpkgs-fmt --check
+              touch "$out"
+            '';
+          };
+        });
 
-  outputs = { nixpkgs, nixpkgs-stable, ... }@inputs: {
-    nixosConfigurations =
-      let
-        hostNames = [ "acer-aspire" "lenovo-x1" "wsl" "macbook" ];
-        username = "marco";
-      in
-      builtins.listToAttrs (map
-        (host: {
-          name = host;
-          value = nixpkgs.lib.nixosSystem rec {
+      nixosConfigurations =
+        nixpkgs.lib.genAttrs hostNames (host:
+          let
             system = "x86_64-linux";
+          in
+          nixpkgs.lib.nixosSystem {
+            inherit system;
             specialArgs = {
               inherit inputs host username;
-              pkgs-stable = import nixpkgs-stable {
-                inherit system;
-                config.allowUnfree = true;
-              };
             };
             modules = [ ./hosts/${host}/configuration.nix ];
-          };
-        })
-        hostNames);
-  };
+          });
+    };
 }

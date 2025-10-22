@@ -1,4 +1,4 @@
-{ config, lib, inputs, host, username, pkgs-stable, ... }: {
+{ config, lib, inputs, host, username, ... }: {
   imports = [
     inputs.home-manager.nixosModules.home-manager
   ];
@@ -17,7 +17,7 @@
       useGlobalPkgs = true;
       useUserPackages = true;
       extraSpecialArgs = {
-        inherit inputs host username pkgs-stable;
+        inherit inputs host username;
         nixOsConfig = config;
       };
       users.${username} = import config.modules.homeManager.path;

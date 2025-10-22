@@ -1,4 +1,4 @@
-{ config, lib, username, host,  ... }:
+{ config, lib, username, host, ... }:
 {
   # Documentation: https://github.com/viperML/nh
   options = {
@@ -10,7 +10,7 @@
       enable = true;
       clean.enable = true;
       clean.extraArgs = "--keep 3";
-      flake = if (host == "wsl" )then "/mnt/c/Users/marco.ravazzini/projects/nix-config" else "/home/${username}/nix-config";
+      flake = if (host == "wsl") then "/mnt/c/Users/marco.ravazzini/projects/nix-config" else "/home/${username}/nix-config";
     };
   };
 }

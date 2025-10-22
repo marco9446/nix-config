@@ -1,4 +1,4 @@
-{lib, config, ...}:{
+{ lib, config, ... }: {
 
   options = {
     modules.ssh.enable = lib.mkEnableOption "enable ssh module";
