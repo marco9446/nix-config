@@ -9,10 +9,9 @@
     programs.git = {
       enable = true;
       settings = {
-  userName = "marco";
-      userEmail = "marco@test.com";
+        userName = "marco";
+        userEmail = "marco@test.com";
       };
-    
     };
   };
 }
