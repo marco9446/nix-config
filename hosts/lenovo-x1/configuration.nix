@@ -33,11 +33,12 @@
       enable = true;
       configurationLimit = 2;
       consoleMode = "1";
+      # uncomment the echo comman if you wnat windows as default boot
       extraInstallCommands = ''
         {
-          echo "default auto-windows"
+          # echo "default auto-windows"
           echo "beep true"
-          echo "timeout 3"
+          echo "timeout 2"
         } >> /boot/loader/loader.conf
       '';
     };
@@ -57,7 +58,7 @@
   # Enable the X11 windowing system.
   services = {
     # Enable CUPS to print documents.
-    printing.enable = true;
+    printing.enable = false;
     power-profiles-daemon.enable = true;
     pipewire = {
       enable = true;
