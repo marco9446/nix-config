@@ -9,7 +9,7 @@
     programs.nh = {
       enable = true;
       clean.enable = host != "wsl";
-      clean.dates = "daily";
+      clean.dates = "18:00";
       flake = if (host == "wsl") then "/mnt/c/Users/marco.ravazzini/projects/nix-config" else "/home/${username}/nix-config";
     };
   };
