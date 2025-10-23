@@ -3,7 +3,7 @@
 {
   imports = [
     (modulesPath + "/profiles/qemu-guest.nix")
-    ./default.nix
+    ./nixOS
   ];
   modules = {
     customConfig = {

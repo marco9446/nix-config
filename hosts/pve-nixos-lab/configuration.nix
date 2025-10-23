@@ -2,6 +2,6 @@
 
 {
   imports = [
-    ../../modules/nixOS/defaultProxmoxConfig.nix
+    ../../modules/defaultProxmoxConfig.nix
   ];
 }

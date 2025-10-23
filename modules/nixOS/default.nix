@@ -92,8 +92,9 @@
 
     # Perform garbage collection weekly to maintain low disk usage
     nix.gc = {
-      automatic = config.programs.nh.enable == false;
-      dates = "daily";
+      # wsl does not have proper timekeeping when suspended
+      automatic = config.programs.nh.clean.enable == false && host != "wsl";
+      dates = "18:00";
       options = "--delete-older-than 1w";
     };
 
