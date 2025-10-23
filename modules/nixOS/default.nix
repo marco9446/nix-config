@@ -95,7 +95,6 @@
       # wsl does not have proper timekeeping when suspended
       automatic = config.programs.nh.clean.enable == false && host != "wsl";
       dates = "18:00";
-      options = "--delete-older-than 1w";
     };
 
     programs = {
