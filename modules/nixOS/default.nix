@@ -92,14 +92,14 @@
 
     # Perform garbage collection weekly to maintain low disk usage
     nix.gc = {
-      automatic = lib.mkIf config.programs.nh.enable == false;
-      dates = "weekly";
+      automatic = config.programs.nh.enable == false;
+      dates = "daily";
       options = "--delete-older-than 1w";
     };
 
     programs = {
-      zsh.enable = lib.mkIf config.modules.customConfig.userShell == pkgs.zsh;
-      bash.enable = lib.mkIf config.modules.customConfig.userShell == pkgs.bash;
+      zsh.enable = config.modules.customConfig.userShell == pkgs.zsh;
+      bash.enable = config.modules.customConfig.userShell == pkgs.bash;
     };
 
   };
