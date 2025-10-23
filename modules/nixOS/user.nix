@@ -6,11 +6,14 @@
   };
 
   config = lib.mkIf config.modules.user.enable {
-    # Define a user account. Don't forget to set a password with ‘passwd’.
+    # Allow user to change their own passwords
+    users.mutableUsers = true;
+
     users.users.${username} = {
       isNormalUser = true;
       extraGroups = [ "networkmanager" "wheel" ];
-      shell = pkgs.zsh;
+      shell = config.modules.customConfig.userShell;
+      initialPassword = "changeMe";
     };
   };
 }

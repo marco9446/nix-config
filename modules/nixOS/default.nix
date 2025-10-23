@@ -14,6 +14,7 @@
     ./docker.nix
     ./nh.nix
     ./gnome.nix
+    ./defaultPackages.nix
   ];
 
   options = {
@@ -26,11 +27,17 @@
         type = lib.types.str;
         default = "20";
       };
+      userShell = lib.mkOption {
+        type = lib.types.package;
+        default = pkgs.zsh;
+        description = "Shell package to use for the user (set to e.g. pkgs.zsh).";
+      };
     };
   };
 
   config = {
     modules = {
+      defaultPackages.enable = lib.mkDefault true;
       nvidia.enable = lib.mkDefault false;
       cosmicDesktop.enable = config.modules.customConfig.desktop == "cosmic";
       xfce.enable = config.modules.customConfig.desktop == "xfce";
@@ -64,7 +71,7 @@
     };
 
     # Set your time zone.
-    time.timeZone = "Europe/Rome";
+    time.timeZone = "Europe/Zurich";
 
     # Select internationalisation properties.
     i18n = {
@@ -91,17 +98,9 @@
     };
 
     programs = {
-      zsh.enable = true;
+      zsh.enable = lib.mkIf config.modules.customConfig.userShell == pkgs.zsh;
+      bash.enable = lib.mkIf config.modules.customConfig.userShell == pkgs.bash;
     };
 
-    # List packages installed in system profile.
-    environment.systemPackages = with pkgs; [
-      wget
-      git
-      htop
-      lshw
-      vlc
-      sslscan
-    ];
   };
 }

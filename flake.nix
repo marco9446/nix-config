@@ -20,7 +20,7 @@
     let
       systems = [ "x86_64-linux" ];
       forAllSystems = nixpkgs.lib.genAttrs systems;
-      hostNames = [ "acer-aspire" "lenovo-x1" "wsl" "macbook" ];
+      hostNames = [ "acer-aspire" "lenovo-x1" "wsl" "macbook" "prox-main" ];
       username = "marco";
       pkgsFor = system: import nixpkgs { inherit system; };
     in
