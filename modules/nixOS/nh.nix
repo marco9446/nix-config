@@ -8,7 +8,7 @@
   config = lib.mkIf config.modules.nh.enable {
     programs.nh = {
       enable = true;
-      clean.enable = true;
+      clean.enable = host != "wsl";
       clean.dates = "daily";
       flake = if (host == "wsl") then "/mnt/c/Users/marco.ravazzini/projects/nix-config" else "/home/${username}/nix-config";
     };

@@ -25,6 +25,15 @@
       enable = true;
       path = ./home.nix;
     };
+    defaultPackages.enable = false;
+    nvidia.enable = false;
+    bluetooth.enable = false;
+    nixVim.enable = true;
+    tailscale.enable = false;
+    ssh.enable = false;
+    docker.enable = false;
+    user.enable = true;
+    nh.enable = true;
   };
 
   wsl.enable = true;
