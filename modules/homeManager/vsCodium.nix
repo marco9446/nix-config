@@ -32,6 +32,7 @@
             jnoortheen.nix-ide
             vscode-icons-team.vscode-icons
             yzhang.markdown-all-in-one
+            usernamehw.errorlens
           ];
 
           keybindings = [
@@ -101,6 +102,7 @@
             "workbench.startupEditor" = "none";
             "window.zoomLevel" = 0;
             "vsicons.dontShowNewVersionMessage" = true;
+            "chat.commandCenter.enabled" = true;
           };
 
         };
