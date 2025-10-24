@@ -1,9 +1,10 @@
-{ config, pkgs, modulesPath, lib, system, ... }:
+{ pkgs, modulesPath, lib, ... }:
 
 {
   imports = [
     (modulesPath + "/profiles/qemu-guest.nix")
     ./nixOS
+    ./nixOS/proxmoxServices
   ];
   modules = {
     customConfig = {
@@ -20,6 +21,7 @@
     docker.enable = false;
     user.enable = true;
     nh.enable = true;
+    adguard.enable = lib.mkDefault false;
   };
 
   # Enable QEMU Guest for Proxmox
@@ -59,5 +61,5 @@
     fsType = "ext4";
   };
 
-  system.stateVersion = "25.05"; # Did you read the comment?
+  system.stateVersion = "25.05";
 }

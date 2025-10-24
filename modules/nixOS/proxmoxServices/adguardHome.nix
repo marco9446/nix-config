@@ -2,9 +2,9 @@
 
 {
   options = {
-    homeModules.adguard.enable = lib.mkEnableOption "enable adguard home";
+    modules.adguard.enable = lib.mkEnableOption "enable adguard home";
   };
-  config = lib.mkIf config.homeModules.adguard.enable {
+  config = lib.mkIf config.modules.adguard.enable {
     # https://search.nixos.org/options?channel=unstable&query=adguard
     services.adguardhome = {
       enable = true;

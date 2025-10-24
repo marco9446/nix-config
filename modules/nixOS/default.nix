@@ -50,6 +50,7 @@
       docker.enable = lib.mkDefault false;
       user.enable = lib.mkDefault true;
       nh.enable = lib.mkDefault true;
+
     };
 
     environment.sessionVariables = {
