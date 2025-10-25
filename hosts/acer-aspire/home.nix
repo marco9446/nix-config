@@ -6,7 +6,7 @@
   ];
 
   homeModules = {
-    vsCodium.enable = true;
+    vsCode.enable = true;
     yt-dlp.enable = true;
   };
 }

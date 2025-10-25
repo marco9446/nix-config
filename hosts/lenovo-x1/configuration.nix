@@ -57,6 +57,7 @@
 
   # Enable the X11 windowing system.
   services = {
+    gnome.gnome-keyring.enable = true;
     # Enable CUPS to print documents.
     printing.enable = false;
     power-profiles-daemon.enable = true;

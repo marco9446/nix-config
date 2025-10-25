@@ -8,7 +8,7 @@
   homeModules = {
     git.enable = true;
     starship.enable = true;
-    vsCodium.enable = false;
+    vsCode.enable = false;
     xfce.enable = false;
     yt-dlp.enable = false;
     zsh.enable = true;

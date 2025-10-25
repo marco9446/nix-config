@@ -2,13 +2,13 @@
 
 {
   options = {
-    homeModules.vsCodium.enable = lib.mkEnableOption "enable vsCodium";
-    homeModules.vsCodium.withWailand = lib.mkOption {
+    homeModules.vsCode.enable = lib.mkEnableOption "enable vsCode";
+    homeModules.vsCode.withWailand = lib.mkOption {
       default = !nixOsConfig.modules.xfce.enable;
       type = lib.types.bool;
     };
   };
-  config = lib.mkIf config.homeModules.vsCodium.enable {
+  config = lib.mkIf config.homeModules.vsCode.enable {
 
     home.packages = with pkgs; [
       nixd
@@ -17,13 +17,11 @@
 
     programs.vscode = {
       enable = true;
-      package =
-        if (config.homeModules.vsCodium.withWailand) then
-          pkgs.vscodium.override
-            {
-              commandLineArgs = "--enable-ozone --ozone-platform=wayland";
-            }
-        else pkgs.vscodium;
+      # package = pkgs.vscode.override
+      #  it is configures in the ~/.vscode/argv.json file and required services.gnome.gnome-keyring.enable
+      #   {
+      #     commandLineArgs = "--password-store='gnome-libsecret'";
+      #   };
 
       profiles = {
         default = {
@@ -33,6 +31,8 @@
             vscode-icons-team.vscode-icons
             yzhang.markdown-all-in-one
             usernamehw.errorlens
+            github.copilot
+            github.copilot-chat
           ];
 
           keybindings = [
@@ -55,7 +55,7 @@
             "diffEditor.ignoreTrimWhitespace" = false;
             "editor.fontFamily" = "'JetBrainsMono Nerd Font', 'JetBrains Mono', Consolas, 'Courier New', monospace";
             "editor.fontLigatures" = false;
-            "editor.fontSize" = if (config.homeModules.vsCodium.withWailand) then 13.5 else 12.5;
+            "editor.fontSize" = if (config.homeModules.vsCode.withWailand) then 13.5 else 12.5;
             "editor.fontWeight" = "400";
             "editor.formatOnSave" = true;
             "editor.lineHeight" = 1.5;
@@ -103,6 +103,7 @@
             "window.zoomLevel" = 0;
             "vsicons.dontShowNewVersionMessage" = true;
             "chat.commandCenter.enabled" = true;
+            "github.copilot.nextEditSuggestions.enabled" = true;
           };
 
         };

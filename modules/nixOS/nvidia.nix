@@ -6,9 +6,7 @@
   config = lib.mkIf config.modules.nvidia.enable {
 
     # Enable OpenGL
-    hardware.graphics = {
-      enable = true;
-    };
+    hardware.graphics.enable = true;
     services.xserver.videoDrivers = [ "nvidia" ];
 
     nixpkgs.config.nvidia.acceptLicense = true;
@@ -46,8 +44,8 @@
 
       prime = {
         # Make sure to use the correct Bus ID values for your system!
-        intelBusId = "PCI:00:02:0";
-        nvidiaBusId = "PCI:01:00:0";
+        intelBusId = "PCI:2@0:0:0";
+        nvidiaBusId = "PCI:1@0:0:0";
         offload = {
           enable = true;
           enableOffloadCmd = true; # Provides `nvidia-offload` command.

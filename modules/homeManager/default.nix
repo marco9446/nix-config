@@ -3,7 +3,7 @@
   imports = [
     ./git.nix
     ./starship.nix
-    ./vsCodium.nix
+    ./vsCode.nix
     ./xfce.nix
     ./yt-dlp.nix
     ./zsh.nix
@@ -16,7 +16,7 @@
   homeModules = {
     git.enable = lib.mkDefault true;
     starship.enable = lib.mkDefault true;
-    vsCodium.enable = lib.mkDefault false;
+    vsCode.enable = lib.mkDefault false;
     xfce.enable = lib.mkDefault nixOsConfig.modules.xfce.enable;
     yt-dlp.enable = lib.mkDefault false;
     zsh.enable = lib.mkDefault true;
