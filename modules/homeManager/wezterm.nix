@@ -9,8 +9,12 @@
 
     home.file.".config/wezterm/wezterm.lua".text = ''
       local wezterm = require 'wezterm'
+
       return {
         color_scheme = 'Monokai Pro (Gogh)',
+
+        enable_wayland = false,
+        window_close_confirmation = "NeverPrompt",
         keys = {
           -- Copy if selection is active, otherwise send Ctrl+C to the process
           {
@@ -34,11 +38,6 @@
           },
           {
             key = 'h',
-            mods = 'CTRL|SHIFT',
-            action = wezterm.action.SplitVertical { domain = 'CurrentPaneDomain' },
-          },
-          {
-            key = 'v',
             mods = 'CTRL|SHIFT',
             action = wezterm.action.SplitHorizontal { domain = 'CurrentPaneDomain' },
           },
