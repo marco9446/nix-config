@@ -27,7 +27,7 @@ in
 
       tailscale = {
         enable = true;
-        useRoutingFeatures = "client";
+        useRoutingFeatures = "server";
         interfaceName = "tailscale0";
         # combine exit node + subnet routes
         extraSetFlags =
