@@ -71,10 +71,23 @@
     # throttled.enable = true; # TODO check if makes a difference
     pulseaudio.enable = false;
     flatpak.enable = true;
-  };
 
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
+    # Enable remapping for Logitech MX Master 3.
+    evremap = {
+      enable = true;
+      settings.device_name = "Logitech MX Master 3";
+      settings.remap = [
+        {
+          input = [ "BTN_EXTRA" ];
+          output = [ "KEY_LEFTCTRL" "KEY_LEFTMETA" "KEY_RIGHT" ];
+        }
+        {
+          input = [ "BTN_SIDE" ];
+          output = [ "KEY_LEFTCTRL" "KEY_LEFTMETA" "KEY_LEFT" ];
+        }
+      ];
+    };
+  };
 
   programs = {
     firefox.enable = true;
