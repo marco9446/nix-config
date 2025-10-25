@@ -11,6 +11,7 @@
     ./yazi.nix
     ./zoxide.nix
     ./gtk.nix
+    ./wezterm.nix
   ];
 
   homeModules = {
@@ -24,6 +25,7 @@
     yazi.enable = lib.mkDefault true;
     zoxide.enable = lib.mkDefault true;
     gtk.enable = lib.mkDefault true;
+    wezterm.enable = lib.mkDefault false;
   };
 
 
