@@ -1,35 +1,51 @@
 { config, lib, ... }:
 
+
+let
+  webUiPort = 1000;
+  dnsPort = 53;
+  machineIP = "192.168.188.136";
+in
 {
   options = {
     modules.adguard.enable = lib.mkEnableOption "enable adguard home";
   };
   config = lib.mkIf config.modules.adguard.enable {
+    networking.firewall.allowedTCPPorts = [ dnsPort ];
+    networking.firewall.allowedUDPPorts = [ dnsPort ];
+
     # https://search.nixos.org/options?channel=unstable&query=adguard
     services.adguardhome = {
       enable = true;
       # Allow changes made on the AdGuard Home web interface to persist between service restarts.
-      mutableSettings = true;
+      mutableSettings = false;
       allowDHCP = false;
       # port for main dashboard
-      port = 1000;
+      port = webUiPort;
       # open firewall for web dashboard not for main dns
       openFirewall = true;
       # All settings liste here https://github.com/AdguardTeam/AdGuardHome/wiki/Configuration#configuration-file
       settings = {
         theme = "auto";
+        # disable auth with an empty array
+        users = [
+          { name = "user"; password = "$2a$12$9jnM8p2viBoUsD0AXTtknOf8lE8cMmFjLGCAv/nzYifmWzBv/Q1FC"; }
+        ];
         http = {
           # You can select any ip and port, just make sure to open firewalls where needed
-          address = "127.0.0.1:1000";
+          address = "127.0.0.1:${webUiPort}";
         };
         dns = {
           upstream_dns = [
             "https://dns.quad9.net/dns-query"
             "quic://unfiltered.adguard-dns.com"
-            "[/local/]192.168.0.1:53"
           ];
-          bind_hosts = [ "127.0.0.1" ];
-          port = 53;
+          bind_hosts = [ "127.0.0.1" machineIP ];
+          port = dnsPort;
+          bootstrap_dns = [
+            "1.1.1.1"
+            "9.9.9.9"
+          ];
           local_ptr_upstreams = [ "192.168.188.1" ];
         };
         filtering = {
@@ -122,3 +138,4 @@
     };
   };
 }
+

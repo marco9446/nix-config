@@ -15,10 +15,10 @@
     nvidia.enable = false;
     bluetooth.enable = false;
     nixVim.enable = true;
-    tailscale.enable = false;
+    tailscale.enable = lib.mkDefault false;
     homeManager.enable = false;
     ssh.enable = true;
-    docker.enable = false;
+    docker.enable = lib.mkDefault false;
     user.enable = true;
     nh.enable = true;
     adguard.enable = lib.mkDefault false;
