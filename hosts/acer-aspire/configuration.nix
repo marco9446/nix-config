@@ -10,11 +10,11 @@
   # local modules
   modules = {
     customConfig = {
-      desktop = "xfce";
+      desktop = "cosmic";
       xcursorSize = "22";
     };
     tailscale.enable = true;
-    ssh.enable = true;
+    ssh.enable = false;
     user-family.enable = true;
     homeManager = {
       enable = true;
