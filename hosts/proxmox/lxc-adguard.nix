@@ -1,7 +1,7 @@
 { ... }:
 
 let
-  webUiPort = 1000;
+  webUiPort = 80;
   dnsPort = 53;
   containerIP = "192.168.188.31";
   gatewayIP = "192.168.188.1";
@@ -40,6 +40,7 @@ in
         upstream_dns = [
           "https://dns.quad9.net/dns-query"
           "quic://unfiltered.adguard-dns.com"
+          "[/fritz.box/]192.168.188.1"
         ];
         bind_hosts = [ "127.0.0.1" containerIP ];
         port = dnsPort;
