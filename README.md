@@ -28,6 +28,45 @@ Now you can copy this file into proxmox using scp in the path `/var/lib/vz/dump`
 
 Now you can restore the vm by going into the proxmox UI in local/backups and selecting the uploaded file
 
+### Deploy NixOs LXC on proxmox
+check this [guide](https://nixos.wiki/wiki/Proxmox_Linux_Container) for more details.
+
+##### Import LXC container image
+1) Copy the link of the latest successful `nixos.ProxmoxLXC` job from https://hydra.nixos.org/project/nixos (latest full build)
+2) in proxmox, under CT templates paste the link under `Download from URL`
+
+##### Create container
+```shell
+ctid="2__"
+ctname="<lxc-hostname>"
+ctt=" /var/lib/vz/template/cache/vztmpl/<TEMPLATE_NAME.tar.xz>"
+cts="local-lvm"
+
+ipaddr="192.168.188.<ip from 30 to 100>/24"
+gw="192.168.188.1"
+dns="9.9.9.9"
+domain="local"
+
+pct create ${ctid} ${ctt} \
+  --hostname=${ctname} \
+  --ostype=nixos --unprivileged=0 --features nesting=1 \
+  --net0 name=eth0,bridge=vmbr0,ip=${ipaddr},gw=${gw} \
+  --nameserver=${dns} --searchdomain=${domain} \
+  --arch=amd64 --swap=1024 --memory=2048 \
+  --storage=${cts}
+```
+
+you can now start the container, increase disk size and remove root password
+
+```shell
+pct resize ${ctid} rootfs +2G
+pct start ${ctid}
+pct enter ${ctid}
+
+source /etc/set-environment
+passwd --delete root
+```
+
 ### Update NIXOS configuration after deployment in proxmox
 ```shell
 nixos-rebuild --flake .#flakeTarget --target-host user@remote-host --sudo --ask-sudo-password switch

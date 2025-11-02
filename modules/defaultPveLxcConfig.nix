@@ -10,6 +10,8 @@
     keep-derivations = false; # Do not keep .drv files after builds (reduces disk usage)
     keep-outputs = false; # Do not keep build outputs unless needed
     max-jobs = 1; # Limit parallel builds to 1 (resource constraints in LXC)
+    experimental-features = [ "nix-command" "flakes" ];
+    warn-dirty = false;
   };
 
   # Proxmox LXC-specific options
