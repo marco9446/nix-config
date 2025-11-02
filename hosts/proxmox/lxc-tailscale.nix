@@ -1,12 +1,11 @@
-{ ... }:
+{ ... }: {
 
-{
   imports = [
-    ../../modules/defaultProxmoxConfig.nix
+    ../../modules/defaultPveLxcConfig.nix
+    ../../modules/nixOS/tailscale.nix
   ];
 
   modules = {
-    adguard.enable = true;
     tailscale = {
       enable = true;
       isExitNode = true;

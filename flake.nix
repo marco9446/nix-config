@@ -20,7 +20,15 @@
     let
       systems = [ "x86_64-linux" ];
       forAllSystems = nixpkgs.lib.genAttrs systems;
-      hostNames = [ "acer-aspire" "lenovo-x1" "wsl" "macbook" "pve-nixos-lab" "pve-nixos-net" ];
+      # Discover host names of all non-proxmox hosts
+      hostNames = builtins.filter
+        (
+          name: (builtins.readDir ./hosts).${name} == "directory" && name != "proxmox"
+        )
+        (builtins.attrNames (builtins.readDir ./hosts));
+      # Discover proxmox configs
+      proxmoxConfigs = builtins.filter (f: builtins.match ".*hosts/proxmox/(vm|lxc)-.*\\.nix" f != null)
+        (builtins.attrNames (builtins.readDir ./hosts/proxmox));
       username = "marco";
       pkgsFor = system: import nixpkgs { inherit system; };
     in
@@ -36,7 +44,12 @@
         let pkgs = pkgsFor system;
         in {
           default = pkgs.mkShell {
-            packages = with pkgs; [ git nixpkgs-fmt nil ];
+            packages = with pkgs; [
+              git
+              nixpkgs-fmt
+              nil
+              nixos-generators
+            ];
           };
         });
       # use it with nix flake check
@@ -58,16 +71,30 @@
         });
 
       nixosConfigurations =
-        nixpkgs.lib.genAttrs hostNames (host:
+        nixpkgs.lib.genAttrs hostNames
+          (host:
+            let
+              system = "x86_64-linux";
+            in
+            nixpkgs.lib.nixosSystem {
+              inherit system;
+              specialArgs = {
+                inherit inputs host username;
+              };
+              modules = [ ./hosts/${host}/configuration.nix ];
+            }) //
+        # Add proxmox VMs and LXCs as additional configurations
+        nixpkgs.lib.genAttrs proxmoxConfigs (cfg:
           let
             system = "x86_64-linux";
           in
           nixpkgs.lib.nixosSystem {
             inherit system;
             specialArgs = {
-              inherit inputs host username;
+              inherit inputs username;
+              host = cfg;
             };
-            modules = [ ./hosts/${host}/configuration.nix ];
+            modules = [ ./hosts/proxmox/${cfg} ];
           });
     };
 }

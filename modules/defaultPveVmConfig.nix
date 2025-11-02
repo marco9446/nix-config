@@ -1,11 +1,12 @@
-{ pkgs, modulesPath, lib, ... }:
+{ pkgs, lib, ... }:
 
 {
   imports = [
-    (modulesPath + "/profiles/qemu-guest.nix")
+    pkgs.nixosModules.proxmox-image
     ./nixOS
     ./nixOS/proxmoxServices
   ];
+
   modules = {
     customConfig = {
       desktop = lib.mkDefault "none";
@@ -24,19 +25,6 @@
     adguard.enable = lib.mkDefault false;
   };
 
-  # Enable QEMU Guest for Proxmox
-  services.qemuGuest.enable = lib.mkDefault true;
-
-  # Use the boot drive for grub
-  boot.loader.grub.enable = lib.mkDefault true;
-  boot.loader.grub.devices = [ "nodev" ];
-
-  boot.growPartition = lib.mkDefault true;
-
-  # Allow remote updates with flakes and non-root users
-  nix.settings.trusted-users = [ "root" "@wheel" ];
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
   # Enable mDNS for `hostname.local` addresses
   services.avahi.enable = true;
   services.avahi.nssmdns4 = true;
@@ -53,13 +41,6 @@
 
   # Don't ask for passwords
   security.sudo.wheelNeedsPassword = false;
-
-  # Default filesystem
-  fileSystems."/" = lib.mkDefault {
-    device = "/dev/disk/by-label/nixos";
-    autoResize = true;
-    fsType = "ext4";
-  };
 
   system.stateVersion = "25.05";
 }
