@@ -3,6 +3,8 @@
 let
   webUiPort = 1000;
   dnsPort = 53;
+  containerIP = "192.168.188.31";
+  gatewayIP = "192.168.188.1";
 in
 {
   imports = [
@@ -39,13 +41,13 @@ in
           "https://dns.quad9.net/dns-query"
           "quic://unfiltered.adguard-dns.com"
         ];
-        bind_hosts = [ "0.0.0.0" ];
+        bind_hosts = [ "127.0.0.1" containerIP ];
         port = dnsPort;
         bootstrap_dns = [
           "9.9.9.9"
           "1.1.1.1"
         ];
-        local_ptr_upstreams = [ "192.168.188.1" ];
+        local_ptr_upstreams = [ gatewayIP ];
       };
       filtering = {
         protection_enabled = true;
