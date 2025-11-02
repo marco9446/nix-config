@@ -22,11 +22,9 @@
 
   # Disable fstrim service inside the container; Proxmox host will handle it
   services.fstrim.enable = false;
-  services.getty.enable = false; # Disable getty; Proxmox console provides access
   services.udisks2.enable = false; # Disable disk management service (not needed in LXC)
   services.timesyncd.enable = false; # Disable time sync; host handles time
-  services.dbus.enable = false; # Disable D-Bus system bus (reduces overhead)
-  services.nscd.enable = false; # Disable name service cache daemon (not needed)
+  services.nscd.enable = true; # Enable name service cache daemon (needed for name resolution)
 
   # Configure journald to store logs in RAM only to reduce disk usage
   services.journald.extraConfig = ''
@@ -46,11 +44,9 @@
   # Strip unneeded locales and documentation:
   i18n.supportedLocales = [ "en_US.UTF-8/UTF-8" ]; # Only include US English locale
   documentation.enable = false; # Disable system documentation
-  programs.man.enable = false; # Disable man pages
-  environment.noXlibs = true; # Do not include X11 libraries (minimal footprint)
+  documentation.man.enable = false; # Disable man pages
 
-  nix.daemon.enable = false; # Disable Nix daemon (not needed in container)
-  boot.tmpOnTmpfs = true; # Mount /tmp as tmpfs (RAM-backed)
+  boot.tmp.useTmpfs = true; # Mount /tmp as tmpfs (RAM-backed)
   systemd.tmpfiles.rules = [ "d /tmp 1777 root root 1d" ]; # Ensure /tmp exists with correct permissions and is cleaned daily
 
   networking = {

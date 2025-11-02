@@ -27,8 +27,11 @@
         )
         (builtins.attrNames (builtins.readDir ./hosts));
       # Discover proxmox configs
-      proxmoxConfigs = builtins.filter (f: builtins.match ".*hosts/proxmox/(vm|lxc)-.*\\.nix" f != null)
-        (builtins.attrNames (builtins.readDir ./hosts/proxmox));
+      proxmoxConfigs = builtins.map
+        (name: builtins.replaceStrings [ ".nix" ] [ "" ] name)
+        (builtins.filter
+          (name: (builtins.readDir ./hosts/proxmox).${name} == "regular")
+          (builtins.attrNames (builtins.readDir ./hosts/proxmox)));
       username = "marco";
       pkgsFor = system: import nixpkgs { inherit system; };
     in
@@ -84,17 +87,16 @@
               modules = [ ./hosts/${host}/configuration.nix ];
             }) //
         # Add proxmox VMs and LXCs as additional configurations
-        nixpkgs.lib.genAttrs proxmoxConfigs (cfg:
+        nixpkgs.lib.genAttrs proxmoxConfigs (host:
           let
             system = "x86_64-linux";
           in
           nixpkgs.lib.nixosSystem {
             inherit system;
             specialArgs = {
-              inherit inputs username;
-              host = cfg;
+              inherit inputs host username;
             };
-            modules = [ ./hosts/proxmox/${cfg} ];
+            modules = [ ./hosts/proxmox/${host}.nix ];
           });
     };
 }
