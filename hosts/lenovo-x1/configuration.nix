@@ -38,7 +38,7 @@
         {
           # echo "default auto-windows"
           echo "beep true"
-          echo "timeout 2"
+          echo "timeout 3"
         } >> /boot/loader/loader.conf
       '';
     };

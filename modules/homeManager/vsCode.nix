@@ -17,12 +17,13 @@
 
     programs.vscode = {
       enable = true;
-      # package = pkgs.vscode.override
-      #  it is configures in the ~/.vscode/argv.json file and required services.gnome.gnome-keyring.enable
-      #   {
-      #     commandLineArgs = "--password-store='gnome-libsecret'";
-      #   };
-
+      package =
+        if (config.homeModules.vsCode.withWailand) then
+          pkgs.vscode.override
+            {
+              # required services.gnome.gnome-keyring.enable
+              commandLineArgs = "--enable-ozone --ozone-platform=wayland --password-store='gnome-libsecret'";
+            } else pkgs.vscode;
       profiles = {
         default = {
           extensions = with pkgs.vscode-extensions; [
