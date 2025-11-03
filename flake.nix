@@ -34,8 +34,32 @@
           (builtins.attrNames (builtins.readDir ./hosts/proxmox)));
       username = "marco";
       pkgsFor = system: import nixpkgs { inherit system; };
+      proxmoxInfo = {
+        "lxc-adguard" = { user = "root"; ip = "192.168.188.31"; };
+        "lxc-tailscale" = { user = "root"; ip = "192.168.188.32"; };
+      };
     in
     {
+      # use it with nix run .#deploy-<host>
+      apps = forAllSystems (system:
+        let
+          pkgs = pkgsFor system;
+        in
+        nixpkgs.lib.genAttrs (builtins.attrNames proxmoxInfo) (host:
+          let
+            deployInfo = proxmoxInfo.${host};
+            target = "${deployInfo.user}@${deployInfo.ip}";
+          in
+          {
+            type = "app";
+            program = toString (pkgs.writeShellScript "deploy-${host}" ''
+              boldBlue="\e[1;34m"
+              reset="\e[0m"
+              echo -e "🚀 Deploying ''${boldBlue}${host}''${reset} to ''${boldBlue}${target}''${reset}..."
+              nixos-rebuild switch --flake .#${host} --target-host ${target}
+              echo -e "✅ Deployment of ''${boldBlue}${host}''${reset} finished."
+            '');
+          }));
       # use it with nix fmt
       formatter = forAllSystems (system:
         let pkgs = pkgsFor system;
@@ -94,7 +118,7 @@
           nixpkgs.lib.nixosSystem {
             inherit system;
             specialArgs = {
-              inherit inputs host username;
+              inherit inputs host username proxmoxInfo;
             };
             modules = [ ./hosts/proxmox/${host}.nix ];
           });

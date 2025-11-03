@@ -1,9 +1,9 @@
-{ ... }:
+{ proxmoxInfo, ... }:
 
 let
   webUiPort = 80;
   dnsPort = 53;
-  containerIP = "192.168.188.31";
+  containerIP = proxmoxInfo."lxc-adguard".ip;
   gatewayIP = "192.168.188.1";
 in
 {

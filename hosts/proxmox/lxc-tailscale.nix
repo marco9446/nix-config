@@ -1,4 +1,4 @@
-{ ... }: {
+{ proxmoxInfo, ... }: {
 
   imports = [
     ../../modules/defaultPveLxcConfig.nix
@@ -15,7 +15,7 @@
       advertiseRoutes = [ "192.168.188.0/24" ];
       webClient = {
         enable = true;
-        listenAddr = "192.168.188.32";
+        listenAddr = proxmoxInfo."lxc-tailscale".ip;
         port = 80;
       };
     };
