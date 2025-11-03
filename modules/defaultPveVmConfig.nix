@@ -1,29 +1,9 @@
-{ pkgs, lib, ... }:
+{ modulesPath, ... }:
 
 {
   imports = [
-    pkgs.nixosModules.proxmox-image
-    ./nixOS
-    ./nixOS/proxmoxServices
+    (modulesPath + "/virtualisation/proxmox-image.nix")
   ];
-
-  modules = {
-    customConfig = {
-      desktop = lib.mkDefault "none";
-      userShell = lib.mkDefault pkgs.bash;
-    };
-    defaultPackages.enable = false;
-    nvidia.enable = false;
-    bluetooth.enable = false;
-    nixVim.enable = true;
-    tailscale.enable = lib.mkDefault false;
-    homeManager.enable = false;
-    ssh.enable = true;
-    docker.enable = lib.mkDefault false;
-    user.enable = true;
-    nh.enable = true;
-    adguard.enable = lib.mkDefault false;
-  };
 
   # Enable mDNS for `hostname.local` addresses
   services.avahi.enable = true;
@@ -34,10 +14,10 @@
   };
 
   # Some sane packages we need on every system
-  environment.systemPackages = with pkgs; [
-    vim # for emergencies
-    git # for pulling nix flakes
-  ];
+  # environment.systemPackages = with pkgs; [
+  #   vim # for emergencies
+  #   git # for pulling nix flakes
+  # ];
 
   # Don't ask for passwords
   security.sudo.wheelNeedsPassword = false;

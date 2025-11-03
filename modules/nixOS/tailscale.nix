@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 
 let
   cfg = config.modules.tailscale;
@@ -6,6 +6,8 @@ in
 {
   options.modules.tailscale = {
     enable = lib.mkEnableOption "enable tailscale desktop";
+
+
 
     isExitNode = lib.mkOption {
       description = "Whether the node should be advertised as an exit node.";
@@ -17,9 +19,27 @@ in
       type = lib.types.listOf lib.types.str;
       default = [ ];
     };
+    webClient = {
+      enable = lib.mkEnableOption "enable tailscale web client service";
+      listenAddr = lib.mkOption {
+        description = "IP address for Tailscale web client to listen on.";
+        type = lib.types.str;
+        default = "127.0.0.1";
+      };
+      port = lib.mkOption {
+        description = "Port for Tailscale web client.";
+        type = lib.types.port;
+        default = 8080;
+      };
+    };
   };
 
   config = lib.mkIf cfg.enable {
+
+    networking.firewall.allowedTCPPorts = [ 5252 ]
+      ++ (lib.optionals cfg.webClient.enable [ cfg.webClient.port ]);
+
+    # https://search.nixos.org/options?channel=unstable&query=services.tailscale.
     services = {
       # systemd-resolved is required for proper DNS integration
       resolved.enable = true;
@@ -34,14 +54,25 @@ in
           (lib.optionals cfg.isExitNode [ "--advertise-exit-node" ]) ++
           (lib.optionals (cfg.advertiseRoutes != [ ])
             [ "--advertise-routes=${lib.concatStringsSep "," cfg.advertiseRoutes}" ]);
-
       };
 
-      # --- Firewall configuration not sure if needed ---
-      # networking.firewall = {
-      #   allowedUDPPorts = lib.mkForce (config.networking.firewall.allowedUDPPorts ++ [ 41641 ]);
-      #   trustedInterfaces = lib.mkForce (config.networking.firewall.trustedInterfaces ++ [ "tailscale0" ]);
-      # };
+    };
+    systemd.services.tailscale-web = lib.mkIf cfg.webClient.enable {
+      description = "Tailscale Web Client";
+      after = [ "tailscaled.service" ];
+      wants = [ "tailscaled.service" ];
+      wantedBy = [ "multi-user.target" ];
+      serviceConfig = {
+        Type = "simple";
+        ExecStart = ''
+          ${pkgs.tailscale}/bin/tailscale web --listen ${cfg.webClient.listenAddr}:${toString cfg.webClient.port} --readonly=false
+        '';
+        Restart = "on-failure";
+        # Running as root is necessary to bind to privileged ports (<1024)
+        # and to have the necessary permissions to interact with tailscaled.
+        User = "root";
+        Group = "root";
+      };
     };
   };
 }
