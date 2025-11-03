@@ -40,7 +40,7 @@
       };
     in
     {
-      # use it with nix run .#deploy-<host>
+      # remote deploy proxmox vm/lxc with nix run .#<host>
       apps = forAllSystems (system:
         let
           pkgs = pkgsFor system;
