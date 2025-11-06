@@ -1,74 +1,63 @@
-name: Update flake and run checks
+name: "Flake.lock: update Nix dependencies"
 
 on:
+  workflow_dispatch: # allows manual triggering
   schedule:
-    # At 17:00 on Friday (UTC) — adjust if you prefer a different time/zone
-    - cron: '0 17 * * FRI'
-  workflow_dispatch: {}
-
-permissions:
-  contents: write
+    - cron: '0 17 * * FRI'  # At 17:00 on Friday (UTC)
 
 jobs:
-  update-and-check:
+  nix-flake-update:
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Install Nix
-        # Use the official install script to get a usable nix on GitHub runners
-        run: |
-          curl -L https://nixos.org/nix/install | sh -s -- --no-daemon
-          . /home/runner/.nix-profile/etc/profile.d/nix.sh
-
-      - name: Enable experimental flakes
-        run: |
-          mkdir -p $HOME/.config/nix
-          echo 'experimental-features = nix-command flakes' > $HOME/.config/nix/nix.conf
-          . /home/runner/.nix-profile/etc/profile.d/nix.sh
-
-      - name: Update flake.lock
+      - uses: actions/checkout@v5
+      - uses: DeterminateSystems/determinate-nix-action@v3
+      - uses: DeterminateSystems/update-flake-lock@main
         id: update
-        run: |
-          . /home/runner/.nix-profile/etc/profile.d/nix.sh
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          # Create a branch for the update so the main branch isn't force-changed inadvertently
-          BRANCH="flake-update-$(date +%Y%m%d-%H%M%S)"
-          git checkout -b "$BRANCH"
-          nix flake update
-          # If flake.lock didn't change, exit early
-          if git status --porcelain | grep -q 'flake.lock'; then
-            git add flake.lock
-            git commit -m "chore: update flake.lock (nix flake update)"
-            echo "branch=$BRANCH" >> $GITHUB_OUTPUT
-            echo "updated=true" >> $GITHUB_OUTPUT
-          else
-            echo "No changes to flake.lock; nothing to do."
-            echo "updated=false" >> $GITHUB_OUTPUT
-          fi
-
-      - name: Run nix flake check
-        if: steps.update.outputs.updated == 'true'
-        run: |
-          . /home/runner/.nix-profile/etc/profile.d/nix.sh
-          # Run flake check; if it fails we should not push the updated lockfile
-          nix flake check
-
-      - name: Create Pull Request
-        if: steps.update.outputs.updated == 'true' && success()
-        uses: peter-evans/create-pull-request@v5
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          # Use the branch created earlier
-          branch: ${{ steps.update.outputs.branch }}
-          base: main
-          title: "chore: update flake.lock (nix flake update)"
-          body: |
-            This pull request updates `flake.lock` using `nix flake update` and
-            runs `nix flake check` in CI. If the checks pass, please review and
-            merge.
-          labels: automated,dependencies
+          pr-title: "Update Nix flake inputs" # Title of PR to be created
+          pr-labels: | # Labels to be set on the PR
+            dependencies
+            automated
+      - name: Check Nixpkgs
+        uses: DeterminateSystems/flake-checker-action@main
+        with:
+          fail-mode: true
+      - name: Comment on PR if check failed
+        if: failure()
+        uses: actions/github-script@v6
+        env:
+          PR_NUMBER: ${{ steps.update.outputs.pull-request-number }}
+        with:
+          script: |
+            const runUrl = `${process.env.GITHUB_SERVER_URL}/${github.context.repo.owner}/${github.context.repo.repo}/actions/runs/${process.env.GITHUB_RUN_ID}`;
+
+            // Prefer the PR number from the update action if available
+            let prNumber = process.env.PR_NUMBER ? Number(process.env.PR_NUMBER) : null;
+
+            // If still no PR, try to get PR number from the workflow event
+            if (!prNumber && github.context.payload.pull_request) {
+              prNumber = github.context.payload.pull_request.number;
+            }
+
+            const body = `flake-checker detected failures. See the Actions run for details: ${runUrl}`;
+
+            if (prNumber) {
+              await github.rest.issues.createComment({
+                owner: github.context.repo.owner,
+                repo: github.context.repo.repo,
+                issue_number: prNumber,
+                body,
+              });
+            } else {
+              // Fallback: open an issue so maintainers get notified
+              await github.rest.issues.create({
+                owner: github.context.repo.owner,
+                repo: github.context.repo.repo,
+                title: 'flake-checker: failure when updating flake inputs',
+                body: `The scheduled/automated flake update run failed. ${body}`,
+              });
+            }
