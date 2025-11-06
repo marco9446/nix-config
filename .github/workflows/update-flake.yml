@@ -1,0 +1,74 @@
+name: Update flake and run checks
+
+on:
+  schedule:
+    # At 17:00 on Friday (UTC) — adjust if you prefer a different time/zone
+    - cron: '0 17 * * FRI'
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  update-and-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install Nix
+        # Use the official install script to get a usable nix on GitHub runners
+        run: |
+          curl -L https://nixos.org/nix/install | sh -s -- --no-daemon
+          . /home/runner/.nix-profile/etc/profile.d/nix.sh
+
+      - name: Enable experimental flakes
+        run: |
+          mkdir -p $HOME/.config/nix
+          echo 'experimental-features = nix-command flakes' > $HOME/.config/nix/nix.conf
+          . /home/runner/.nix-profile/etc/profile.d/nix.sh
+
+      - name: Update flake.lock
+        id: update
+        run: |
+          . /home/runner/.nix-profile/etc/profile.d/nix.sh
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          # Create a branch for the update so the main branch isn't force-changed inadvertently
+          BRANCH="flake-update-$(date +%Y%m%d-%H%M%S)"
+          git checkout -b "$BRANCH"
+          nix flake update
+          # If flake.lock didn't change, exit early
+          if git status --porcelain | grep -q 'flake.lock'; then
+            git add flake.lock
+            git commit -m "chore: update flake.lock (nix flake update)"
+            echo "branch=$BRANCH" >> $GITHUB_OUTPUT
+            echo "updated=true" >> $GITHUB_OUTPUT
+          else
+            echo "No changes to flake.lock; nothing to do."
+            echo "updated=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Run nix flake check
+        if: steps.update.outputs.updated == 'true'
+        run: |
+          . /home/runner/.nix-profile/etc/profile.d/nix.sh
+          # Run flake check; if it fails we should not push the updated lockfile
+          nix flake check
+
+      - name: Create Pull Request
+        if: steps.update.outputs.updated == 'true' && success()
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          # Use the branch created earlier
+          branch: ${{ steps.update.outputs.branch }}
+          base: main
+          title: "chore: update flake.lock (nix flake update)"
+          body: |
+            This pull request updates `flake.lock` using `nix flake update` and
+            runs `nix flake check` in CI. If the checks pass, please review and
+            merge.
+          labels: automated,dependencies
