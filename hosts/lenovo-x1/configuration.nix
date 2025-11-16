@@ -72,10 +72,11 @@
     pulseaudio.enable = false;
     flatpak.enable = true;
 
-    # Enable remapping for Logitech MX Master 3.
+    # Enable remapping for Logitech Wireless Mouse MX Master 3.
+    # To see the list of input events, run `sudo evremap list-devices`
     evremap = {
       enable = true;
-      settings.device_name = "Logitech MX Master 3";
+      settings.device_name = "Logitech Wireless Mouse MX Master 3";
       settings.remap = [
         {
           input = [ "BTN_EXTRA" ];
@@ -98,6 +99,8 @@
     gparted
     gvfs
     xfce.thunar
+    # android-tools
+    # universal-android-debloater
   ];
 
   # Open ports in the firewall.
