@@ -5,6 +5,7 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
+    colmena.url = "github:zhaofengli/colmena";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -16,7 +17,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
-  outputs = inputs@{ nixpkgs, ... }:
+  outputs = inputs@{ nixpkgs, colmena, ... }:
     let
       systems = [ "x86_64-linux" ];
       forAllSystems = nixpkgs.lib.genAttrs systems;
@@ -40,26 +41,26 @@
       };
     in
     {
-      # remote deploy proxmox vm/lxc with nix run .#<host>
-      apps = forAllSystems (system:
-        let
-          pkgs = pkgsFor system;
-        in
-        nixpkgs.lib.genAttrs (builtins.attrNames proxmoxInfo) (host:
-          let
-            deployInfo = proxmoxInfo.${host};
-            target = "${deployInfo.user}@${deployInfo.ip}";
-          in
-          {
-            type = "app";
-            program = toString (pkgs.writeShellScript "deploy-${host}" ''
-              boldBlue="\e[1;34m"
-              reset="\e[0m"
-              echo -e "🚀 Deploying ''${boldBlue}${host}''${reset} to ''${boldBlue}${target}''${reset}..."
-              nixos-rebuild switch --flake .#${host} --target-host ${target}
-              echo -e "✅ Deployment of ''${boldBlue}${host}''${reset} finished."
-            '');
-          }));
+      colmenaHive = colmena.lib.makeHive (
+        {
+          meta = {
+            nixpkgs = import nixpkgs {
+              system = "x86_64-linux";
+            };
+            specialArgs = {
+              inherit inputs username proxmoxInfo;
+            };
+          };
+        } // nixpkgs.lib.genAttrs proxmoxConfigs (host: {
+          deployment = {
+            targetHost = proxmoxInfo.${host}.ip;
+            targetUser = proxmoxInfo.${host}.user;
+          };
+          imports = [ ./hosts/proxmox/${host}.nix ];
+          _module.args.host = host;
+        })
+      );
+
       # use it with nix fmt
       formatter = forAllSystems (system:
         let pkgs = pkgsFor system;
@@ -76,6 +77,7 @@
               nixpkgs-fmt
               nil
               nixos-generators
+              colmena.packages.${system}.colmena
             ];
           };
         });
