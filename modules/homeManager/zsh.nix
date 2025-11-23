@@ -76,7 +76,7 @@
       ];
       profileExtra = lib.mkIf nixOsConfig.modules.hyprland.enable ''
         if [ -z "$WAYLAND_DISPLAY" ] && [ "$XDG_VTNR" ]; then
-          exec uwsm start -S hyprland-uwsm.desktop
+          exec hyprland
         fi
       '';
     };
