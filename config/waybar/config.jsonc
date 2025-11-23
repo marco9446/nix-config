@@ -1,10 +1,9 @@
 // -*- mode: jsonc -*-
 {
-    "layer": "top", 
-    "position": "top", 
-    "height": 30, 
-    "spacing": 4, 
-
+    "layer": "top",
+    "position": "top",
+    "height": 30,
+    "spacing": 4,
     // Choose the order of the modules
     "modules-left": [
         "hyprland/workspaces",
@@ -12,9 +11,7 @@
         "hyprland/window",
         "custom/sep"
     ],
-    "modules-center": [
-    ],
-
+    "modules-center": [],
     "modules-right": [
         "custom/sep",
         "network",
@@ -23,13 +20,12 @@
         "custom/sep",
         "memory",
         "custom/sep",
-        "disk",
-        "custom/sep",
         "clock",
+        "custom/sep",
+        "battery",
         "custom/sep",
         "tray"
     ],
-
     // Modules configuration
     "hyprland/workspaces": {
         "disable-scroll": true,
@@ -37,20 +33,19 @@
         "warp-on-scroll": false,
         "format": "{name}",
         "persistent-workspaces": {
-            "*" : 9
+            "*": 9
         }
     },
-    "hyprland/window" : {
+    "hyprland/window": {
         "max-length": 40,
         "seperate-outputs": false
     },
     "tray": {
         // "icon-size": 21,
-        "spacing": 10
-        // "icons": {
-        //   "blueman": "bluetooth",
-        //   "TelegramDesktop": "$HOME/.local/share/icons/hicolor/16x16/apps/telegram.png"
-        // }
+        "spacing": 10,
+        "icons": {
+            "blueman": "bluetooth"
+        }
     },
     "clock": {
         "format-alt": "{:%Y-%m-%d}"
@@ -73,18 +68,34 @@
             "warning": 30,
             "critical": 15
         },
-        "format": "Bat: {capacity}% {icon} {time}",
+        "format": "{icon}: {capacity}% {time}",
         "format-plugged": "{capacity}% ",
-        "format-alt": "Bat {capacity}%",
+        "format-alt": "{icon}: {capacity}%",
         "format-time": "{H}:{M}",
-        "format-icons": ["", "", "", "", ""]
+        "format-icons": [
+            "",
+            "",
+            "",
+            "",
+            ""
+        ]
     },
     "network": {
-        "format": "Online",
-        "format-disconnected": "Disconnected ⚠"
+        "format-wifi": "{icon}",
+        "format-ethernet": "",
+        "format-disconnected": "⚠",
+        "format-icons": [
+            "󰤯",
+            "󰤟",
+            "󰤢",
+            "󰤥",
+            "󰤨"
+        ],
+        "tooltip-format": "{essid} ({signalStrength}%)",
+        "on-click": "nm-connection-editor"
     },
     "custom/sep": {
-        "format" : "|",
-        "interval" : 0
+        "format": "|",
+        "interval": 0
     }
 }
