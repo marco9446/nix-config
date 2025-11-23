@@ -14,6 +14,7 @@
     ./docker.nix
     ./nh.nix
     ./gnome.nix
+    ./hyprland.nix
     ./defaultPackages.nix
   ];
 
@@ -21,7 +22,7 @@
     modules.customConfig = {
       desktop = lib.mkOption {
         description = "The desktop environment you intend to use";
-        type = lib.types.enum [ "none" "xfce" "cosmic" "gnome" ];
+        type = lib.types.enum [ "none" "xfce" "cosmic" "gnome" "hyprland" ];
       };
       xcursorSize = lib.mkOption {
         type = lib.types.str;
@@ -42,6 +43,7 @@
       cosmicDesktop.enable = config.modules.customConfig.desktop == "cosmic";
       xfce.enable = config.modules.customConfig.desktop == "xfce";
       gnome.enable = config.modules.customConfig.desktop == "gnome";
+      hyprland.enable = config.modules.customConfig.desktop == "hyprland";
       bluetooth.enable = lib.mkDefault true;
       nixVim.enable = lib.mkDefault true;
       tailscale.enable = lib.mkDefault false;

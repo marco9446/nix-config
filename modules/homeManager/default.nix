@@ -11,6 +11,7 @@
     ./yazi.nix
     ./zoxide.nix
     ./gtk.nix
+    ./hyprland.nix
     ./wezterm.nix
   ];
 
@@ -19,6 +20,7 @@
     starship.enable = lib.mkDefault true;
     vsCode.enable = lib.mkDefault false;
     xfce.enable = lib.mkDefault nixOsConfig.modules.xfce.enable;
+    hyprland.enable = lib.mkDefault nixOsConfig.modules.hyprland.enable;
     yt-dlp.enable = lib.mkDefault false;
     zsh.enable = lib.mkDefault true;
     eza.enable = lib.mkDefault true;
