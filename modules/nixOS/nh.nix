@@ -10,7 +10,7 @@
       enable = true;
       clean.enable = host != "wsl";
       clean.dates = "18:00";
-      flake = if (host == "wsl") then "/mnt/c/Users/marco.ravazzini/projects/nix-config" else "/home/${username}/nix-config";
+      flake = if (host == "wsl") then "/mnt/c/Users/marco.ravazzini/projects_dev/nix-config" else "/home/${username}/nix-config";
     };
   };
 }
