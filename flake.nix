@@ -38,7 +38,7 @@
       proxmoxInfo = {
         "lxc-adguard" = { user = "root"; ip = "192.168.188.31"; };
         "lxc-tailscale" = { user = "root"; ip = "192.168.188.32"; };
-        "lxc-ollama" = { user = "root"; ip = "192.168.188.33"; };
+        # "lxc-ollama" = { user = "root"; ip = "192.168.188.33"; };
       };
     in
     {
