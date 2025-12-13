@@ -45,12 +45,13 @@
     # Radeon 890M is RDNA 3.5. 
     # 11.0.0 is the safest override.
     rocmOverrideGfx = "11.0.0";
-    # environmentVariables = {
-    #   HSA_ENABLE_SDMA = "0"; # Fixes some APU/Container issues
-    #   HSA_OVERRIDE_GFX_VERSION = "11.0.0"; # Force override in env as well
-    #   HSA_AMD_SVM_SUPPORT = "0"; # Disable SVM, critical for some APUs in containers
-    #   OLLAMA_DEBUG = "0"; 
-    # };
+    environmentVariables = {
+      HSA_ENABLE_SDMA = "0"; # Fixes some APU/Container issues
+      HSA_OVERRIDE_GFX_VERSION = "11.0.0"; # Force override in env as well
+      HSA_AMD_SVM_SUPPORT = "0"; # Disable SVM, critical for some APUs in containers
+      OLLAMA_KEEP_ALIVE = "10s"; # Unload model quickly to stop high idle GPU usage
+      OLLAMA_DEBUG = "0"; 
+    };
     openFirewall = true;
   };
 
