@@ -20,7 +20,7 @@ in
       shellWrapperName = "y";
 
       settings = {
-        manager = {
+        mgr = {
           show_hidden = true;
           sort_dir_first = true;
           ratio = [ 1 4 3 ];
@@ -46,7 +46,7 @@ in
       '';
 
       keymap = {
-        manager.prepend_keymap = [
+        mgr.prepend_keymap = [
           {
             on = "i";
             run = "plugin max-preview";
