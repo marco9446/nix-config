@@ -39,7 +39,7 @@ check this [guide](https://nixos.wiki/wiki/Proxmox_Linux_Container) for more det
 ```shell
 ctid="2__"
 ctname="<lxc-hostname>"
-ctt=" /var/lib/vz/template/cache/vztmpl/<TEMPLATE_NAME.tar.xz>"
+ctt=" /var/lib/vz/template/cache/<TEMPLATE_NAME.tar.xz>"
 cts="local-lvm"
 
 ipaddr="192.168.188.<ip from 30 to 100>/24"
