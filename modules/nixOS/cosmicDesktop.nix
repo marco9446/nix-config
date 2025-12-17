@@ -1,4 +1,4 @@
-{ lib, config, ... }: {
+{ lib, config, pkgs, ... }: {
 
   # imports = [
   #   {
@@ -15,9 +15,22 @@
   };
 
   config = lib.mkIf config.modules.cosmicDesktop.enable {
-    services.desktopManager.cosmic.enable = true;
+    # Enable the COSMIC login manager
     services.displayManager.cosmic-greeter.enable = true;
+
+    # Enable the COSMIC desktop environment
+    services.desktopManager.cosmic.enable = true;
+
+    environment.cosmic.excludePackages = with pkgs; [
+      cosmic-edit
+    ];
+
+    # improve performance
+    services.system76-scheduler.enable = true;
+
+    # Allow all windows to have access to clipboard
     environment.sessionVariables.COSMIC_DATA_CONTROL_ENABLED = 1;
+    # Disable blueman to avoid duplicates with gnome bluetooth manager
     modules.bluetooth.withBlueman = false;
   };
 }

@@ -11,7 +11,7 @@
   modules = {
     customConfig = {
       desktop = "cosmic";
-      xcursorSize = "22";
+      xcursorSize = 20;
     };
     tailscale.enable = true;
     ssh.enable = false;

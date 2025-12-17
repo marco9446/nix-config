@@ -6,7 +6,7 @@
   config = lib.mkIf config.homeModules.gtk.enable {
     gtk = {
       enable = true;
-      cursorTheme.size = lib.strings.toInt nixOsConfig.modules.customConfig.xcursorSize;
+      cursorTheme.size = nixOsConfig.modules.customConfig.xcursorSize;
       cursorTheme.name = "elementary";
       iconTheme = {
         name = "Flat-Remix-Blue-Dark";

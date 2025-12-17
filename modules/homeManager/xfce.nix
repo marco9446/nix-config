@@ -9,7 +9,7 @@
         type = lib.types.int;
       };
       cursorSize = lib.mkOption {
-        default = lib.strings.toInt nixOsConfig.modules.customConfig.xcursorSize;
+        default = nixOsConfig.modules.customConfig.xcursorSize;
         type = lib.types.int;
       };
       fontSize = lib.mkOption {

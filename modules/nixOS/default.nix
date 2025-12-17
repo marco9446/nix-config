@@ -13,6 +13,7 @@
     ./ssh.nix
     ./docker.nix
     ./nh.nix
+    ./niri.nix
     ./gnome.nix
     ./hyprland.nix
     ./defaultPackages.nix
@@ -22,11 +23,11 @@
     modules.customConfig = {
       desktop = lib.mkOption {
         description = "The desktop environment you intend to use";
-        type = lib.types.enum [ "none" "xfce" "cosmic" "gnome" "hyprland" ];
+        type = lib.types.enum [ "none" "xfce" "cosmic" "gnome" "hyprland" "niri" ];
       };
       xcursorSize = lib.mkOption {
-        type = lib.types.str;
-        default = "20";
+        type = lib.types.int;
+        default = 20;
       };
       userShell = lib.mkOption {
         type = lib.types.package;
@@ -44,6 +45,7 @@
       xfce.enable = config.modules.customConfig.desktop == "xfce";
       gnome.enable = config.modules.customConfig.desktop == "gnome";
       hyprland.enable = config.modules.customConfig.desktop == "hyprland";
+      niriDesktop.enable = config.modules.customConfig.desktop == "niri";
       bluetooth.enable = lib.mkDefault true;
       nixVim.enable = lib.mkDefault true;
       tailscale.enable = lib.mkDefault false;
@@ -55,9 +57,9 @@
 
     };
 
-    environment.sessionVariables = {
-      XCURSOR_SIZE = config.modules.customConfig.xcursorSize;
-    };
+    # environment.sessionVariables = {
+    #   XCURSOR_SIZE = config.modules.customConfig.xcursorSize;
+    # };
 
     # Allow unfree packages
     nixpkgs.config.allowUnfree = true;

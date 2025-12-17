@@ -39,6 +39,14 @@
     VISUAL = "nvim";
   };
 
+  home.pointerCursor = {
+    enable = true;
+    gtk.enable = true;
+    name = "Adwaita";
+    package = pkgs.adwaita-icon-theme;
+    size = nixOsConfig.modules.customConfig.xcursorSize;
+  };
+
   # Packages that should be installed to the user profile.
   home.packages = with pkgs; [
     # archives

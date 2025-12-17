@@ -16,7 +16,7 @@
   modules = {
     customConfig = rec{
       desktop = "cosmic";
-      xcursorSize = if (desktop == "xfce") then "42" else "22";
+      xcursorSize = if (desktop == "xfce") then 42 else 22;
     };
     nvidia.enable = true;
     homeManager = {
