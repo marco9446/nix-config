@@ -11,6 +11,8 @@
     # plugin dependencies
     environment.systemPackages = with pkgs; [
       ripgrep
+      nixpkgs-fmt # formats .nix
+      prettier # js/ts/html/css
     ];
 
     programs.nixvim = {
@@ -60,14 +62,14 @@
         ignorecase = true;
         smartcase = true;
         incsearch = true; # show matches as you type
-        hlsearch = true;  # keep search highlights
+        hlsearch = true; # keep search highlights
 
         # Swap and backup files
         swapfile = false;
         backup = false;
         writebackup = false;
         undofile = true;
-        ruler = true;  # Show line and column when searching
+        ruler = true; # Show line and column when searching
 
         # White space characters
         list = true;
@@ -105,7 +107,12 @@
             ts_ls.enable = true;
             html.enable = true;
             cssls.enable = true;
-            nixd.enable = true;
+            nixd = {
+              enable = true;
+              settings = {
+                formatting = { command = [ "nixpkgs-fmt" ]; };
+              };
+            };
             yamlls.enable = true;
           };
         };
@@ -120,7 +127,7 @@
           enable = true;
           settings = {
             defaults = {
-              layout_config = {prompt_position = "top";};
+              layout_config = { prompt_position = "top"; };
               sorting_strategy = "ascending";
             };
             pickers.find_files.hidden = true;
@@ -139,6 +146,11 @@
           enable = true;
           settings = {
             indent = { char = "▏"; tab_char = "▏"; };
+            scope = {
+              enabled = true;
+              show_start = true;
+              show_end = false;
+            };
           };
         };
         lualine.enable = true;
@@ -159,7 +171,13 @@
           mode = "n";
           key = "<leader>w";
           action = ":w<CR>";
-          options = { silent = true; };
+          options.silent = true;
+        }
+        {
+          mode = "n";
+          key = "<leader>f";
+          action = "<cmd>lua vim.lsp.buf.format({ async = true })<CR>";
+          options.silent = true;
         }
         {
           mode = "n";
