@@ -25,7 +25,12 @@
       vimAlias = true;
       termguicolors = true;
       globals.mapleader = " ";
-      colorschemes.monokai-pro.enable = true;
+      colorschemes.monokai-pro = {
+        enable = true;
+        settings = {
+          filter = "octagon";
+        };
+      };
       completeopt = [ "menuone" "noselect" "noinsert" ];
       updatetime = 300;
 
