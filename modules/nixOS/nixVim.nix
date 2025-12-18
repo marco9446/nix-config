@@ -1,5 +1,5 @@
-{ lib, config, inputs, ... }:
-
+{ lib, config, inputs, pkgs, ... }:
+# cSpell:disable
 {
   imports = [
     inputs.nixvim.nixosModules.nixvim
@@ -8,63 +8,81 @@
     modules.nixVim.enable = lib.mkEnableOption "enable nixVim";
   };
   config = lib.mkIf config.modules.nixVim.enable {
+    # plugin dependencies
+    environment.systemPackages = with pkgs; [
+      ripgrep
+    ];
 
     programs.nixvim = {
+      ############################################################
+      # GENERAL Configuration
+      ############################################################
       enable = true;
       defaultEditor = true;
       viAlias = true;
       vimAlias = true;
-
+      termguicolors = true;
+      globals.mapleader = " ";
       colorschemes.monokai-pro.enable = true;
-      plugins = {
-        lualine.enable = true;
-        nvim-autopairs.enable = true;
-        comment.enable = true;
-        neo-tree.enable = true;
-        web-devicons.enable = true;
-      };
-      keymaps = [
-        {
-          key = ";";
-          action = ":";
-        }
-        {
-          key = "<C-b>";
-          action = ":Neotree toggle<CR>";
-        }
-      ];
+      completeopt = [ "menuone" "noselect" "noinsert" ];
+      updatetime = 300;
+
+      ############################################################
+      # OPTIONS Configuration
+      ############################################################
       opts = {
-        number = true; # Show line numbers
-        relativenumber = false;
-
-        # Always show the signcolumn, otherwise text would be shifted when displaying error icons
-        signcolumn = "yes";
-
-        # Enable mouse
+        # General settings
+        encoding = "utf-8";
+        fileencoding = "utf-8";
         mouse = "a";
+        splitbelow = true;
+        splitright = true;
+
+        # Tabs
+        tabstop = 2;
+        shiftwidth = 2;
+        softtabstop = 2;
+        expandtab = true;
+        shiftround = true;
+        smartindent = true;
+
+        # Line numbers
+        number = true;
+        relativenumber = false;
+        wrap = false;
+        cursorline = true;
+        signcolumn = "yes";
+        colorcolumn = "120";
+        scrolloff = 5;
+        sidescrolloff = 5;
 
         # Search
         ignorecase = true;
         smartcase = true;
+        incsearch = true; # show matches as you type
+        hlsearch = true;  # keep search highlights
 
-        # Tab defaults (might get overwritten by an LSP server)
-        tabstop = 4;
-        shiftwidth = 4;
-        softtabstop = 0;
-        expandtab = true;
-        smarttab = true;
-
-        # Save undo history
+        # Swap and backup files
+        swapfile = false;
+        backup = false;
+        writebackup = false;
         undofile = true;
+        ruler = true;  # Show line and column when searching
 
-        # Highlight the current line for cursor
-        cursorline = true;
+        # White space characters
+        list = true;
+        listchars = {
+          tab = "▸ ";
+          trail = "·";
+          extends = "»";
+          precedes = "«";
+        };
 
-        # Show line and column when searching
-        ruler = true;
+        # Folding settings
+        foldmethod = "indent";
+        foldlevel = 99;
+        foldenable = false;
 
-        # Start scrolling when the cursor is X lines away from the top/bottom
-        scrolloff = 5;
 
         # System clipboard support, needs xclip/wl-clipboard
         clipboard = {
@@ -75,6 +93,87 @@
           register = "unnamedplus";
         };
       };
+
+      ############################################################
+      # PLUGINS Configuration
+      ############################################################
+      plugins = {
+        lsp = {
+          enable = true;
+          format.enable = true;
+          servers = {
+            ts_ls.enable = true;
+            html.enable = true;
+            cssls.enable = true;
+            nixd.enable = true;
+            yamlls.enable = true;
+          };
+        };
+        gitsigns = {
+          enable = true;
+          settings = {
+            attach_to_untracked = true;
+            current_line_blame = false;
+          };
+        };
+        telescope = {
+          enable = true;
+          settings = {
+            defaults = {
+              layout_config = {prompt_position = "top";};
+              sorting_strategy = "ascending";
+            };
+            pickers.find_files.hidden = true;
+          };
+          extensions."fzf-native" = {
+            enable = true;
+            settings = {
+              fuzzy = true;
+              override_file_sorter = true;
+              override_generic_sorter = true;
+              case_mode = "smart_case";
+            };
+          };
+        };
+        "indent-blankline" = {
+          enable = true;
+          settings = {
+            indent = { char = "▏"; tab_char = "▏"; };
+          };
+        };
+        lualine.enable = true;
+        nvim-autopairs.enable = true;
+        comment.enable = true;
+        web-devicons.enable = true;
+      };
+
+      ############################################################
+      # KEY-MAPS Configuration
+      ############################################################
+      keymaps = [
+        {
+          key = ";";
+          action = ":";
+        }
+        {
+          mode = "n";
+          key = "<leader>w";
+          action = ":w<CR>";
+          options = { silent = true; };
+        }
+        {
+          mode = "n";
+          key = "<leader>ff";
+          action = "<cmd>Telescope find_files<CR>";
+          options.silent = true;
+        }
+        {
+          mode = "n";
+          key = "<leader>fg";
+          action = "<cmd>Telescope live_grep<CR>";
+          options.silent = true;
+        }
+      ];
     };
   };
 }
