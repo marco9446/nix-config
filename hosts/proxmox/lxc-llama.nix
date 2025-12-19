@@ -1,20 +1,34 @@
 { pkgs, lib, ... }: {
-  /*
-    you need to passthrough the GPU devices to the LXC container in proxmox ui
-    to do so, add the following lines to the container's config file (e.g., /etc/pve/lxc/100.conf):
-  
-    lxc.cgroup2.devices.allow: c 226:128 rwm
-    lxc.mount.entry: /dev/dri dev/dri none bind,optional,create=dir
-    lxc.mount.entry: /dev/dri/renderD128 dev/dri/renderD128 none bind,optional,create=file
-    lxc.cgroup2.devices.allow: c 510:0 rwm
-    lxc.mount.entry: /dev/kfd dev/kfd none bind,optional,create=file
-  */
 
+  /* ------------------------------------------------------------------
+   * 1️⃣  LXC container – GPU passthrough
+   * ------------------------------------------------------------------
+   *
+   * In Proxmox’s LXC UI you must expose the GPU device(s) you want to use
+   * inside the container.  The following lines are inserted into
+   * /etc/pve/lxc/100.conf (or wherever your container is defined).
+   *
+   *   lxc.cgroup2.devices.allow:  c 226:128 rwm
+   *   lxc.mount.entry:          /dev/dri dev/dri none bind,optional,create=dir
+   *   lxc.mount.entry:          /dev/dri/renderD128 dev/dri/renderD128 none bind,optional,create=file
+   *   lxc.cgroup2.devices.allow:  c 510:0   rwm
+   *   lxc.mount.entry:          /dev/kfd dev/kfd none bind,optional,create=file
+   *
+   * 226:128 and 510:0 are the PCIe‑bus/slot numbers you found when
+   * probing your GPU.  If you’re not sure, run `lspci` and look for
+   * “GPU” in the output – the bus numbers are the two numbers after the
+   * colon.  Feel free to tweak them to match your hardware.
+   *
+   * ------------------------------------------------------------------
+   */
 
   imports = [
     ../../modules/defaultPveLxcConfig.nix
   ];
 
+  # ------------------------------------------------------------------
+  # 2️⃣  Hardware/Graphics
+  # ------------------------------------------------------------------
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
@@ -22,13 +36,20 @@
       rocmPackages.clr.icd
     ];
   };
-  # Tools to verify GPU/ROCm functionality
+
+  # ------------------------------------------------------------------
+  # 3️⃣  System packages to test the GPU/ROCm stack
+  # ------------------------------------------------------------------
   environment.systemPackages = with pkgs; [
-    rocmPackages.rocm-smi
-    rocmPackages.rocminfo
-    htop
+    rocmPackages.rocm-smi #  GPU runtime
+    rocmPackages.rocminfo #  Diagnostics
+    htop #  Top‑level monitor
   ];
 
+
+  # ------------------------------------------------------------------
+  # 4️⃣  LXC‑container service – Llama‑CPP
+  # ------------------------------------------------------------------
   services.llama-cpp = {
     enable = true;
     # if this doesn't work, try llama-cpp-rocm
