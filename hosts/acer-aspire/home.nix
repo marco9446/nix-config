@@ -7,8 +7,7 @@
 
   homeModules = {
     vsCode.enable = true;
+    zed-editor.enable = true;
     yt-dlp.enable = true;
   };
 }
-
- 

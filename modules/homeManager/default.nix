@@ -2,6 +2,7 @@
 
   imports = [
     ./git.nix
+    ./zed-editor.nix
     ./starship.nix
     ./vsCode.nix
     ./xfce.nix
@@ -28,6 +29,7 @@
     zoxide.enable = lib.mkDefault true;
     gtk.enable = lib.mkDefault true;
     wezterm.enable = lib.mkDefault false;
+    zed-editor.enable = lib.mkDefault false;
   };
 
 

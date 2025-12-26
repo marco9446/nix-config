@@ -13,6 +13,7 @@
       lshw
       vlc
       sslscan
+      nix-search-tv
     ];
   };
 }

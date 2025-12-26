@@ -36,6 +36,7 @@
         disk = "df | grep  '/$' | awk '{print $1}' | xargs df -H";
         lb = "lsblk -o +LABEL,UUID";
         nd = "nix develop -c $SHELL";
+        tv = "nix-search-tv print | fzf --preview 'nix-search-tv preview {}' --scheme history";
       };
 
       initContent = ''
