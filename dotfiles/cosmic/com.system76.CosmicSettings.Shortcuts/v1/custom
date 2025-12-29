@@ -1,0 +1,16 @@
+{
+    (
+        modifiers: [
+            Super,
+        ],
+        key: "d",
+        description: Some("code"),
+    ): Spawn("code"),
+    (
+        modifiers: [
+            Super,
+        ],
+        key: "z",
+        description: Some("zed editor"),
+    ): Spawn("zeditor"),
+}
