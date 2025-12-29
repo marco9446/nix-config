@@ -1,4 +1,4 @@
-{lib, config, ...}:
+{lib, config, pkgs, ...}:
 
 {
   options = {
@@ -8,6 +8,9 @@
     programs.zed-editor = {
       enable = true;
       themes = {};
+      extraPackages = [
+        pkgs.nil
+      ];
 
       userKeymaps = [
         {context = "Workspace";

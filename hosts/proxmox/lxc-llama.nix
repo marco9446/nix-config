@@ -55,7 +55,8 @@
     # if this doesn't work, try llama-cpp-rocm
     package = pkgs.llama-cpp-rocm;
     port = 8080;
-    model = "/var/lib/llama/models/OpenAI-20B-NEO-CODE-DI-Uncensored-Q5_1.gguf";
+    # model = "/var/lib/llama/models/OpenAI-20B-NEO-CODE-DI-Uncensored-Q5_1.gguf";
+    model = "/var/lib/llama/models/Qwen3-4B-Q4_K_M.gguf";
     openFirewall = true;
     host = "0.0.0.0";
     extraFlags = [

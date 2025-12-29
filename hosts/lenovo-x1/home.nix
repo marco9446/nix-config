@@ -8,6 +8,7 @@
 
   homeModules = {
     vsCode.enable = true;
+    zed-editor.enable = true;
     yt-dlp.enable = true;
     gtk.enable = false;
     wezterm.enable = true;
