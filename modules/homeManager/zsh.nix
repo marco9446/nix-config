@@ -1,9 +1,7 @@
-{
-  pkgs,
-  lib,
-  config,
-  nixOsConfig,
-  ...
+{ pkgs
+, lib
+, config
+, ...
 }:
 
 {
