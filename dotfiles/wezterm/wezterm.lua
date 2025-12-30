@@ -26,7 +26,7 @@ return {
   window_decorations = "RESIZE",
   window_close_confirmation = "NeverPrompt",
   hide_tab_bar_if_only_one_tab = true,
-  font = wezterm.font('JetBrains Mono'),
+  font = wezterm.font("JetBrainsMono Nerd Font", {stretch="Normal", style="Normal"}),
   window_padding = {
     bottom = "1.5cell",
   },
