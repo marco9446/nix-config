@@ -8,7 +8,7 @@
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
   "collaboration_panel": {
-    "dock": null,
+    "button": false,
   },
   "telemetry": {
     "diagnostics": false,
