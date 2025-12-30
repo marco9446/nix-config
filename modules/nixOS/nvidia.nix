@@ -13,7 +13,7 @@
 
     # Enable OpenGL
     hardware.graphics.enable = true;
-    services.xserver.videoDrivers = [ "nvidia" ];
+    services.xserver.videoDrivers = if (host == "macbook") then [ "intel" ] else [ "nvidia" ];
 
     nixpkgs.config.nvidia.acceptLicense = true;
 
@@ -66,5 +66,11 @@
     boot.kernelParams = lib.mkIf (host == "macbook") [
       "acpi_osi=Darwin"
     ];
+
+    # Explicitly disable on Mac
+    systemd.services.nvidia-powerd.enable = lib.mkIf (host == "mackbook") false;
+    systemd.services.nvidia-persistenced.enable = lib.mkIf (host == "mackbook") false;
+    systemd.services.nvidia-suspend.enable = lib.mkIf (host == "mackbook") false;
+    systemd.services.nvidia-resume.enable = lib.mkIf (host == "mackbook") false;
   };
 }
