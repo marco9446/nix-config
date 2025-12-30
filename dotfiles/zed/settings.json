@@ -71,8 +71,9 @@
     "show_onboarding_banner": false,
   },
   "project_panel": {
+    "entry_spacing": "standard",
     "auto_fold_dirs": true,
-    "starts_open": true,
+    "starts_open": false,
     "sticky_scroll": true,
   },
 
