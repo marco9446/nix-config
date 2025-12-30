@@ -15,6 +15,20 @@
   };
 
   config = lib.mkIf config.modules.cosmicDesktop.enable {
+    # disable title bar in cosmic-comp(requires too much time to compile, leave it commented for now)
+    # nixpkgs.overlays = lib.mkAfter [
+    #   (_final: prev: {
+    #     cosmic-comp = prev.cosmic-comp.overrideAttrs (old: {
+    #       patches = (old.patches or [ ]) ++ [
+    #         (prev.fetchpatch {
+    #           url = "https://raw.githubusercontent.com/cramt/nixconf/main/patches/no_ssd.patch";
+    #           hash = "sha256-eqjGcGspSpG3X++X8+LFOCksjhathHw7fjnr4IOCvmM=";
+    #         })
+    #       ];
+    #     });
+    #   })
+    # ];
+
     # Enable the COSMIC login manager
     services.displayManager.cosmic-greeter.enable = true;
 

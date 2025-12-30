@@ -13,6 +13,7 @@
     eza.enable = true;
     git.enable = true;
     starship.enable = true;
+    wezterm.enable = true;
     xfce = {
       enable = nixOsConfig.modules.xfce.enable;
       scalingFactor = 2;

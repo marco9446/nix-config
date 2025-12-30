@@ -23,9 +23,11 @@
       systems = [ "x86_64-linux" ];
       forAllSystems = nixpkgs.lib.genAttrs systems;
       # Discover host names of all non-proxmox hosts
-      hostNames = builtins.filter (
-        name: (builtins.readDir ./hosts).${name} == "directory" && name != "proxmox"
-      ) (builtins.attrNames (builtins.readDir ./hosts));
+      hostNames = builtins.filter
+        (
+          name: (builtins.readDir ./hosts).${name} == "directory" && name != "proxmox"
+        )
+        (builtins.attrNames (builtins.readDir ./hosts));
       # Discover proxmox configs
       proxmoxConfigs = map (name: builtins.replaceStrings [ ".nix" ] [ "" ] name) (
         builtins.filter (name: (builtins.readDir ./hosts/proxmox).${name} == "regular") (
@@ -122,22 +124,8 @@
       );
 
       nixosConfigurations =
-        nixpkgs.lib.genAttrs hostNames (
-          host:
-          let
-            system = "x86_64-linux";
-          in
-          nixpkgs.lib.nixosSystem {
-            inherit system;
-            specialArgs = {
-              inherit inputs host username;
-            };
-            modules = [ ./hosts/${host}/configuration.nix ];
-          }
-        )
-        //
-          # Add proxmox VMs and LXCs as additional configurations
-          nixpkgs.lib.genAttrs proxmoxConfigs (
+        nixpkgs.lib.genAttrs hostNames
+          (
             host:
             let
               system = "x86_64-linux";
@@ -145,15 +133,30 @@
             nixpkgs.lib.nixosSystem {
               inherit system;
               specialArgs = {
-                inherit
-                  inputs
-                  host
-                  username
-                  proxmoxInfo
-                  ;
+                inherit inputs host username;
               };
-              modules = [ ./hosts/proxmox/${host}.nix ];
+              modules = [ ./hosts/${host}/configuration.nix ];
             }
-          );
+          )
+        //
+        # Add proxmox VMs and LXCs as additional configurations
+        nixpkgs.lib.genAttrs proxmoxConfigs (
+          host:
+          let
+            system = "x86_64-linux";
+          in
+          nixpkgs.lib.nixosSystem {
+            inherit system;
+            specialArgs = {
+              inherit
+                inputs
+                host
+                username
+                proxmoxInfo
+                ;
+            };
+            modules = [ ./hosts/proxmox/${host}.nix ];
+          }
+        );
     };
 }

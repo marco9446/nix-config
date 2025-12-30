@@ -1,10 +1,9 @@
-{
-  lib,
-  pkgs,
-  username,
-  config,
-  nixOsConfig,
-  ...
+{ lib
+, pkgs
+, username
+, config
+, nixOsConfig
+, ...
 }:
 {
 

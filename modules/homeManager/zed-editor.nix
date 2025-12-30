@@ -1,4 +1,4 @@
-{lib, config, pkgs, ...}:
+{ lib, config, pkgs, ... }:
 
 {
   options = {
@@ -7,16 +7,18 @@
   config = lib.mkIf config.homeModules.zed-editor.enable {
     programs.zed-editor = {
       enable = true;
-      themes = {};
+      themes = { };
       extraPackages = [
         pkgs.nil
       ];
 
       userKeymaps = [
-        {context = "Workspace";
+        {
+          context = "Workspace";
           bindings = {
             ctrl-shift-t = "workspace::NewTerminal";
-        };}
+          };
+        }
       ];
     };
   };
