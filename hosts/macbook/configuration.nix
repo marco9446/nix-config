@@ -62,6 +62,9 @@
     serviceConfig.User = "root"; # Ensure the command runs as root
   };
 
+  nixpkgs.config.permittedInsecurePackages = [
+    "broadcom-sta-6.30.223.271-59-6.12.63"
+  ];
 
   programs = {
     firefox.enable = true;
