@@ -1,4 +1,10 @@
-{ pkgs, lib, config, nixOsConfig, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  nixOsConfig,
+  ...
+}:
 
 {
 
@@ -75,11 +81,6 @@
           };
         }
       ];
-      profileExtra = lib.mkIf nixOsConfig.modules.hyprland.enable ''
-        if [ -z "$WAYLAND_DISPLAY" ] && [ "$XDG_VTNR" ]; then
-          exec hyprland
-        fi
-      '';
     };
   };
 }

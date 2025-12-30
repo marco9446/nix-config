@@ -1,0 +1,8 @@
+[
+  {
+    "bindings": {
+      "ctrl-shift-t": "workspace::NewTerminal",
+    },
+    "context": "Workspace",
+  },
+]

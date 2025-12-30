@@ -1,4 +1,12 @@
-{ lib, pkgs, inputs, host, config, ... }: {
+{
+  lib,
+  pkgs,
+  inputs,
+  host,
+  config,
+  ...
+}:
+{
 
   imports = [
     ./cosmicDesktop.nix
@@ -15,7 +23,6 @@
     ./nh.nix
     ./niri.nix
     ./gnome.nix
-    ./hyprland.nix
     ./defaultPackages.nix
   ];
 
@@ -23,7 +30,13 @@
     modules.customConfig = {
       desktop = lib.mkOption {
         description = "The desktop environment you intend to use";
-        type = lib.types.enum [ "none" "xfce" "cosmic" "gnome" "hyprland" "niri" ];
+        type = lib.types.enum [
+          "none"
+          "xfce"
+          "cosmic"
+          "gnome"
+          "niri"
+        ];
       };
       xcursorSize = lib.mkOption {
         type = lib.types.int;
@@ -44,7 +57,6 @@
       cosmicDesktop.enable = config.modules.customConfig.desktop == "cosmic";
       xfce.enable = config.modules.customConfig.desktop == "xfce";
       gnome.enable = config.modules.customConfig.desktop == "gnome";
-      hyprland.enable = config.modules.customConfig.desktop == "hyprland";
       niriDesktop.enable = config.modules.customConfig.desktop == "niri";
       bluetooth.enable = lib.mkDefault true;
       nixVim.enable = lib.mkDefault true;
@@ -66,7 +78,10 @@
     nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
 
     # Enable the Flakes feature and the accompanying new nix command-line tool
-    nix.settings.experimental-features = [ "nix-command" "flakes" ];
+    nix.settings.experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
     nix.settings.warn-dirty = false;
 
     # Enable networking
@@ -93,7 +108,6 @@
         LC_TIME = "it_IT.UTF-8";
       };
     };
-
 
     # Perform garbage collection weekly to maintain low disk usage
     nix.gc = {

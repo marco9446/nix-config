@@ -1,4 +1,10 @@
-{ lib, config, pkgs, ... }:
+{
+  lib,
+  username,
+  config,
+  pkgs,
+  ...
+}:
 
 {
   options = {
@@ -7,19 +13,15 @@
   config = lib.mkIf config.homeModules.zed-editor.enable {
     programs.zed-editor = {
       enable = true;
-      themes = { };
+
       extraPackages = [
         pkgs.nil
       ];
+    };
 
-      userKeymaps = [
-        {
-          context = "Workspace";
-          bindings = {
-            ctrl-shift-t = "workspace::NewTerminal";
-          };
-        }
-      ];
+    xdg.configFile."zed" = {
+      source = config.lib.file.mkOutOfStoreSymlink "/home/${username}/nix-config/dotfiles/zed";
+      recursive = true;
     };
   };
 }

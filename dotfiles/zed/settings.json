@@ -1,0 +1,101 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
+{
+  "collaboration_panel": {
+    "dock": null,
+  },
+  "telemetry": {
+    "diagnostics": false,
+    "metrics": false,
+  },
+  "sticky_scroll": {
+    "enabled": true,
+  },
+  "minimap": {
+    "show": "never",
+  },
+  "linked_edits": true,
+  "show_whitespaces": "trailing",
+  "tab_size": 2,
+  "tabs": { "file_icons": true, "git_status": true, "show_diagnostics": "all" },
+  "git": { "inline_blame": { "enabled": false } },
+  "format_on_save": "on",
+  "hide_mouse": "on_typing_and_movement",
+  "toolbar": {
+    "breadcrumbs": true,
+    "quick_actions": false,
+    "selections_menu": false,
+  },
+  "features": {
+    "edit_prediction_provider": "copilot",
+  },
+  "inlay_hints": {
+    "enabled": true,
+  },
+  "indent_guides": {
+    "enabled": true,
+    "coloring": "indent_aware",
+  },
+  "vim": {
+    "use_system_clipboard": "always",
+  },
+  "wrap_guides": [120],
+  "show_wrap_guides": true,
+  "status_bar": {
+    "active_language_button": true,
+    "line_endings_button": true,
+    "cursor_position_button": true,
+  },
+  "colorize_brackets": true,
+  "rounded_selection": true,
+  "inline_code_actions": false,
+  "relative_line_numbers": "enabled",
+  "title_bar": {
+    "show_sign_in": false,
+    "show_branch_icon": true,
+    "show_branch_name": true,
+    "show_onboarding_banner": false,
+  },
+  "project_panel": {
+    "auto_fold_dirs": true,
+    "starts_open": true,
+    "sticky_scroll": true,
+  },
+
+  // ---------------------------------------------
+  // FONTS
+  // ---------------------------------------------
+  "ui_font_size": 16,
+  "buffer_font_size": 13.5,
+  "buffer_font_fallbacks": ["Fira Mono"],
+  "buffer_font_family": "JetBrainsMono Nerd Font",
+  "terminal": {
+    "font_family": "JetBrainsMono Nerd Font",
+    "font_fallbacks": [".ZedMono"],
+    "line_height": {
+      "custom": 1.1,
+    },
+  },
+
+  // ---------------------------------------------
+  // ICONS & COLORS
+  // ---------------------------------------------
+  "theme": {
+    "mode": "system",
+    "light": "One Light",
+    "dark": "One Dark",
+  },
+  "icon_theme": "Catppuccin Latte",
+
+  // ---------------------------------------------
+  // KEYMAPS
+  // ---------------------------------------------
+  "vim_mode": true,
+  "base_keymap": "VSCode",
+}
