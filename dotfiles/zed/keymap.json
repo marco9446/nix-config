@@ -1,9 +1,10 @@
 [
   {
+    "context": "Editor || Workspace",
     "bindings": {
-      "ctrl-shift-t": "workspace::NewTerminal",
+      "ctrl-r": "projects::OpenRecent",
+      "ctrl-shift-t": "terminal_panel::Toggle",
     },
-    "context": "Workspace",
   },
   {
     "context": "Editor && VimControl && !VimWaiting && !menu",
@@ -11,13 +12,15 @@
       "g ]": "editor::GoToDiagnostic",
       "g [": "editor::GoToPreviousDiagnostic",
       "g r": "editor::FindAllReferences",
+      "g c c": "editor::ToggleComments",
       "shift-k": "editor::Hover",
+      "space w": "workspace::SaveAll",
       "space l a": "editor::ToggleCodeActions",
       "space l r": "editor::Rename",
       "space l f": "editor::Format",
+      "space f f": "file_finder::Toggle",
       "space l l": "diagnostics::Deploy",
-      "g c c": "editor::ToggleComments",
-      "space f": "file_finder::Toggle",
+      "space f": "editor::Format",
       "space t": "tab_switcher::Toggle",
       "space e": "workspace::ToggleLeftDock",
       "space o": "outline::Toggle",

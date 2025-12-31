@@ -8,15 +8,15 @@
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
   "git_panel": {
-    "status_style": "label_color"
+    "status_style": "label_color",
   },
   "agent": {
     "default_profile": "write",
     "default_model": {
       "provider": "copilot_chat",
-      "model": "gemini-3-flash-preview"
+      "model": "gemini-3-flash-preview",
     },
-    "model_parameters": []
+    "model_parameters": [],
   },
   "collaboration_panel": {
     "button": false,
