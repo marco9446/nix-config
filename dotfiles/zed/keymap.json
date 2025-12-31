@@ -20,7 +20,6 @@
       "space l f": "editor::Format",
       "space f f": "file_finder::Toggle",
       "space l l": "diagnostics::Deploy",
-      "space f": "editor::Format",
       "space t": "tab_switcher::Toggle",
       "space e": "workspace::ToggleLeftDock",
       "space o": "outline::Toggle",
