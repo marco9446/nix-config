@@ -1,4 +1,10 @@
-{ lib, config, inputs, pkgs, ... }:
+{
+  lib,
+  config,
+  inputs,
+  pkgs,
+  ...
+}:
 # cSpell:disable
 {
   imports = [
@@ -31,7 +37,11 @@
           filter = "octagon";
         };
       };
-      completeopt = [ "menuone" "noselect" "noinsert" ];
+      completeopt = [
+        "menuone"
+        "noselect"
+        "noinsert"
+      ];
       updatetime = 300;
 
       ############################################################
@@ -90,11 +100,10 @@
         foldlevel = 99;
         foldenable = false;
 
-
         # System clipboard support, needs xclip/wl-clipboard
         clipboard = {
           providers = {
-            wl-copy.enable = true; # Wayland 
+            wl-copy.enable = true; # Wayland
             xsel.enable = true; # For X11
           };
           register = "unnamedplus";
@@ -108,19 +117,66 @@
         lsp = {
           enable = true;
           format.enable = true;
+          capabilities = ''
+            require("cmp_nvim_lsp").default_capabilities()
+          '';
           servers = {
+            rust_analyzer = {
+              enable = true;
+              installCargo = true;
+              installRustc = true;
+            };
             ts_ls.enable = true;
             html.enable = true;
             cssls.enable = true;
             nixd = {
               enable = true;
               settings = {
-                formatting = { command = [ "nixpkgs-fmt" ]; };
+                formatting = {
+                  command = [ "nixpkgs-fmt" ];
+                };
               };
             };
             yamlls.enable = true;
           };
         };
+        cmp = {
+          enable = true;
+          autoEnableSources = true;
+
+          settings = {
+
+            mapping = {
+              "<C-Space>" = "cmp.mapping.complete()";
+              "<CR>" = "cmp.mapping.confirm({ select = true })";
+              "<Tab>" = ''
+                cmp.mapping(function(fallback)
+                  if cmp.visible() then
+                    cmp.select_next_item()
+                  else
+                    fallback()
+                  end
+                end, { "i", "s" })
+              '';
+              "<S-Tab>" = ''
+                cmp.mapping(function(fallback)
+                  if cmp.visible() then
+                    cmp.select_prev_item()
+                  else
+                    fallback()
+                  end
+                end, { "i", "s" })
+              '';
+            };
+
+            sources = [
+              { name = "nvim_lsp"; }
+              { name = "buffer"; }
+              { name = "path"; }
+            ];
+          };
+        };
+
         gitsigns = {
           enable = true;
           settings = {
@@ -132,7 +188,9 @@
           enable = true;
           settings = {
             defaults = {
-              layout_config = { prompt_position = "top"; };
+              layout_config = {
+                prompt_position = "top";
+              };
               sorting_strategy = "ascending";
             };
             pickers.find_files.hidden = true;
@@ -147,10 +205,18 @@
             };
           };
         };
+        treesitter = {
+          enable = true;
+          highlight.enable = true;
+          indent.enable = true;
+        };
         "indent-blankline" = {
           enable = true;
           settings = {
-            indent = { char = "▏"; tab_char = "▏"; };
+            indent = {
+              char = "▏";
+              tab_char = "▏";
+            };
             scope = {
               enabled = true;
               show_start = true;
@@ -162,6 +228,7 @@
         nvim-autopairs.enable = true;
         comment.enable = true;
         web-devicons.enable = true;
+        symbols-outline.enable = true;
       };
 
       ############################################################
@@ -175,14 +242,23 @@
         {
           mode = "n";
           key = "<leader>w";
-          action = ":w<CR>";
+          action = "<cmd>w<CR>";
           options.silent = true;
         }
         {
           mode = "n";
-          key = "<leader>f";
+          key = "<leader>la";
+          action = "<cmd>lua vim.lsp.buf.code_action()<CR>";
+        }
+        {
+          mode = "n";
+          key = "<leader>lr";
+          action = "<cmd>lua vim.lsp.buf.rename()<CR>";
+        }
+        {
+          mode = "n";
+          key = "<leader>lf";
           action = "<cmd>lua vim.lsp.buf.format({ async = true })<CR>";
-          options.silent = true;
         }
         {
           mode = "n";
@@ -195,6 +271,45 @@
           key = "<leader>fg";
           action = "<cmd>Telescope live_grep<CR>";
           options.silent = true;
+        }
+        {
+          mode = "n";
+          key = "<leader>ll";
+          action = "<cmd>Telescope diagnostics<CR>";
+        }
+        {
+          mode = "n";
+          key = "<leader>t";
+          action = "<cmd>Telescope buffers<CR>";
+        }
+        {
+          mode = "n";
+          key = "<leader>o";
+          action = "<cmd>lua require('telescope.builtin').treesitter()<CR>";
+          options.silent = true;
+        }
+        {
+          mode = "n";
+          key = "U";
+          action = "<C-r>";
+        }
+        ### INSERT MODE ###
+        {
+          mode = "i";
+          key = "jj";
+          action = "<Esc>";
+        }
+
+        ### VISUAL MODE ###
+        {
+          mode = "v";
+          key = "J";
+          action = ":m '>+1<CR>gv=gv";
+        }
+        {
+          mode = "v";
+          key = "K";
+          action = ":m '<-2<CR>gv=gv";
         }
       ];
     };
