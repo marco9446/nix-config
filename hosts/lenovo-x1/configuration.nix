@@ -4,21 +4,17 @@
 
 { inputs, pkgs, ... }:
 {
-  imports =
-    [
-      inputs.nixos-hardware.nixosModules.common-pc-ssd
-      ./hardware-configuration.nix
-      ../../modules/nixOS
-    ];
+  imports = [
+    inputs.nixos-hardware.nixosModules.common-pc-ssd
+    ./hardware-configuration.nix
+    ../../modules/nixOS
+  ];
 
   # local modules
   modules = {
     customConfig = rec {
       desktop = "cosmic";
-      xcursorSize =
-        if (desktop == "xfce") then 42
-        else if (desktop == "gnome") then 24
-        else 20;
+      xcursorSize = if (desktop == "xfce") then 42 else 24;
     };
     nvidia.enable = true;
     homeManager = {
@@ -80,11 +76,19 @@
       settings.remap = [
         {
           input = [ "BTN_EXTRA" ];
-          output = [ "KEY_LEFTCTRL" "KEY_LEFTMETA" "KEY_RIGHT" ];
+          output = [
+            "KEY_LEFTCTRL"
+            "KEY_LEFTMETA"
+            "KEY_RIGHT"
+          ];
         }
         {
           input = [ "BTN_SIDE" ];
-          output = [ "KEY_LEFTCTRL" "KEY_LEFTMETA" "KEY_LEFT" ];
+          output = [
+            "KEY_LEFTCTRL"
+            "KEY_LEFTMETA"
+            "KEY_LEFT"
+          ];
         }
       ];
     };
@@ -98,7 +102,7 @@
   environment.systemPackages = with pkgs; [
     gparted
     gvfs
-    xfce.thunar
+    thunar
     # android-tools
     # universal-android-debloater
   ];

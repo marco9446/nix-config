@@ -22,6 +22,7 @@ return {
   -- -----------------------------------------------
   -- GENERAL
   -- -----------------------------------------------
+  enable_wayland = false,
   window_decorations = "NONE",
   window_close_confirmation = "NeverPrompt",
   hide_tab_bar_if_only_one_tab = true,
