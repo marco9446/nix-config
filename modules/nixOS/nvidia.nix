@@ -11,7 +11,6 @@
   };
   config = lib.mkIf config.modules.nvidia.enable {
 
-    # Enable OpenGL
     hardware.graphics.enable = true;
     services.xserver.videoDrivers = if (host == "macbook") then [ "intel" ] else [ "nvidia" ];
 
@@ -54,8 +53,8 @@
 
       prime = {
         # Make sure to use the correct Bus ID values for your system!
-        intelBusId = if host == "macbook" then "PCI:0:2:0" else "PCI:2@0:0:0";
-        nvidiaBusId = if host == "macbook" then "PCI:1:0:0" else "PCI:1@0:0:0";
+        intelBusId = "PCI:0:2:0";
+        nvidiaBusId = "PCI:1:0:0";
         offload = {
           enable = true;
           enableOffloadCmd = true; # Provides `nvidia-offload` command.
@@ -68,9 +67,9 @@
     ];
 
     # Explicitly disable on Mac
-    systemd.services.nvidia-powerd.enable = lib.mkIf (host == "mackbook") false;
-    systemd.services.nvidia-persistenced.enable = lib.mkIf (host == "mackbook") false;
-    systemd.services.nvidia-suspend.enable = lib.mkIf (host == "mackbook") false;
-    systemd.services.nvidia-resume.enable = lib.mkIf (host == "mackbook") false;
+    systemd.services.nvidia-powerd.enable = lib.mkIf (host == "macbook") false;
+    systemd.services.nvidia-persistenced.enable = lib.mkIf (host == "macbook") false;
+    systemd.services.nvidia-suspend.enable = lib.mkIf (host == "macbook") false;
+    systemd.services.nvidia-resume.enable = lib.mkIf (host == "macbook") false;
   };
 }

@@ -22,8 +22,7 @@ return {
   -- -----------------------------------------------
   -- GENERAL
   -- -----------------------------------------------
-  enable_wayland = true,
-  window_decorations = "RESIZE",
+  window_decorations = "NONE",
   window_close_confirmation = "NeverPrompt",
   hide_tab_bar_if_only_one_tab = true,
   font = wezterm.font("JetBrainsMono Nerd Font", {stretch="Normal", style="Normal"}),
