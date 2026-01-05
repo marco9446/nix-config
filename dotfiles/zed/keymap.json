@@ -3,16 +3,8 @@
     "context": "Editor || Workspace",
     "bindings": {
       "ctrl-r": "projects::OpenRecent",
+      "ctrl-b": "workspace::ToggleLeftDock",
       "ctrl-shift-t": "terminal_panel::Toggle",
-    },
-  },
-  {
-    "context": "Workspace && !menu",
-    "bindings": {
-      "space f f": "file_finder::Toggle",
-      "space t": "tab_switcher::Toggle",
-      "space e": "workspace::ToggleLeftDock",
-      "space o": "outline::Toggle",
     },
   },
   {
@@ -22,6 +14,10 @@
       "g [": "editor::GoToPreviousDiagnostic",
       "g r": "editor::FindAllReferences",
       "g c c": "editor::ToggleComments",
+      "space t": "tab_switcher::Toggle",
+      "space e": "workspace::ToggleLeftDock",
+      "space o": "outline::Toggle",
+      "space f f": "file_finder::Toggle",
       "shift-k": "editor::Hover",
       "space w": "workspace::SaveAll",
       "space v": "editor::GoToDefinitionSplit",

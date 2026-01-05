@@ -7,6 +7,7 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "restore_on_startup": "none",
   "git_panel": {
     "status_style": "label_color",
   },
@@ -78,6 +79,9 @@
     "auto_fold_dirs": true,
     "starts_open": false,
     "sticky_scroll": true,
+  },
+  "languages": {
+    "Rust": { "inlay_hints": { "enabled": false } },
   },
 
   // ---------------------------------------------
