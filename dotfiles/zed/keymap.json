@@ -7,6 +7,15 @@
     },
   },
   {
+    "context": "Workspace && !menu",
+    "bindings": {
+      "space f f": "file_finder::Toggle",
+      "space t": "tab_switcher::Toggle",
+      "space e": "workspace::ToggleLeftDock",
+      "space o": "outline::Toggle",
+    },
+  },
+  {
     "context": "Editor && VimControl && !VimWaiting && !menu",
     "bindings": {
       "g ]": "editor::GoToDiagnostic",
@@ -15,15 +24,11 @@
       "g c c": "editor::ToggleComments",
       "shift-k": "editor::Hover",
       "space w": "workspace::SaveAll",
-      "space l a": "editor::ToggleCodeActions",
-      "space l r": "editor::Rename",
-      "space l f": "editor::Format",
-      "space f f": "file_finder::Toggle",
-      "space l l": "diagnostics::Deploy",
-      "space t": "tab_switcher::Toggle",
-      "space e": "workspace::ToggleLeftDock",
-      "space o": "outline::Toggle",
       "space v": "editor::GoToDefinitionSplit",
+      "space l r": "editor::Rename",
+      "space l a": "editor::ToggleCodeActions",
+      "space l f": "editor::Format",
+      "space l l": "diagnostics::Deploy",
     },
   },
   {
