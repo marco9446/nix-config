@@ -40,4 +40,11 @@
       "shift-k": "editor::MoveLineUp",
     },
   },
+  {
+    "context": "EmptyPane  ||  ProjectPanel",
+    "bindings": {
+      "space f f": "file_finder::Toggle",
+      "space e": "workspace::ToggleLeftDock",
+    },
+  },
 ]

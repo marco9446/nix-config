@@ -7,17 +7,16 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "agent": {
+    "default_model": {
+      "provider": "copilot_chat",
+      "model": "gemini-3-flash-preview"
+    },
+    "model_parameters": []
+  },
   "restore_on_startup": "none",
   "git_panel": {
     "status_style": "label_color",
-  },
-  "agent": {
-    "default_profile": "write",
-    "default_model": {
-      "provider": "copilot_chat",
-      "model": "gpt-5.2",
-    },
-    "model_parameters": [],
   },
   "collaboration_panel": {
     "button": false,
