@@ -1,7 +1,7 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
+# config for Lenovo ThinkPad X1 Extreme Gen 2
 { inputs, pkgs, ... }:
 {
   imports = [
@@ -29,7 +29,7 @@
       enable = true;
       configurationLimit = 2;
       consoleMode = "1";
-      # uncomment the echo comman if you wnat windows as default boot
+      # uncomment the echo comman if you want windows as default boot
       extraInstallCommands = ''
         {
           # echo "default auto-windows"
@@ -40,10 +40,6 @@
     };
     efi.canTouchEfiVariables = true;
   };
-
-  # Fixes an issue with incorrect battery reporting. See
-  # https://wiki.archlinux.org/index.php/Lenovo_ThinkPad_X1_Extreme_(Gen_2)#Invalid_Stats_Workaround
-  # boot.initrd.availableKernelModules = [ "battery" ];
 
   # New ThinkPads have a different TrackPoint manufacturer/name.
   hardware.trackpoint.device = "TPPS/2 Elan TrackPoint";
@@ -56,7 +52,6 @@
     gnome.gnome-keyring.enable = true;
     # Enable CUPS to print documents.
     printing.enable = false;
-    power-profiles-daemon.enable = true;
     pipewire = {
       enable = true;
       alsa.enable = true;
@@ -92,8 +87,28 @@
         }
       ];
     };
-  };
 
+    thermald.enable = true;
+    power-profiles-daemon.enable = true;
+    # tlp = {
+    #   enable = true;
+    #   settings = {
+    #     CPU_SCALING_GOVERNOR_ON_AC = "performance";
+    #     CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+
+    #     CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
+    #     CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
+
+    #     CPU_MIN_PERF_ON_AC = 0;
+    #     CPU_MAX_PERF_ON_AC = 100;
+    #     CPU_MIN_PERF_ON_BAT = 0;
+    #     CPU_MAX_PERF_ON_BAT = 20;
+
+    #     START_CHARGE_THRESH_BAT0 = 70;
+    #     STOP_CHARGE_THRESH_BAT0 = 80;
+    #   };
+    # };
+  };
   programs = {
     firefox.enable = true;
   };
@@ -103,17 +118,10 @@
     gparted
     gvfs
     thunar
-    # android-tools
-    # universal-android-debloater
   ];
 
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
+  # Battery and performance Management
+  powerManagement.enable = true;
 
-  # It‘s perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
   system.stateVersion = "24.11"; # Did you read the comment?
 }

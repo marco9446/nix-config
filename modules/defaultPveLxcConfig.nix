@@ -1,4 +1,9 @@
-{ modulesPath, lib, host, ... }:
+{
+  modulesPath,
+  lib,
+  host,
+  ...
+}:
 {
   # Import the Proxmox LXC virtualization module
   imports = [ (modulesPath + "/virtualisation/proxmox-lxc.nix") ];
@@ -10,7 +15,10 @@
     keep-derivations = false; # Do not keep .drv files after builds (reduces disk usage)
     keep-outputs = false; # Do not keep build outputs unless needed
     max-jobs = 1; # Limit parallel builds to 1 (resource constraints in LXC)
-    experimental-features = [ "nix-command" "flakes" ];
+    experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
     warn-dirty = false;
   };
 
@@ -32,14 +40,6 @@
     Compress=no
     SystemMaxUse=16M
   '';
-
-  # Cache DNS lookups to improve performance in the container
-  services.resolved = {
-    extraConfig = ''
-      Cache=true
-      CacheFromLocalhost=true
-    '';
-  };
 
   # Strip unneeded locales and documentation:
   i18n.supportedLocales = [ "en_US.UTF-8/UTF-8" ]; # Only include US English locale
