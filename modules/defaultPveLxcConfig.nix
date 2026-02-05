@@ -1,8 +1,7 @@
-{
-  modulesPath,
-  lib,
-  host,
-  ...
+{ modulesPath
+, lib
+, host
+, ...
 }:
 {
   # Import the Proxmox LXC virtualization module
@@ -63,6 +62,13 @@
       PermitRootLogin = "yes"; # Allow root login via SSH
       PasswordAuthentication = true; # Enable password authentication
       PermitEmptyPasswords = "yes"; # Allow empty passwords (not secure)
+    };
+  };
+
+  nix = {
+    gc = {
+      automatic = true;
+      dates = "weekly";
     };
   };
 
