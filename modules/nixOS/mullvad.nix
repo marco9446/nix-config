@@ -7,7 +7,7 @@
 
   config = lib.mkIf config.modules.mullvad.enable {
     # Enable the Mullvad VPN client
-    services.mullvad = {
+    services.mullvad-vpn = {
       enable = true;
       package = pkgs.mullvad-vpn;
     };
