@@ -22,6 +22,7 @@
     ./nh.nix
     ./niri.nix
     ./gnome.nix
+    ./mullvad.nix
     ./defaultPackages.nix
   ];
 
@@ -65,7 +66,7 @@
       docker.enable = lib.mkDefault false;
       user.enable = lib.mkDefault true;
       nh.enable = lib.mkDefault true;
-
+      mullvad.enable = lib.mkDefault false;
     };
 
     # environment.sessionVariables = {

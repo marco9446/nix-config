@@ -21,6 +21,7 @@
       enable = true;
       path = ./home.nix;
     };
+    mullvad.enable = true;
   };
 
   # Bootloader.
