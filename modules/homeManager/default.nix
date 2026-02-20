@@ -40,12 +40,6 @@
   home.username = username;
   home.homeDirectory = "/home/${username}";
 
-  # apply dotfile
-  xdg.configFile."cosmic" = {
-    source = config.lib.file.mkOutOfStoreSymlink "/home/${username}/nix-config/dotfiles/cosmic";
-    recursive = true;
-  };
-
   home.sessionVariables = {
     EDITOR = "nvim";
     VISUAL = "nvim";
